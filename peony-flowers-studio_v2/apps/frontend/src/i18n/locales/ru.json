@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Главная",
+    "catalog": "Каталог",
+    "about": "О нас",
+    "cart": "Корзина",
+    "account": "Кабинет",
+    "login": "Войти"
+  },
+  "product": {
+    "addToCart": "В корзину",
+    "outOfStock": "Нет в наличии",
+    "price": "Цена",
+    "reviews": "Отзывы"
+  },
+  "checkout": {
+    "title": "Оформление заказа",
+    "deliveryDate": "Дата доставки",
+    "deliveryTime": "Время доставки",
+    "giftMessage": "Текст поздравления",
+    "paymentMethod": "Способ оплаты",
+    "click": "Через Click",
+    "cash": "Наличные",
+    "submit": "Оформить заказ"
+  },
+  "auth": {
+    "phone": "Номер телефона",
+    "sendCode": "Отправить код",
+    "code": "Код подтверждения",
+    "verify": "Подтвердить",
+    "fullName": "Полное имя"
+  }
+}

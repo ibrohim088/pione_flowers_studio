@@ -1,0 +1,32 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# build outputs
+dist
+.turbo
+.output
+
+# env
+.env
+.env.local
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# OS
+.DS_Store
+
+# prisma
+apps/backend/src/prisma/migrations/dev.db
+
+# misc
+coverage

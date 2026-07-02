@@ -1,0 +1,816 @@
+PEONY FLOWERS STUDIO — TO'LIQ FILE STRUKTURASI (v1 — MVP)
+==========================================================================
+  Backend  → Express + TypeScript + Prisma + PostgreSQL
+  Frontend → Vue 3 + Vite + Pinia
+  Admin    → Vue 3 + Vite + Pinia  (alohida app)
+  Bot      → YO'Q (MVP'da kerak emas)
+==========================================================================
+  To'lov usullari (MVP):
+    ✅ Naqt pul  → Yetkazib berishda to'lov (admin panel orqali tasdiqlanadi)
+    ✅ Click     → click.uz API (REST + MD5 imzo)
+    ⏳ Payme, Uzum, Visa/MasterCard → Phase 2'ga qoldirildi
+==========================================================================
+  Foydalanuvchi rollari:
+    customer  → oddiy mijoz
+    florist   → buyurtmani tayyorlaydi (Admin panel ichida, cheklangan huquq)
+    courier   → yetkazib beradi (Admin panel ichida, cheklangan huquq)
+    admin     → to'liq boshqaruv
+    (Super Admin MVP'da yo'q — kerak bo'lsa keyin qo'shiladi)
+==========================================================================
+
+
+📦 peony-flowers-studio/                         ← Monorepo root
+│
+├── 📁 apps/
+│   ├── 📁 backend/                              ← EXPRESS + TypeScript
+│   ├── 📁 frontend/                             ← VUE 3 + VITE + Pinia
+│   └── 📁 admin/                                ← VUE 3 + VITE + Pinia (alohida app)
+│
+├── 📁 packages/
+│   └── 📁 shared/                               ← Umumiy TypeScript tiplar (3 app ishlatadi)
+│       ├── 📁 types/
+│       │   ├── user.ts
+│       │   ├── product.ts                       → Bouquet, Flower, ChocolateBox, Souvenir
+│       │   ├── category.ts
+│       │   ├── order.ts                         → OrderStatus: 'pending'|'confirmed'
+│       │   │                                       |'preparing'|'ready'|'delivering'
+│       │   │                                       |'delivered'|'cancelled'
+│       │   ├── payment.ts                       → PaymentMethod: 'click'|'cash'
+│       │   │                                       PaymentStatus: 'pending'|'paid'
+│       │   │                                                    |'failed'|'refunded'
+│       │   │                                                    |'pending_cash'
+│       │   ├── address.ts
+│       │   ├── review.ts
+│       │   ├── wishlist.ts
+│       │   ├── coupon.ts
+│       │   ├── notification.ts
+│       │   └── index.ts
+│       ├── package.json
+│       └── tsconfig.json
+│
+├── package.json                                 → workspaces ro'yxati
+├── turbo.json                                   → Turborepo konfiguratsiyasi
+├── tsconfig.base.json
+├── .gitignore
+├── .editorconfig
+├── .prettierrc
+├── .eslintrc.json
+├── README.md
+└── .env.example                                 → barcha env namunalari
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. BACKEND — apps/backend/
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📁 apps/backend/
+│
+├── 📁 src/
+│   │
+│   ├── 📁 config/
+│   │   ├── database.ts                          → Prisma client singleton
+│   │   ├── redis.ts                              → Redis client (session, OTP cache)
+│   │   ├── s3.ts                                 → Rasm saqlash (S3 yoki Cloudinary)
+│   │   ├── sms.ts                                → SMS provider (Eskiz.uz / Play Mobile)
+│   │   ├── env.ts                                → Env validatsiya (Zod)
+│   │   └── payment.ts                            → Click credentials, callback URL,
+│   │                                                test/prod rejim, cash limitlari
+│   │
+│   ├── 📁 modules/
+│   │   │
+│   │   ├── 📁 auth/
+│   │   │   ├── auth.router.ts                    → POST /auth/send-otp
+│   │   │   │                                        POST /auth/verify-otp
+│   │   │   │                                        POST /auth/refresh
+│   │   │   │                                        POST /auth/logout
+│   │   │   ├── auth.controller.ts
+│   │   │   ├── auth.service.ts                   → OTP yaratish/tekshirish, JWT berish
+│   │   │   ├── auth.validation.ts                → Zod sxemalar
+│   │   │   └── auth.types.ts
+│   │   │
+│   │   ├── 📁 users/
+│   │   │   ├── users.router.ts                   → GET    /users/me
+│   │   │   │                                        PUT    /users/me
+│   │   │   │                                        DELETE /users/me
+│   │   │   │                                        GET    /users           (admin)
+│   │   │   │                                        GET    /users/:id       (admin)
+│   │   │   │                                        PUT    /users/:id       (admin)
+│   │   │   │                                        DELETE /users/:id       (admin)
+│   │   │   ├── users.controller.ts
+│   │   │   ├── users.service.ts
+│   │   │   ├── users.validation.ts
+│   │   │   └── users.types.ts
+│   │   │
+│   │   ├── 📁 categories/
+│   │   │   ├── categories.router.ts              → GET    /categories
+│   │   │   │                                        POST   /categories        (admin)
+│   │   │   │                                        PUT    /categories/:id    (admin)
+│   │   │   │                                        DELETE /categories/:id    (admin)
+│   │   │   ├── categories.controller.ts
+│   │   │   ├── categories.service.ts
+│   │   │   └── categories.types.ts
+│   │   │
+│   │   ├── 📁 products/
+│   │   │   ├── products.router.ts                → GET    /products              (filter/qidiruv)
+│   │   │   │                                        GET    /products/:slug
+│   │   │   │                                        POST   /products              (admin)
+│   │   │   │                                        PUT    /products/:id          (admin)
+│   │   │   │                                        DELETE /products/:id          (admin)
+│   │   │   ├── products.controller.ts
+│   │   │   ├── products.service.ts
+│   │   │   ├── products.validation.ts
+│   │   │   └── products.types.ts
+│   │   │
+│   │   ├── 📁 orders/
+│   │   │   ├── orders.router.ts                  → GET   /orders                     (mijoz)
+│   │   │   │                                        GET   /orders/:id
+│   │   │   │                                        POST  /orders                     → tabrik matni,
+│   │   │   │                                                                            yetkazish sana/vaqt
+│   │   │   │                                        PATCH /orders/:id/cancel
+│   │   │   │                                        GET   /orders/admin/all           (admin)
+│   │   │   │                                        PATCH /orders/:id/status          (admin/florist/courier)
+│   │   │   │                                        GET   /orders/florist/queue       (florist)
+│   │   │   │                                        POST  /orders/:id/prepared        (florist) → rasm yuklab,
+│   │   │   │                                                                            kuryerga topshirish
+│   │   │   │                                        GET   /orders/courier/today       (courier)
+│   │   │   │                                        PATCH /orders/:id/delivered       (courier)
+│   │   │   ├── orders.controller.ts
+│   │   │   ├── orders.service.ts
+│   │   │   ├── orders.validation.ts
+│   │   │   └── orders.types.ts
+│   │   │
+│   │   ├── 📁 addresses/
+│   │   │   ├── addresses.router.ts               → GET    /addresses
+│   │   │   │                                        POST   /addresses
+│   │   │   │                                        PUT    /addresses/:id
+│   │   │   │                                        DELETE /addresses/:id
+│   │   │   ├── addresses.controller.ts
+│   │   │   ├── addresses.service.ts
+│   │   │   ├── addresses.validation.ts
+│   │   │   └── addresses.types.ts
+│   │   │
+│   │   ├── 📁 reviews/
+│   │   │   ├── reviews.router.ts                 → GET    /products/:id/reviews
+│   │   │   │                                        POST   /products/:id/reviews
+│   │   │   │                                        DELETE /reviews/:id               (admin)
+│   │   │   ├── reviews.controller.ts
+│   │   │   ├── reviews.service.ts
+│   │   │   └── reviews.types.ts
+│   │   │
+│   │   ├── 📁 wishlist/
+│   │   │   ├── wishlist.router.ts                → GET    /wishlist
+│   │   │   │                                        POST   /wishlist/:productId
+│   │   │   │                                        DELETE /wishlist/:productId
+│   │   │   ├── wishlist.controller.ts
+│   │   │   └── wishlist.service.ts
+│   │   │
+│   │   ├── 📁 coupons/
+│   │   │   ├── coupons.router.ts                 → POST   /coupons/apply
+│   │   │   │                                        GET    /coupons               (admin)
+│   │   │   │                                        POST   /coupons               (admin)
+│   │   │   │                                        DELETE /coupons/:id           (admin)
+│   │   │   ├── coupons.controller.ts
+│   │   │   ├── coupons.service.ts
+│   │   │   └── coupons.types.ts
+│   │   │
+│   │   ├── 📁 notifications/
+│   │   │   ├── notifications.router.ts           → GET   /notifications
+│   │   │   │                                        PATCH /notifications/:id/read
+│   │   │   │                                        PATCH /notifications/read-all
+│   │   │   │                                        POST  /notifications/send  (admin)
+│   │   │   ├── notifications.controller.ts
+│   │   │   ├── notifications.service.ts
+│   │   │   └── notifications.types.ts
+│   │   │
+│   │   ├── 📁 upload/
+│   │   │   ├── upload.router.ts                  → POST   /upload/image
+│   │   │   │                                        DELETE /upload/image
+│   │   │   ├── upload.controller.ts
+│   │   │   └── upload.service.ts                 → S3/Cloudinary ga yuklash/o'chirish
+│   │   │
+│   │   ├── 📁 payments/
+│   │   │   ├── payments.router.ts                → POST /payments/click/prepare
+│   │   │   │                                        POST /payments/click/complete
+│   │   │   │                                        POST /payments/cash/confirm    (admin)
+│   │   │   │                                        POST /payments/cash/reject     (admin)
+│   │   │   │                                        GET  /payments/:orderId/status
+│   │   │   │                                        GET  /payments/history         (admin)
+│   │   │   │                                        POST /payments/:id/refund      (admin)
+│   │   │   ├── payments.controller.ts
+│   │   │   ├── payments.service.ts
+│   │   │   ├── payments.validation.ts
+│   │   │   ├── payments.types.ts
+│   │   │   ├── payments.webhook.ts               → Click imzo tekshirish (MD5)
+│   │   │   └── 📁 providers/
+│   │   │       ├── payment.provider.ts           → Interface IPaymentProvider
+│   │   │       ├── cash.provider.ts
+│   │   │       └── click.provider.ts
+│   │   │
+│   │   └── 📁 analytics/                         ← Admin Dashboard uchun
+│   │       ├── analytics.router.ts               → GET /analytics/overview    (admin)
+│   │       │                                        GET /analytics/revenue     (admin)
+│   │       │                                        GET /analytics/orders      (admin)
+│   │       │                                        GET /analytics/products    (admin)
+│   │       │                                        GET /analytics/users       (admin)
+│   │       ├── analytics.controller.ts
+│   │       ├── analytics.service.ts              → Prisma aggregate so'rovlar
+│   │       └── analytics.types.ts
+│   │
+│   ├── 📁 middleware/
+│   │   ├── authenticate.ts                       → JWT tekshirish, req.user set
+│   │   ├── requireRole.ts                        → ('admin'|'florist'|'courier') ruxsat
+│   │   ├── errorHandler.ts                        → Global xato ushlash
+│   │   ├── validate.ts                            → Zod schema validation
+│   │   ├── rateLimiter.ts                         → OTP/login spam himoyasi
+│   │   ├── requestLogger.ts                       → Har bir so'rovni loglash
+│   │   └── notFound.ts                            → 404 handler
+│   │
+│   ├── 📁 prisma/
+│   │   ├── schema.prisma                         → Barcha jadval sxemalari
+│   │   ├── seed.ts                                → Boshlang'ich test ma'lumotlari
+│   │   └── 📁 migrations/
+│   │
+│   ├── 📁 utils/
+│   │   ├── jwt.ts                                → sign/verify access & refresh token
+│   │   ├── otp.ts
+│   │   ├── hash.ts
+│   │   ├── apiResponse.ts
+│   │   ├── pagination.ts
+│   │   ├── slugify.ts
+│   │   └── logger.ts
+│   │
+│   ├── 📁 types/
+│   │   ├── express.d.ts
+│   │   └── env.d.ts
+│   │
+│   ├── 📁 constants/
+│   │   ├── roles.ts                              → 'customer'|'florist'|'courier'|'admin'
+│   │   ├── orderStatus.ts
+│   │   └── paymentStatus.ts
+│   │
+│   └── server.ts
+│
+├── .env
+├── .env.example
+├── tsconfig.json
+├── nodemon.json
+├── package.json
+├── Dockerfile
+└── .dockerignore
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  2. FRONTEND — apps/frontend/  (Vue 3 + Vite + Pinia)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📁 apps/frontend/
+│
+├── 📁 src/
+│   ├── App.vue
+│   ├── main.ts                                   → Pinia, Router, i18n, Axios ulanadi
+│   │
+│   ├── 📁 router/
+│   │   ├── index.ts                              → Route ro'yxati + navigation guard
+│   │   └── routes.ts
+│   │
+│   ├── 📁 views/
+│   │   ├── 📁 public/                            ← ochiq sahifalar
+│   │   │   ├── HomeView.vue
+│   │   │   ├── CatalogView.vue                   → filtr + ro'yxat
+│   │   │   ├── ProductDetailView.vue              → /product/:slug
+│   │   │   ├── AboutView.vue
+│   │   │   ├── CartView.vue
+│   │   │   └── CheckoutView.vue                  → Click | Naqt, yetkazish sana/vaqt,
+│   │   │                                            tabrik matni
+│   │   │
+│   │   ├── 📁 auth/
+│   │   │   ├── LoginView.vue
+│   │   │   └── RegisterView.vue
+│   │   │
+│   │   └── 📁 account/                           ← login bo'lgan mijoz
+│   │       ├── AccountOverviewView.vue
+│   │       ├── PersonalInfoView.vue
+│   │       ├── OrdersView.vue
+│   │       ├── OrderDetailView.vue
+│   │       ├── AddressesView.vue
+│   │       ├── WishlistView.vue
+│   │       └── NotificationsView.vue
+│   │
+│   ├── 📁 components/
+│   │   ├── 📁 layout/
+│   │   │   ├── AppHeader.vue
+│   │   │   ├── AppFooter.vue
+│   │   │   ├── AccountSidebar.vue
+│   │   │   └── MobileMenu.vue
+│   │   │
+│   │   ├── 📁 ui/
+│   │   │   ├── AppButton.vue
+│   │   │   ├── AppInput.vue
+│   │   │   ├── AppTextarea.vue
+│   │   │   ├── AppSelect.vue
+│   │   │   ├── AppModal.vue
+│   │   │   ├── AppBadge.vue
+│   │   │   ├── AppSkeleton.vue
+│   │   │   ├── AppToast.vue
+│   │   │   ├── AppSpinner.vue
+│   │   │   └── OtpInput.vue
+│   │   │
+│   │   ├── 📁 catalog/
+│   │   │   ├── ProductCard.vue
+│   │   │   ├── ProductGrid.vue
+│   │   │   ├── ProductGallery.vue
+│   │   │   └── FilterPanel.vue
+│   │   │
+│   │   ├── 📁 home/
+│   │   │   ├── HeroSection.vue
+│   │   │   ├── FeaturedProducts.vue
+│   │   │   └── BrandStory.vue
+│   │   │
+│   │   ├── 📁 cart/
+│   │   │   ├── CartItem.vue
+│   │   │   └── CartSummary.vue
+│   │   │
+│   │   ├── 📁 account/
+│   │   │   ├── OrderCard.vue
+│   │   │   ├── OrderTabs.vue
+│   │   │   ├── AddressCard.vue
+│   │   │   └── ProfileForm.vue
+│   │   │
+│   │   ├── 📁 reviews/
+│   │   │   ├── ReviewList.vue
+│   │   │   └── ReviewForm.vue
+│   │   │
+│   │   └── 📁 payment/
+│   │       ├── PaymentMethodSelector.vue
+│   │       ├── ClickButton.vue
+│   │       ├── CashInfo.vue
+│   │       └── PaymentStatus.vue
+│   │
+│   ├── 📁 stores/                                ← Pinia
+│   │   ├── authStore.ts                          → user, login/logout (token cookie'da,
+│   │   │                                            access token faqat memory'da saqlanadi)
+│   │   ├── cartStore.ts                          → localStorage bilan sync
+│   │   ├── wishlistStore.ts                      → localStorage (mehmon) + backend (login)
+│   │   ├── checkoutStore.ts                      → sessionStorage bilan sync (vaqtinchalik)
+│   │   └── uiStore.ts                            → til, tema → localStorage
+│   │
+│   ├── 📁 composables/
+│   │   ├── useProducts.ts
+│   │   ├── useProduct.ts
+│   │   ├── useOrders.ts
+│   │   ├── useOrder.ts
+│   │   ├── useAuth.ts
+│   │   ├── useAddresses.ts
+│   │   ├── useWishlist.ts
+│   │   ├── useReviews.ts
+│   │   ├── useNotifications.ts
+│   │   └── usePayment.ts
+│   │
+│   ├── 📁 lib/
+│   │   ├── api.ts                                → Axios instance, withCredentials:true
+│   │   ├── storage.ts                             → localStorage/sessionStorage helper
+│   │   │                                            (JSON parse/stringify wrapper)
+│   │   └── utils.ts                               → formatPrice(), formatDate()
+│   │
+│   ├── 📁 i18n/
+│   │   ├── index.ts
+│   │   └── 📁 locales/
+│   │       ├── uz.json
+│   │       └── ru.json
+│   │
+│   ├── 📁 types/
+│   │   ├── api.ts
+│   │   ├── product.ts
+│   │   ├── order.ts
+│   │   ├── user.ts
+│   │   ├── address.ts
+│   │   └── payment.ts
+│   │
+│   ├── 📁 assets/
+│   │   ├── 📁 styles/
+│   │   │   ├── _variables.scss
+│   │   │   ├── _themes.scss
+│   │   │   ├── _typography.scss
+│   │   │   ├── _mixins.scss
+│   │   │   ├── _breakpoints.scss
+│   │   │   ├── _animations.scss
+│   │   │   ├── _reset.scss
+│   │   │   └── main.scss
+│   │   ├── 📁 images/                            → logo.svg, hero-bg.webp, placeholder.png
+│   │   └── 📁 icons/                              → cash.svg, click.svg
+│   │
+│   └── vite-env.d.ts
+│
+├── 📁 public/
+│   └── favicon.ico
+│
+├── index.html
+├── vite.config.ts
+├── .env.local
+├── .env.example
+├── tsconfig.json
+├── package.json
+├── Dockerfile
+└── .dockerignore
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  3. ADMIN PANEL — apps/admin/  (Vue 3 + Vite + Pinia, alohida app)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  URL: https://admin.peonyflowers.uz
+  Tech: Vue 3 + Vite + TypeScript + Pinia
+  Auth: JWT (alohida login sahifa; rolega qarab ko'rinadigan bo'limlar farqlanadi)
+  Port: 3001 (frontend: 3000, admin: 3001)
+
+  ROLLARGA QARAB KO'RINADIGAN BO'LIMLAR:
+  ─────────────────────────────────────────────────────────────────
+  admin    → hammasi
+  florist  → faqat /orders/prepare (tayyorlash navbati)
+  courier  → faqat /orders/deliver (yetkazish ro'yxati)
+  ─────────────────────────────────────────────────────────────────
+
+  ROUTING XARITASI:
+  ─────────────────────────────────────────────────────────────────
+  /login                          → Admin/Florist/Courier login (telefon + OTP)
+  /                                → Dashboard (overview)                    [admin]
+  /orders                         → Buyurtmalar ro'yxati                    [admin]
+  /orders/:id                     → Buyurtma tafsiloti                     [admin]
+  /orders/prepare                 → Florist navbati                        [florist]
+  /orders/deliver                 → Kuryer ro'yxati (bugungi)               [courier]
+  /products                       → Mahsulotlar ro'yxati                   [admin]
+  /products/new                   → Yangi mahsulot qo'shish                [admin]
+  /products/:id/edit              → Mahsulotni tahrirlash                  [admin]
+  /categories                     → Kategoriyalar                         [admin]
+  /users                          → Foydalanuvchilar                      [admin]
+  /users/:id                      → Foydalanuvchi tafsiloti               [admin]
+  /payments                       → To'lovlar tarixi                      [admin]
+  /coupons                        → Chegirma kodlari                      [admin]
+  /analytics                      → Statistika va grafiklar                [admin]
+  /settings                       → Sayt sozlamalari                      [admin]
+  ─────────────────────────────────────────────────────────────────
+
+📁 apps/admin/
+│
+├── 📁 src/
+│   ├── App.vue
+│   ├── main.ts
+│   │
+│   ├── 📁 router/
+│   │   ├── index.ts                              → navigation guard: token yo'q → /login
+│   │   │                                            role mos kelmasa → 403
+│   │   └── routes.ts
+│   │
+│   ├── 📁 views/
+│   │   ├── LoginView.vue                         → POST /auth/send-otp, /auth/verify-otp
+│   │   ├── DashboardView.vue                     → StatCard×4 + RevenueChart +
+│   │   │                                            TopProducts + RecentOrders
+│   │   │                                            API: GET /analytics/overview, /revenue
+│   │   │
+│   │   ├── 📁 orders/
+│   │   │   ├── OrdersListView.vue                → filtr: status/to'lov, qidiruv
+│   │   │   │                                        API: GET /orders/admin/all
+│   │   │   ├── OrderDetailView.vue                → mijoz+manzil+mahsulotlar+to'lov+
+│   │   │   │                                          [status o'zgartir] [refund]
+│   │   │   │                                        API: GET /orders/:id
+│   │   │   │                                             PATCH /orders/:id/status
+│   │   │   │                                             POST  /payments/:id/refund
+│   │   │   ├── FloristQueueView.vue               → tayyorlanadigan buyurtmalar,
+│   │   │   │                                          rasm yuklash, "tayyor" belgilash
+│   │   │   │                                        API: GET  /orders/florist/queue
+│   │   │   │                                             POST /orders/:id/prepared
+│   │   │   └── CourierListView.vue                → bugungi buyurtmalar, "yetkazildi"
+│   │   │                                             API: GET   /orders/courier/today
+│   │   │                                                  PATCH /orders/:id/delivered
+│   │   │
+│   │   ├── 📁 products/
+│   │   │   ├── ProductsListView.vue               → rasm, nom, narx, stok, amallar
+│   │   │   ├── ProductFormView.vue                → create va edit uchun bitta komponent
+│   │   │   └── CategoriesView.vue
+│   │   │
+│   │   ├── 📁 users/
+│   │   │   ├── UsersListView.vue
+│   │   │   └── UserDetailView.vue
+│   │   │
+│   │   ├── 📁 payments/
+│   │   │   └── PaymentsListView.vue               → filtr: click|cash, paid|pending|failed
+│   │   │
+│   │   ├── 📁 coupons/
+│   │   │   └── CouponsListView.vue
+│   │   │
+│   │   ├── 📁 analytics/
+│   │   │   └── AnalyticsView.vue                  → davr tanlash (7/30/90 kun),
+│   │   │                                             RevenueChart, OrdersByStatus,
+│   │   │                                             PaymentMix, TopProducts
+│   │   │
+│   │   └── SettingsView.vue                       → sayt nomi/logo, to'lov test/prod
+│   │
+│   ├── 📁 components/
+│   │   ├── 📁 layout/
+│   │   │   ├── AdminSidebar.vue                   → rolega qarab menyu elementlari
+│   │   │   ├── AdminHeader.vue
+│   │   │   └── AdminLayout.vue                    → Sidebar + Header + router-view
+│   │   │
+│   │   ├── 📁 ui/
+│   │   │   ├── AdminButton.vue
+│   │   │   ├── AdminInput.vue
+│   │   │   ├── AdminSelect.vue
+│   │   │   ├── AdminModal.vue
+│   │   │   ├── AdminTable.vue                     → generik jadval + pagination
+│   │   │   ├── AdminBadge.vue                     → success|warning|danger|info
+│   │   │   ├── AdminPagination.vue
+│   │   │   ├── AdminSearchInput.vue                → debounced qidiruv
+│   │   │   ├── StatCard.vue
+│   │   │   └── AppSpinner.vue
+│   │   │
+│   │   ├── 📁 dashboard/
+│   │   │   ├── RevenueChart.vue                   → Chart.js/ApexCharts LineChart
+│   │   │   ├── TopProducts.vue
+│   │   │   └── RecentOrders.vue
+│   │   │
+│   │   ├── 📁 orders/
+│   │   │   ├── OrdersTable.vue
+│   │   │   ├── OrderStatusSelect.vue               → pending|confirmed|preparing|ready|
+│   │   │   │                                          delivering|delivered|cancelled
+│   │   │   ├── OrderDetailCard.vue
+│   │   │   └── PreparedPhotoUpload.vue             → Florist tayyor mahsulot rasmi
+│   │   │
+│   │   ├── 📁 products/
+│   │   │   ├── ProductsTable.vue
+│   │   │   ├── ProductForm.vue
+│   │   │   └── ProductImageUpload.vue             → drag & drop + preview
+│   │   │
+│   │   ├── 📁 users/
+│   │   │   ├── UsersTable.vue
+│   │   │   └── UserDetailCard.vue
+│   │   │
+│   │   ├── 📁 payments/
+│   │   │   ├── PaymentsTable.vue
+│   │   │   └── RefundModal.vue
+│   │   │
+│   │   └── 📁 analytics/
+│   │       ├── OrdersByStatusChart.vue            → Donut chart
+│   │       └── PaymentMethodChart.vue             → Bar chart: Click | Cash ulushi
+│   │
+│   ├── 📁 stores/                                ← Pinia
+│   │   ├── authStore.ts                          → adminUser, role, login()/logout()
+│   │   │                                            token faqat memory'da; refresh
+│   │   │                                            token httpOnly cookie'dan yangilanadi
+│   │   ├── ordersStore.ts
+│   │   └── uiStore.ts
+│   │
+│   ├── 📁 composables/
+│   │   ├── useOrders.ts
+│   │   ├── useOrder.ts
+│   │   ├── useProducts.ts
+│   │   ├── useProduct.ts
+│   │   ├── useUsers.ts
+│   │   ├── usePayments.ts
+│   │   ├── useAnalytics.ts
+│   │   └── useUpload.ts
+│   │
+│   ├── 📁 lib/
+│   │   ├── api.ts                                → Axios, withCredentials:true,
+│   │   │                                            401 bo'lsa /auth/refresh chaqiradi
+│   │   └── utils.ts                              → formatPrice(), formatDate()
+│   │
+│   ├── 📁 types/
+│   │   ├── api.ts
+│   │   ├── analytics.ts
+│   │   └── admin.ts                              → AdminUser, Role tiplari
+│   │
+│   └── 📁 assets/
+│       ├── 📁 styles/                            → frontend'dan ALOHIDA (qorong'i tema)
+│       │   ├── _variables.scss                   → $sidebar-bg: #171923
+│       │   │                                        $accent: #d6336c  (pushti — gul brendi)
+│       │   │                                        $surface: #1f2230
+│       │   │                                        $border: #2d3148
+│       │   ├── _themes.scss
+│       │   ├── _typography.scss
+│       │   ├── _mixins.scss
+│       │   ├── _breakpoints.scss
+│       │   ├── _animations.scss
+│       │   ├── _reset.scss
+│       │   └── main.scss
+│       └── 📁 images/
+│           └── logo.svg
+│
+├── 📁 public/
+│   └── favicon.ico
+│
+├── index.html
+├── vite.config.ts
+├── .env.local                                    → VITE_API_URL=https://api.peonyflowers.uz
+├── .env.example
+├── tsconfig.json
+├── package.json
+├── Dockerfile
+└── .dockerignore
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  4. AUTH JARAYONI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Saytda (frontend):                    Admin panelda:
+  ────────────────────                  ──────────────────────────
+  1. Telefon kiriting                   1. Telefon kiriting
+  2. SMS OTP keladi                     2. SMS OTP keladi
+  3. 6 raqam kiritiladi                 3. 6 raqam kiritiladi
+  4. Access token → Pinia (memory)      4. Rol tekshiriladi (admin/florist/courier)
+     Refresh token → httpOnly cookie    5. Access token → Pinia (memory)
+                                           Refresh token → httpOnly cookie
+                                        6. Rolega qarab sidebar ko'rsatiladi
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  5. TO'LOV JARAYONI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  CLICK:
+  1. Checkout'da "Click" tanlanadi → POST /payments/click/prepare
+  2. Click sahifasiga redirect
+  3. To'lov tugagach → click.uz webhook → POST /payments/click/complete
+  4. Order.paymentStatus = 'paid'
+
+  NAQT PUL:
+  1. Checkout'da "Naqt" tanlanadi → order paymentStatus='pending_cash' bilan yaratiladi
+  2. Admin panel /orders sahifasida pending_cash filtri
+  3. Kuryer yetkazgach → admin [Tasdiqlash] tugmasi → POST /payments/cash/confirm
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  6. WEB STORAGE STRATEGIYASI (localStorage / sessionStorage / cookies)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Ma'lumot                          Qayerda saqlanadi        Fayl/store
+  ──────────────────────────────────────────────────────────────────────
+  Access token                      Pinia state (memory)     authStore.ts
+  Refresh token                     httpOnly Cookie          backend beradi
+  Savatcha (Cart)                   localStorage              cartStore.ts
+  Wishlist (login qilmagan)         localStorage              wishlistStore.ts
+  Checkout vaqtinchalik ma'lumot    sessionStorage             checkoutStore.ts
+                                     (yetkazish vaqti, tabrik matni)
+  Til tanlovi (uz/ru)               localStorage               uiStore.ts
+  Tema (light/dark)                 localStorage               uiStore.ts
+  ──────────────────────────────────────────────────────────────────────
+
+  Muhim: httpOnly cookie ishlatilgani uchun backend CORS sozlamasida
+  credentials: true va frontend Axios'da withCredentials: true bo'lishi shart.
+  CSRF himoyasi uchun cookie'da sameSite: 'strict' qo'yiladi.
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  7. TEXNOLOGIYALAR XARITASI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  BACKEND (apps/backend)
+  ├── Express + TypeScript
+  ├── Prisma ORM              → PostgreSQL
+  ├── Redis                   → OTP cache, session
+  ├── JWT                     → Access + Refresh token
+  ├── Zod                     → Validation
+  ├── S3 / Cloudinary         → Rasm saqlash
+  ├── SMS API (Eskiz.uz)      → OTP
+  └── Click API               → Online to'lov
+
+  FRONTEND (apps/frontend)
+  ├── Vue 3 + Vite + TypeScript
+  ├── Pinia                   → State management
+  ├── Vue Router               → navigation guard bilan
+  ├── vue-i18n                 → uz/ru
+  ├── SCSS Modules
+  ├── Axios
+  └── VueUse (ixtiyoriy)      → useLocalStorage, useSessionStorage helper'lar
+
+  ADMIN (apps/admin)
+  ├── Vue 3 + Vite + TypeScript
+  ├── Pinia
+  ├── Vue Router               → role-based guard
+  ├── SCSS Modules            → alohida qorong'i tema
+  ├── Chart.js / ApexCharts   → grafiklar
+  └── Axios
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  8. PRISMA SCHEMA — asosiy modellar (qisqacha)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  model User {
+    id           String   @id @default(cuid())
+    phone        String   @unique
+    fullName     String?
+    role         String   @default("customer")  // customer|florist|courier|admin
+    createdAt    DateTime @default(now())
+    orders       Order[]
+    addresses    Address[]
+    reviews      Review[]
+    wishlist     WishlistItem[]
+  }
+
+  model Order {
+    id              String    @id @default(cuid())
+    userId          String
+    user            User      @relation(fields: [userId], references: [id])
+    status          String    @default("pending")
+    paymentMethod   String                        // "click" | "cash"
+    paymentStatus   String    @default("pending")  // pending|pending_cash|paid|failed|refunded
+    deliveryDate    DateTime
+    deliveryTime    String
+    giftMessage     String?
+    preparedPhotoUrl String?
+    preparedById    String?                        // florist ID
+    courierId       String?
+    items           OrderItem[]
+    transaction     Transaction?
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime  @updatedAt
+  }
+
+  model Transaction {
+    id            String    @id @default(cuid())
+    orderId       String    @unique
+    order         Order     @relation(fields: [orderId], references: [id])
+    provider      String                           // "click" | "cash"
+    externalId    String?
+    amount        Int                               // Tiyin (so'm × 100)
+    currency      String    @default("UZS")
+    status        String    @default("pending")
+    providerData  Json?
+    confirmedBy   String?                           // Admin ID
+    createdAt     DateTime  @default(now())
+    paidAt        DateTime?
+  }
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  9. ENV O'ZGARUVCHILAR — TO'LIQ RO'YXAT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  # === DATABASE ===
+  DATABASE_URL=postgresql://user:pass@host:5432/peony_flowers
+
+  # === JWT ===
+  JWT_SECRET=your_jwt_secret
+  JWT_REFRESH_SECRET=your_refresh_secret
+
+  # === REDIS ===
+  REDIS_URL=redis://localhost:6379
+
+  # === STORAGE (S3 yoki Cloudinary) ===
+  S3_ACCESS_KEY_ID=
+  S3_SECRET_ACCESS_KEY=
+  S3_BUCKET_NAME=
+  S3_REGION=
+
+  # === SMS (Eskiz.uz) ===
+  SMS_EMAIL=
+  SMS_SECRET=
+
+  # === CLICK ===
+  CLICK_MERCHANT_ID=
+  CLICK_SERVICE_ID=
+  CLICK_SECRET_KEY=
+
+  # === PAYMENT GENERAL ===
+  PAYMENT_CALLBACK_BASE_URL=https://api.peonyflowers.uz
+
+  # === FRONTEND (Vue) ===
+  VITE_API_URL=https://api.peonyflowers.uz
+  VITE_CLICK_MERCHANT_ID=
+  VITE_CLICK_SERVICE_ID=
+
+  # === ADMIN (Vue) ===
+  VITE_API_URL=https://api.peonyflowers.uz
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  10. PHASE 2 — MVP'DAN KEYIN QO'SHILADIGANLAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  - Payme, Uzum Bank, Visa/MasterCard to'lov integratsiyasi
+  - Super Administrator roli + permission tizimi
+  - Blog va bannerlar moduli
+  - Employees (xodimlar) boshqaruvi
+  - Telegram bot (agar kerak bo'lsa)
+  - Google Login

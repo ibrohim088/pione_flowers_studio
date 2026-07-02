@@ -1,0 +1,19 @@
+@import './_variables.scss';
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+a { color: inherit; text-decoration: none; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-secondary); font-weight: 600; font-size: 13px; text-transform: uppercase; }
+}

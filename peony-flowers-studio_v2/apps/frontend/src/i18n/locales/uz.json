@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "catalog": "Katalog",
+    "about": "Biz haqimizda",
+    "cart": "Savatcha",
+    "account": "Kabinet",
+    "login": "Kirish"
+  },
+  "product": {
+    "addToCart": "Savatga qo'shish",
+    "outOfStock": "Sotuvda yo'q",
+    "price": "Narx",
+    "reviews": "Sharhlar"
+  },
+  "checkout": {
+    "title": "Buyurtmani rasmiylashtirish",
+    "deliveryDate": "Yetkazish sanasi",
+    "deliveryTime": "Yetkazish vaqti",
+    "giftMessage": "Tabrik matni",
+    "paymentMethod": "To'lov usuli",
+    "click": "Click orqali",
+    "cash": "Naqd pul",
+    "submit": "Buyurtma berish"
+  },
+  "auth": {
+    "phone": "Telefon raqam",
+    "sendCode": "Kod yuborish",
+    "code": "Tasdiqlash kodi",
+    "verify": "Tasdiqlash",
+    "fullName": "To'liq ism"
+  }
+}

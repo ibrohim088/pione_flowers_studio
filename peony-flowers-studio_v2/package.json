@@ -1,0 +1,25 @@
+{
+  "name": "peony-flowers-studio",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:backend": "turbo run dev --filter=@peony/backend",
+    "dev:frontend": "turbo run dev --filter=@peony/frontend",
+    "dev:admin": "turbo run dev --filter=@peony/admin",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "prisma:generate": "npm run prisma:generate --workspace=@peony/backend",
+    "prisma:migrate": "npm run prisma:migrate --workspace=@peony/backend",
+    "prisma:seed": "npm run prisma:seed --workspace=@peony/backend"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.6",
+    "typescript": "^5.5.3"
+  },
+  "packageManager": "npm@10.8.1"
+}
