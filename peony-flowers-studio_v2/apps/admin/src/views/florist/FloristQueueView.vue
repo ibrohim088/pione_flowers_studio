@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Gift } from '@lucide/vue';
 import { onMounted, ref } from 'vue';
 import { useFlorist } from '../../composables/useFlorist';
 import { formatDateTime } from '../../lib/utils';
@@ -52,7 +53,7 @@ async function confirm() {
         <ul>
           <li v-for="item in order.items" :key="item.id">{{ item.product.title }} × {{ item.quantity }}</li>
         </ul>
-        <p v-if="order.giftMessage" class="gift">🎁 {{ order.giftMessage }}</p>
+        <p v-if="order.giftMessage" class="gift"><Gift :size="14" /> {{ order.giftMessage }}</p>
         <AppButton @click="openPrepareModal(order.id)">Tayyor deb belgilash</AppButton>
       </div>
     </div>
@@ -76,7 +77,7 @@ async function confirm() {
   background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
 }
 .header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; color: var(--text-secondary); }
-.gift { font-style: italic; color: var(--text-secondary); margin: 10px 0; }
+.gift { display: flex; align-items: center; gap: 6px; font-style: italic; color: var(--text-secondary); margin: 10px 0; }
 .upload-section { display: flex; flex-direction: column; gap: 12px; align-items: center; }
 .preview { width: 160px; height: 160px; object-fit: cover; border-radius: var(--radius); }
 .upload-btn {

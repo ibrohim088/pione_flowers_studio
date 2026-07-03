@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Flower2, Package, Users, Wallet } from '@lucide/vue';
 import { onMounted } from 'vue';
 import { useDashboard } from '../../composables/useDashboard';
 import { formatPrice } from '../../lib/utils';
@@ -17,10 +18,10 @@ onMounted(() => fetchDashboard(30));
     <AppSpinner v-if="isLoading" />
     <template v-else-if="data">
       <div class="stats">
-        <AppCard title="Daromad (30 kun)" :value="formatPrice(data.overview.totalRevenue)" icon="💰" />
-        <AppCard title="Buyurtmalar" :value="String(data.overview.totalOrders)" icon="📦" />
-        <AppCard title="Mijozlar" :value="String(data.overview.totalUsers)" icon="👥" />
-        <AppCard title="Faol mahsulotlar" :value="String(data.overview.activeProducts)" icon="🌸" />
+        <AppCard title="Daromad (30 kun)" :value="formatPrice(data.overview.totalRevenue)" :icon="Wallet" />
+        <AppCard title="Buyurtmalar" :value="String(data.overview.totalOrders)" :icon="Package" />
+        <AppCard title="Mijozlar" :value="String(data.overview.totalUsers)" :icon="Users" />
+        <AppCard title="Faol mahsulotlar" :value="String(data.overview.activeProducts)" :icon="Flower2" />
       </div>
 
       <div class="charts">

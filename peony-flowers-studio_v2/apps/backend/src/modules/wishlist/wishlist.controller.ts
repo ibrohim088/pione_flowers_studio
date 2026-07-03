@@ -11,13 +11,13 @@ export const wishlistController = {
   },
   async add(req: Request, res: Response, next: NextFunction) {
     try {
-      const item = await wishlistService.add(req.user!.userId, req.params.productId);
+      const item = await wishlistService.add(req.user!.userId, req.params.productId!);
       return created(res, item, 'Sevimlilarga qo\'shildi');
     } catch (err) { return next(err); }
   },
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      await wishlistService.remove(req.user!.userId, req.params.productId);
+      await wishlistService.remove(req.user!.userId, req.params.productId!);
       return success(res, null, 'Sevimlilardan olib tashlandi');
     } catch (err) { return next(err); }
   },

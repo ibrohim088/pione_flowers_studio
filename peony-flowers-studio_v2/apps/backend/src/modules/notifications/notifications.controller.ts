@@ -11,7 +11,7 @@ export const notificationsController = {
   },
   async markRead(req: Request, res: Response, next: NextFunction) {
     try {
-      const n = await notificationsService.markRead(req.user!.userId, req.params.id);
+      const n = await notificationsService.markRead(req.user!.userId, req.params.id!);
       return success(res, n, 'O\'qilgan deb belgilandi');
     } catch (err) { return next(err); }
   },

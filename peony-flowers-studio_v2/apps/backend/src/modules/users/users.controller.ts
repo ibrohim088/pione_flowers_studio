@@ -33,21 +33,21 @@ export const usersController = {
 
   async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const user = await usersService.getById(req.params.id);
+      const user = await usersService.getById(req.params.id!);
       return success(res, user);
     } catch (err) { return next(err); }
   },
 
   async adminUpdate(req: Request, res: Response, next: NextFunction) {
     try {
-      const user = await usersService.adminUpdate(req.params.id, req.body);
+      const user = await usersService.adminUpdate(req.params.id!, req.body);
       return success(res, user, 'Foydalanuvchi yangilandi');
     } catch (err) { return next(err); }
   },
 
   async adminDelete(req: Request, res: Response, next: NextFunction) {
     try {
-      await usersService.adminDelete(req.params.id);
+      await usersService.adminDelete(req.params.id!);
       return success(res, null, 'Foydalanuvchi bloklandi');
     } catch (err) { return next(err); }
   },

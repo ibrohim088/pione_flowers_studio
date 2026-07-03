@@ -1,0 +1,328 @@
+<!DOCTYPE html><html lang="uz"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Peony Flowers Studio - Shaxsiy Kabinet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#181d17",
+                    "on-secondary-container": "#5d6852",
+                    "inverse-on-surface": "#feecf0",
+                    "inverse-surface": "#382e31",
+                    "surface-tint": "#974353",
+                    "surface-bright": "#fff8f8",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#dbe7cb",
+                    "on-primary-fixed": "#3f0013",
+                    "secondary-fixed": "#dbe7cb",
+                    "on-surface-variant": "#544244",
+                    "tertiary-container": "#525750",
+                    "tertiary-fixed-dim": "#c4c8bf",
+                    "surface-variant": "#efdee2",
+                    "surface-container-high": "#f5e4e8",
+                    "primary": "#6f2435",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#fff0f3",
+                    "error-container": "#ffdad6",
+                    "on-background": "#22191c",
+                    "primary-fixed-dim": "#ffb2bd",
+                    "primary-container": "#8c3b4b",
+                    "surface-container-highest": "#efdee2",
+                    "primary-fixed": "#ffd9dd",
+                    "surface-container": "#fbeaee",
+                    "secondary-fixed-dim": "#bfcab0",
+                    "background": "#fff8f8",
+                    "tertiary-fixed": "#e0e4db",
+                    "secondary": "#57624c",
+                    "outline-variant": "#d9c1c3",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#434842",
+                    "on-tertiary-container": "#c8ccc4",
+                    "on-secondary-fixed": "#151e0d",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#ffb2bd",
+                    "outline": "#877274",
+                    "on-primary-fixed-variant": "#792c3d",
+                    "on-secondary-fixed-variant": "#404a36",
+                    "surface-dim": "#e7d6da",
+                    "on-surface": "#22191c",
+                    "surface": "#fff8f8",
+                    "tertiary": "#3b403a",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#ffb9c2",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "2px",
+                    "lg": "4px",
+                    "xl": "8px",
+                    "full": "12px"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "margin-mobile": "16px",
+                    "section-padding": "80px",
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Fraunces"],
+                    "headline-md-mobile": ["Fraunces"],
+                    "label-sm": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "headline-md": ["Fraunces"],
+                    "body-md": ["Manrope"],
+                    "headline-sm": ["Fraunces"],
+                    "display-lg": ["Fraunces"],
+                    "label-caps": ["Manrope"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                    "headline-md-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                    "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                    "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                    "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                    "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                    "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                    "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                    "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fff8f8;
+            color: #22191c;
+            -webkit-font-smoothing: antialiased;
+        }
+        .editorial-border {
+            border: 1px solid #EBE2DF;
+        }
+        .botanical-sketch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 90C40 90 30 85 25 75C20 65 20 50 30 35C35 25 45 15 55 10C65 5 75 10 80 20C85 30 80 45 70 55C60 65 50 65 40 60C30 55 25 45 30 35' fill='none' stroke='%238C3B4B' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-surface sticky top-0 z-50 border-b border-outline-variant h-20">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-stack-lg">
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary italic leading-none">Peony</span>
+<div class="hidden md:flex gap-stack-md">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Katalog</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Brend haqida</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="hidden md:block font-label-sm text-label-sm text-on-surface-variant cursor-pointer hover:text-primary">UZ/RU</span>
+<div class="flex gap-stack-sm">
+<button class="p-2 hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-primary">shopping_cart</span></button>
+<button class="p-2 hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-primary">favorite</span></button>
+<button class="p-2 bg-surface-container-low border border-outline-variant rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Content Canvas -->
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Sidebar Navigation -->
+<aside class="md:col-span-3 space-y-stack-md">
+<div class="mb-stack-lg">
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Mening kabinetim</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Xush kelibsiz, Aziza</p>
+</div>
+<nav class="flex flex-col gap-unit">
+<a class="flex items-center gap-stack-sm px-stack-md py-stack-sm font-label-sm text-label-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                        Umumiy
+                    </a>
+<a class="flex items-center gap-stack-sm px-stack-md py-stack-sm font-label-sm text-label-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+                        Shaxsiy ma'lumot
+                    </a>
+<!-- Active State: Blush background (#F6E9EA) + wine text (#8C3B4B) -->
+<a class="flex items-center gap-stack-sm px-stack-md py-stack-sm font-label-sm text-label-sm rounded-xl bg-[#F6E9EA] text-[#8C3B4B] font-semibold transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+                        Buyurtmalar
+                    </a>
+<a class="flex items-center gap-stack-sm px-stack-md py-stack-sm font-label-sm text-label-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">location_on</span>
+                        Manzillar
+                    </a>
+<a class="flex items-center gap-stack-sm px-stack-md py-stack-sm font-label-sm text-label-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">favorite</span>
+                        Sevimlilar
+                    </a>
+<a class="flex items-center gap-stack-sm px-stack-md py-stack-sm font-label-sm text-label-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+                        Bildirishnomalar
+                    </a>
+</nav>
+<div class="pt-stack-lg border-t border-outline-variant mt-stack-lg">
+<button class="flex items-center gap-stack-sm px-stack-md py-stack-sm font-label-sm text-label-sm text-error hover:underline transition-all">
+<span class="material-symbols-outlined">logout</span>
+                        Chiqish
+                    </button>
+</div>
+</aside>
+<!-- Right: Order History -->
+<section class="md:col-span-9">
+<header class="flex justify-between items-end mb-stack-md border-b border-outline-variant pb-stack-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Buyurtmalar tarixi</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">3 ta faol buyurtma</span>
+</header>
+<div class="space-y-stack-md">
+<!-- Order Card 1 -->
+<div class="editorial-border rounded-xl p-stack-md bg-surface-container-lowest hover:border-primary-container transition-colors group">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md">
+<div class="flex items-center gap-stack-md">
+<div class="w-20 h-24 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A close-up editorial shot of a lush bouquet of Peonies and Ranunculus in shades of blush and wine red, wrapped in premium heavy-weight cream paper with a silk ribbon. The lighting is soft and natural, emphasizing the organic textures and delicate petals. Minimalist aesthetic consistent with a luxury floral studio in Tashkent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfphYc5vVXaHmJfpupX0IPmwa6JGnctcv0-oxnrPNN6DyF9qOKHk1ISHZmZbf-fU-Ypygrhr_F0bfW0xcZVvRXZ8P7m14lVzvmTBVEDhogWHtouvZp_FAlmridk2aMQ6wVqpKtw_Db2G_p4MhBgIj2IghjuDOyVRK3KuGvM2ydmOnNQv3QLN7gFMZL71rMxAHZkkL3JSEYlhJRQ5flbVKTtnT7X0yBbOJ0QMl4L4w2seiiVnEZRr7-ig">
+</div>
+<div>
+<h3 class="font-headline-sm text-[18px] text-on-surface">"Bahor Nafasi" guldastasi</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ID: #PN-2024-8812</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">12 May, 2024 • 14:30</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-stack-sm w-full md:w-auto">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container font-label-caps text-[10px] rounded-full uppercase tracking-widest">Yetkazilmoqda</span>
+<span class="font-body-lg font-bold text-primary">450,000 UZS</span>
+<button class="text-primary font-label-sm text-label-sm underline hover:opacity-80">Tafsilotlar</button>
+</div>
+</div>
+</div>
+<!-- Order Card 2 -->
+<div class="editorial-border rounded-xl p-stack-md bg-surface-container-lowest hover:border-primary-container transition-colors group">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md">
+<div class="flex items-center gap-stack-md">
+<div class="w-20 h-24 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist overhead photograph of a single large white Peony bloom in a slender ceramic vase, set against a soft beige background with a delicate botanical line sketch watermark. The scene is bright and airy, with sharp focus on the flower's intricate layers, evoking a sense of refined luxury and high-end editorial design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUr_RuiuZ8Am_uUhcsHGFa_RtqZxi_ZQspDWK6jJj-lG1cl3RljfW7aSXA1aZZ4yzk8pov5xlJFo_fn4-3XwBMlGkC3yRZ4zYdFtK3efgcK587mpY8beTOnNgllL1GNkIh3wcbgMPi19AxQSiZ52jElZR3EcbUWREa5CAnzdp1Pa45-lU2cSwZAd1iC2GaLMcOTdRf7mkOyUcAvM7Kmfi3Uk2fqoHquGkl4lrZOogAZhspvTi4WT0n_w">
+</div>
+<div>
+<h3 class="font-headline-sm text-[18px] text-on-surface">"Oq Marvarid" mono-buket</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ID: #PN-2024-8790</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">05 May, 2024 • 11:15</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-stack-sm w-full md:w-auto">
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant font-label-caps text-[10px] rounded-full uppercase tracking-widest">Yetkazilgan</span>
+<span class="font-body-lg font-bold text-primary">320,000 UZS</span>
+<button class="text-primary font-label-sm text-label-sm underline hover:opacity-80">Tafsilotlar</button>
+</div>
+</div>
+</div>
+<!-- Order Card 3 -->
+<div class="editorial-border rounded-xl p-stack-md bg-surface-container-lowest hover:border-primary-container transition-colors group">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md">
+<div class="flex items-center gap-stack-md">
+<div class="w-20 h-24 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="An artistic composition featuring a bouquet of dried lavender and eucalyptus tied with a rustic twine, resting on a polished dark wood table. The background is a soft-focus interior of a modern florist shop with wine-colored accents and subtle warm lighting. The image captures a serene, artisanal mood with a high-end fashion journal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTxnm-QK1hZ8T3IEvpstDOCQTjOFz_iIje2UxXFSNKNSKyqZWSoZeAdLFbxsKafx50YL-mVuV2rQUrSn7FE3F3GQqnq_ZaiJRDhrkWsPd1ze26wHRFuGU3Guest5Somj60pl-CGrx5CeM2bHhVwxE8-frKJN8lJSxF7zcrhStff5UOphfDf84G-EabkDU00yWFKPMf8U2zfyCc1v8NL7fDAi36Q260Lk24pKWSlYCBH5AFBSh2EH_Dkg">
+</div>
+<div>
+<h3 class="font-headline-sm text-[18px] text-on-surface">Kollaboratsiya: Peony x Silk</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ID: #PN-2024-8501</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">28 Apr, 2024 • 09:00</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-stack-sm w-full md:w-auto">
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant font-label-caps text-[10px] rounded-full uppercase tracking-widest">Yetkazilgan</span>
+<span class="font-body-lg font-bold text-primary">1,200,000 UZS</span>
+<button class="text-primary font-label-sm text-label-sm underline hover:opacity-80">Tafsilotlar</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Show More -->
+<div class="mt-stack-lg flex justify-center">
+<button class="px-section-padding/4 py-3 border border-primary text-primary font-label-sm text-label-sm rounded-lg hover:bg-primary-container hover:text-white transition-all duration-300">
+                        Ko'proq ko'rsatish
+                    </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant mt-section-padding">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter py-section-padding px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<span class="font-display-lg text-headline-md text-primary block mb-stack-md">Peony</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Toshkentdagi premium gullar studiyasi. Har bir guldastada san'at va ehtiros.</p>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-stack-md">Do'kon</h4>
+<ul class="space-y-unit flex flex-col">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-all" href="#">Guldastalar</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-all" href="#">Kollaboratsiyalar</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-all" href="#">Yetkazib berish</a>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-stack-md">Mijozlarga</h4>
+<ul class="space-y-unit flex flex-col">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-all" href="#">To'lov usullari</a>
+<a class="font-body-md text-body-md text-primary underline" href="#">Profilim</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-all" href="#">Buyurtmalar tarixi</a>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-stack-md">Bog'lanish</h4>
+<ul class="space-y-unit flex flex-col">
+<span class="font-body-md text-body-md text-on-surface-variant">Manzilimiz: Toshkent sh., Mirobod t.</span>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-all" href="tel:+998901234567">+998 90 123 45 67</a>
+<div class="flex gap-stack-sm mt-stack-sm">
+<span class="material-symbols-outlined text-primary-container">alternate_email</span>
+<span class="material-symbols-outlined text-primary-container">camera</span>
+</div>
+</ul>
+</div>
+</div>
+<div class="border-t border-outline-variant py-stack-md px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center">© 2024 Peony Flowers Studio. Barcha huquqlar himoyalangan.</p>
+</div>
+</footer>
+<!-- Decorative Element -->
+<div class="botanical-sketch"></div>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.editorial-border').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.3s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

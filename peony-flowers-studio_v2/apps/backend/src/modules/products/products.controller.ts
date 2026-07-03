@@ -12,7 +12,7 @@ export const productsController = {
 
   async getBySlug(req: Request, res: Response, next: NextFunction) {
     try {
-      const product = await productsService.getBySlug(req.params.slug);
+      const product = await productsService.getBySlug(req.params.slug!);
       return success(res, product);
     } catch (err) { return next(err); }
   },
@@ -26,14 +26,14 @@ export const productsController = {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const product = await productsService.update(req.params.id, req.body);
+      const product = await productsService.update(req.params.id!, req.body);
       return success(res, product, 'Mahsulot yangilandi');
     } catch (err) { return next(err); }
   },
 
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      await productsService.remove(req.params.id);
+      await productsService.remove(req.params.id!);
       return success(res, null, 'Mahsulot o\'chirildi');
     } catch (err) { return next(err); }
   },

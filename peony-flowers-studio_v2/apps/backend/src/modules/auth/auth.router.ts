@@ -10,5 +10,6 @@ router.post('/send-otp', otpRateLimiter, validate({ body: sendOtpSchema }), auth
 router.post('/verify-otp', loginRateLimiter, validate({ body: verifyOtpSchema }), authController.verifyOtp);
 router.post('/refresh', validate({ body: refreshSchema }), authController.refresh);
 router.post('/logout', authController.logout);
+router.get('/dev-otp/:phone', authController.devGetOtp);
 
 export default router;

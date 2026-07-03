@@ -23,7 +23,7 @@ export const couponsController = {
   },
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      await couponsService.remove(req.params.id);
+      await couponsService.remove(req.params.id!);
       return success(res, null, 'Kupon o\'chirildi');
     } catch (err) { return next(err); }
   },

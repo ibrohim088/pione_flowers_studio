@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Flower2, ShoppingCart } from '@lucide/vue';
 import { RouterLink } from 'vue-router';
 import { useCartStore } from '../../stores/cartStore';
 import { useAuthStore } from '../../stores/authStore';
@@ -11,7 +12,7 @@ const uiStore = useUiStore();
 
 <template>
   <header class="header">
-    <RouterLink to="/" class="logo">🌸 Peony Flowers</RouterLink>
+    <RouterLink to="/" class="logo"><Flower2 :size="20" /> Peony Flowers</RouterLink>
 
     <nav class="nav">
       <RouterLink to="/catalog">{{ $t('nav.catalog') }}</RouterLink>
@@ -25,7 +26,7 @@ const uiStore = useUiStore();
       </select>
 
       <RouterLink to="/cart" class="cart-link">
-        🛒 {{ $t('nav.cart') }}
+        <ShoppingCart :size="18" /> {{ $t('nav.cart') }}
         <span v-if="cartStore.totalItems" class="badge">{{ cartStore.totalItems }}</span>
       </RouterLink>
 
@@ -45,6 +46,9 @@ const uiStore = useUiStore();
   border-bottom: 1px solid var(--border);
 }
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 20px;
   font-weight: 700;
   color: var(--accent);
@@ -60,6 +64,9 @@ const uiStore = useUiStore();
 }
 .cart-link {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .badge {
   position: absolute;

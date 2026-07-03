@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Star } from '@lucide/vue';
+
 defineProps<{ reviews: any[] }>();
 </script>
 
@@ -8,7 +10,9 @@ defineProps<{ reviews: any[] }>();
     <div v-for="review in reviews" :key="review.id" class="review">
       <div class="header">
         <strong>{{ review.user?.fullName || 'Mijoz' }}</strong>
-        <span class="stars">{{ '★'.repeat(review.rating) }}{{ '☆'.repeat(5 - review.rating) }}</span>
+        <span class="stars">
+          <Star v-for="n in 5" :key="n" :size="14" :fill="n <= review.rating ? 'currentColor' : 'none'" />
+        </span>
       </div>
       <p v-if="review.comment">{{ review.comment }}</p>
     </div>
@@ -19,6 +23,6 @@ defineProps<{ reviews: any[] }>();
 .reviews { display: flex; flex-direction: column; gap: 16px; }
 .review { padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); }
 .header { display: flex; justify-content: space-between; margin-bottom: 6px; }
-.stars { color: var(--warning); }
+.stars { display: inline-flex; gap: 2px; color: var(--warning); }
 .empty { color: var(--text-secondary); }
 </style>

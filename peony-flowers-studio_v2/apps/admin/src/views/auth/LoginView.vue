@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Flower2 } from '@lucide/vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/authStore';
@@ -44,7 +45,7 @@ async function verify() {
 <template>
   <div class="login-page">
     <div class="card">
-      <h1>🌸 Peony Admin</h1>
+      <h1><Flower2 :size="24" /> Peony Admin</h1>
 
       <form v-if="step === 'phone'" @submit.prevent="sendOtp">
         <AppInput v-model="phone" label="Telefon raqam" placeholder="+998901234567" />
@@ -70,7 +71,7 @@ async function verify() {
   background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 32px; width: 360px;
 }
-h1 { text-align: center; margin-bottom: 24px; }
+h1 { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 24px; }
 form { display: flex; flex-direction: column; gap: 16px; }
 .error { color: var(--danger); font-size: 13px; }
 </style>

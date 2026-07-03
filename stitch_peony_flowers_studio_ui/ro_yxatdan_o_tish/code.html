@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="light" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#22191c",
+                    "on-surface-variant": "#544244",
+                    "inverse-surface": "#382e31",
+                    "tertiary-fixed-dim": "#c4c8bf",
+                    "surface-container-high": "#f5e4e8",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#feecf0",
+                    "secondary-container": "#dbe7cb",
+                    "secondary-fixed": "#dbe7cb",
+                    "on-secondary-container": "#5d6852",
+                    "on-secondary-fixed": "#151e0d",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#fff0f3",
+                    "surface": "#fff8f8",
+                    "on-tertiary-fixed-variant": "#434842",
+                    "on-tertiary-container": "#c8ccc4",
+                    "on-primary-container": "#ffb9c2",
+                    "surface-dim": "#e7d6da",
+                    "on-tertiary-fixed": "#181d17",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#ffb2bd",
+                    "primary-container": "#8c3b4b",
+                    "on-error": "#ffffff",
+                    "secondary": "#57624c",
+                    "tertiary-fixed": "#e0e4db",
+                    "primary": "#6f2435",
+                    "on-secondary-fixed-variant": "#404a36",
+                    "on-background": "#22191c",
+                    "on-primary-fixed-variant": "#792c3d",
+                    "secondary-fixed-dim": "#bfcab0",
+                    "error": "#ba1a1a",
+                    "tertiary": "#3b403a",
+                    "background": "#fff8f8",
+                    "surface-container-highest": "#efdee2",
+                    "on-primary-fixed": "#3f0013",
+                    "outline-variant": "#d9c1c3",
+                    "outline": "#877274",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#525750",
+                    "surface-variant": "#efdee2",
+                    "primary-fixed": "#ffd9dd",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#fbeaee",
+                    "inverse-primary": "#ffb2bd",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#974353",
+                    "surface-bright": "#fff8f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "64px",
+                    "section-padding": "80px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Manrope"],
+                    "label-caps": ["Manrope"],
+                    "display-lg-mobile": ["Fraunces"],
+                    "display-lg": ["Fraunces"],
+                    "body-md": ["Manrope"],
+                    "headline-md": ["Fraunces"],
+                    "body-lg": ["Manrope"],
+                    "headline-md-mobile": ["Fraunces"],
+                    "headline-sm": ["Fraunces"]
+            },
+            "fontSize": {
+                    "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #FAF5F4;
+            color: #22191c;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .botanical-divider {
+            position: relative;
+            height: 1px;
+            background-color: #EBE2DF;
+            margin: 2rem 0;
+        }
+        .input-transition {
+            transition: border-color 0.2s ease-in-out;
+        }
+        .card-shadow {
+            /* Per style guide: "Flat Layering: Hierarchy is established through tonal shifts in background color. No box-shadows." */
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-margin-mobile">
+<!-- Suppressing TopNavBar and Footer for transactional screen per "Shell Visibility & Relevance" mandate -->
+<main class="w-full max-w-[420px] bg-white border border-[#EBE2DF] xl:rounded-xl overflow-hidden animate-in fade-in duration-700">
+<div class="px-8 pt-10 pb-12 flex flex-col items-center">
+<!-- Brand Logo -->
+<div class="mb-stack-lg">
+<img alt="Peony Flowers Studio Logo" class="h-16 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLtRAonoytteXP7tbaMq9uyRzuwHYhOzKDXCCls0KxrQLpla1ySYW0UGkkmQJAIPGpfs0ILwbaNFSm-tgbcM0oLCqddmQDhy9XlRXgyU8tAevOycGz_uFVjt8vq6myYSj9xnWNwagz6gOEd7MtWMku3xsC8F-U7dJ35aVsRw-9XX7h3YwPj3AOnw8k5-R7Gb-tBgoLnuT_sTs2I_Ieglw8sH4pckGjxRxBVFwbEjEyzwDwCN1kYCRoVo1B4H"/>
+</div>
+<!-- Heading -->
+<h1 class="font-headline-md text-headline-md text-on-surface text-center mb-stack-lg tracking-tight">
+                Ro'yxatdan o'tish
+            </h1>
+<form action="#" class="w-full space-y-6" method="POST">
+<!-- Full Name Field -->
+<div class="space-y-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="full_name">
+                        Ism va familiya
+                    </label>
+<input class="w-full px-4 py-3 bg-white border border-[#EBE2DF] rounded-xl font-body-md text-body-md text-on-surface focus:ring-0 focus:border-primary-container input-transition outline-none" id="full_name" name="full_name" placeholder="Masalan: Anvar Alimov" required="" type="text"/>
+</div>
+<!-- Phone Number Field -->
+<div class="space-y-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="phone">
+                        Telefon raqami
+                    </label>
+<div class="relative">
+<input class="w-full px-4 py-3 bg-white border border-[#EBE2DF] rounded-xl font-body-md text-body-md text-on-surface focus:ring-0 focus:border-primary-container input-transition outline-none" id="phone" name="phone" placeholder="+998" required="" type="tel"/>
+</div>
+</div>
+<!-- Terms & Conditions -->
+<div class="flex items-start gap-3 pt-2">
+<div class="flex items-center h-5">
+<input class="h-4 w-4 rounded border-[#EBE2DF] text-primary-container focus:ring-primary-container" id="terms" name="terms" required="" type="checkbox"/>
+</div>
+<div class="text-sm">
+<label class="font-body-md text-[14px] text-on-surface-variant leading-tight" for="terms">
+                            Men <a class="text-primary-container font-semibold hover:underline" href="#">foydalanish shartlari</a> va maxfiylik siyosatiga roziman.
+                        </label>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full bg-[#8C3B4B] text-white font-label-sm text-label-sm py-4 rounded-xl hover:bg-[#6f2435] transition-all duration-300 font-semibold tracking-wide" type="submit">
+                    Ro'yxatdan o'tish
+                </button>
+</form>
+<!-- Hairline Divider -->
+<div class="w-full botanical-divider relative flex justify-center items-center">
+<!-- Subtle botanical hint could go here if needed, keeping it minimal for now -->
+</div>
+<!-- Secondary Link -->
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Hisobingiz bormi? 
+                    <a class="text-primary-container font-semibold hover:underline ml-1" href="#">
+                        Kirish
+                    </a>
+</p>
+</div>
+</div>
+</main>
+<!-- Decorative Botanical Motif (Watermark effect) -->
+<div class="fixed bottom-0 right-0 p-8 pointer-events-none opacity-5 hidden md:block">
+<svg fill="none" height="240" viewbox="0 0 200 200" width="240" xmlns="http://www.w3.org/2000/svg">
+<path d="M100 180C100 180 130 150 130 110C130 70 100 40 100 40C100 40 70 70 70 110C70 150 100 180 100 180Z" stroke="#8C3B4B" stroke-width="0.5"></path>
+<path d="M100 160C120 160 150 140 150 100C150 60 120 40 100 40C80 40 50 60 50 100C50 140 80 160 100 160Z" stroke="#8C3B4B" stroke-width="0.5"></path>
+<path d="M60 80C60 80 40 100 40 130C40 160 70 180 70 180" stroke="#8C3B4B" stroke-width="0.5"></path>
+<path d="M140 80C140 80 160 100 160 130C160 160 130 180 130 180" stroke="#8C3B4B" stroke-width="0.5"></path>
+</svg>
+</div>
+<script>
+        // Micro-interaction for phone number formatting
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value;
+            if (!value.startsWith('+998')) {
+                e.target.value = '+998';
+            }
+        });
+
+        // Initialize phone value
+        window.addEventListener('DOMContentLoaded', () => {
+            phoneInput.value = '+998 ';
+        });
+    </script>
+</body></html>

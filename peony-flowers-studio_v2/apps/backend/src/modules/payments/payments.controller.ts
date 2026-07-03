@@ -26,7 +26,7 @@ export const paymentsController = {
 
   async getStatus(req: Request, res: Response, next: NextFunction) {
     try {
-      const transaction = await paymentsService.getStatus(req.params.orderId);
+      const transaction = await paymentsService.getStatus(req.params.orderId!);
       return success(res, transaction);
     } catch (err) { return next(err); }
   },
@@ -40,7 +40,7 @@ export const paymentsController = {
 
   async refund(req: Request, res: Response, next: NextFunction) {
     try {
-      const transaction = await paymentsService.refund(req.params.id, req.user!.userId);
+      const transaction = await paymentsService.refund(req.params.id!, req.user!.userId);
       return success(res, transaction, 'To\'lov qaytarildi');
     } catch (err) { return next(err); }
   },

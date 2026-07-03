@@ -17,3 +17,7 @@ export async function verifyOtp(phone: string, code: string): Promise<boolean> {
   await redisClient.del(`${OTP_PREFIX}${phone}`);
   return true;
 }
+
+export async function peekOtpForDev(phone: string): Promise<string | null> {
+  return redisClient.get(`${OTP_PREFIX}${phone}`);
+}

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Banknote, CreditCard } from '@lucide/vue';
+
 defineProps<{ modelValue: 'click' | 'cash' }>();
 defineEmits<{ 'update:modelValue': [value: 'click' | 'cash'] }>();
 </script>
@@ -7,11 +9,11 @@ defineEmits<{ 'update:modelValue': [value: 'click' | 'cash'] }>();
   <div class="methods">
     <label :class="{ active: modelValue === 'click' }">
       <input type="radio" value="click" :checked="modelValue === 'click'" @change="$emit('update:modelValue', 'click')" />
-      💳 Click orqali
+      <CreditCard :size="18" /> Click orqali
     </label>
     <label :class="{ active: modelValue === 'cash' }">
       <input type="radio" value="cash" :checked="modelValue === 'cash'" @change="$emit('update:modelValue', 'cash')" />
-      💵 Naqd pul
+      <Banknote :size="18" /> Naqd pul
     </label>
   </div>
 </template>

@@ -19,14 +19,14 @@ export const categoriesController = {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const category = await categoriesService.update(req.params.id, req.body);
+      const category = await categoriesService.update(req.params.id!, req.body);
       return success(res, category, 'Kategoriya yangilandi');
     } catch (err) { return next(err); }
   },
 
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      await categoriesService.remove(req.params.id);
+      await categoriesService.remove(req.params.id!);
       return success(res, null, 'Kategoriya o\'chirildi');
     } catch (err) { return next(err); }
   },

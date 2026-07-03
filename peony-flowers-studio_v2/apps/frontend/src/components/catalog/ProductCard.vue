@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Heart } from '@lucide/vue';
 import { RouterLink } from 'vue-router';
 import { formatPrice } from '../../lib/utils';
 import { useCartStore } from '../../stores/cartStore';
@@ -26,7 +27,11 @@ function addToCart() {
       <img :src="product.images?.[0]?.url || '/placeholder.jpg'" :alt="product.title" />
     </RouterLink>
     <button class="wishlist-btn" @click="toggle(product.id)">
-      {{ isInWishlist(product.id) ? '❤️' : '🤍' }}
+      <Heart
+        :size="16"
+        :fill="isInWishlist(product.id) ? 'currentColor' : 'none'"
+        :class="{ 'wishlist-active': isInWishlist(product.id) }"
+      />
     </button>
     <div class="info">
       <RouterLink :to="`/product/${product.slug}`" class="title">{{ product.title }}</RouterLink>
@@ -54,7 +59,10 @@ img { width: 100%; aspect-ratio: 1; object-fit: cover; }
   position: absolute; top: 10px; right: 10px;
   background: white; border: none; border-radius: 50%;
   width: 32px; height: 32px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
 }
+.wishlist-active { color: var(--danger); }
 .info { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
 .title { font-weight: 600; }
 .price-row { display: flex; gap: 8px; align-items: center; }

@@ -17,13 +17,13 @@ export const addressesController = {
   },
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      const address = await addressesService.update(req.user!.userId, req.params.id, req.body);
+      const address = await addressesService.update(req.user!.userId, req.params.id!, req.body);
       return success(res, address, 'Manzil yangilandi');
     } catch (err) { return next(err); }
   },
   async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      await addressesService.remove(req.user!.userId, req.params.id);
+      await addressesService.remove(req.user!.userId, req.params.id!);
       return success(res, null, 'Manzil o\'chirildi');
     } catch (err) { return next(err); }
   },

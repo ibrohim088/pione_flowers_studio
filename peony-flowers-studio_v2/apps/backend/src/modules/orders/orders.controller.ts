@@ -20,14 +20,14 @@ export const ordersController = {
   async getById(req: Request, res: Response, next: NextFunction) {
     try {
       const isAdminOrStaff = ['admin', 'florist', 'courier'].includes(req.user!.role);
-      const order = await ordersService.getById(req.params.id, isAdminOrStaff ? undefined : req.user!.userId);
+      const order = await ordersService.getById(req.params.id!, isAdminOrStaff ? undefined : req.user!.userId);
       return success(res, order);
     } catch (err) { return next(err); }
   },
 
   async cancel(req: Request, res: Response, next: NextFunction) {
     try {
-      const order = await ordersService.cancel(req.params.id, req.user!.userId);
+      const order = await ordersService.cancel(req.params.id!, req.user!.userId);
       return success(res, order, 'Buyurtma bekor qilindi');
     } catch (err) { return next(err); }
   },
@@ -41,7 +41,7 @@ export const ordersController = {
 
   async updateStatus(req: Request, res: Response, next: NextFunction) {
     try {
-      const order = await ordersService.updateStatus(req.params.id, req.body.status);
+      const order = await ordersService.updateStatus(req.params.id!, req.body.status);
       return success(res, order, 'Status yangilandi');
     } catch (err) { return next(err); }
   },
@@ -55,7 +55,7 @@ export const ordersController = {
 
   async markPrepared(req: Request, res: Response, next: NextFunction) {
     try {
-      const order = await ordersService.markPrepared(req.params.id, req.user!.userId, req.body.preparedPhotoUrl);
+      const order = await ordersService.markPrepared(req.params.id!, req.user!.userId, req.body.preparedPhotoUrl);
       return success(res, order, 'Buyurtma tayyor deb belgilandi');
     } catch (err) { return next(err); }
   },
@@ -69,7 +69,7 @@ export const ordersController = {
 
   async markDelivered(req: Request, res: Response, next: NextFunction) {
     try {
-      const order = await ordersService.markDelivered(req.params.id, req.user!.userId);
+      const order = await ordersService.markDelivered(req.params.id!, req.user!.userId);
       return success(res, order, 'Buyurtma yetkazildi deb belgilandi');
     } catch (err) { return next(err); }
   },

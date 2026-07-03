@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { X } from '@lucide/vue';
+
 defineProps<{ open: boolean }>();
 defineEmits<{ close: [] }>();
 </script>
@@ -6,7 +8,7 @@ defineEmits<{ close: [] }>();
 <template>
   <transition name="slide">
     <div v-if="open" class="mobile-menu">
-      <button class="close-btn" @click="$emit('close')">✕</button>
+      <button class="close-btn" @click="$emit('close')"><X :size="22" /></button>
       <RouterLink to="/catalog" @click="$emit('close')">Katalog</RouterLink>
       <RouterLink to="/about" @click="$emit('close')">Biz haqimizda</RouterLink>
       <RouterLink to="/account" @click="$emit('close')">Kabinet</RouterLink>
@@ -29,7 +31,9 @@ defineEmits<{ close: [] }>();
   align-self: flex-end;
   border: none;
   background: none;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
 }
 .slide-enter-active, .slide-leave-active { transition: transform 0.25s ease; }
 .slide-enter-from, .slide-leave-to { transform: translateX(100%); }
