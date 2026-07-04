@@ -1,17 +1,33 @@
 <script setup lang="ts">
-import { X } from '@lucide/vue';
+import { RouterLink } from 'vue-router';
+import { useAuthStore } from '../../stores/authStore';
 
 defineProps<{ open: boolean }>();
 defineEmits<{ close: [] }>();
+
+const authStore = useAuthStore();
 </script>
 
 <template>
   <transition name="slide">
     <div v-if="open" class="mobile-menu">
-      <button class="close-btn" @click="$emit('close')"><X :size="22" /></button>
-      <RouterLink to="/catalog" @click="$emit('close')">Katalog</RouterLink>
-      <RouterLink to="/about" @click="$emit('close')">Biz haqimizda</RouterLink>
-      <RouterLink to="/account" @click="$emit('close')">Kabinet</RouterLink>
+      <div class="top">
+        <span class="logo display-lg">Peony</span>
+        <button class="close-btn" type="button" @click="$emit('close')">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <nav class="links">
+        <RouterLink to="/catalog" class="headline-sm" @click="$emit('close')">{{ $t('nav.catalog') }}</RouterLink>
+        <RouterLink to="/about" class="headline-sm" @click="$emit('close')">{{ $t('mobileMenu.brand') }}</RouterLink>
+        <RouterLink
+          :to="authStore.isAuthenticated ? '/account' : '/login'"
+          class="headline-sm"
+          @click="$emit('close')"
+        >
+          {{ authStore.isAuthenticated ? $t('nav.account') : $t('nav.login') }}
+        </RouterLink>
+      </nav>
     </div>
   </transition>
 </template>
@@ -20,21 +36,43 @@ defineEmits<{ close: [] }>();
 .mobile-menu {
   position: fixed;
   inset: 0;
-  background: var(--bg-primary);
-  z-index: 50;
+  background: var(--color-surface);
+  z-index: 60;
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  gap: 16px;
+  padding: var(--margin-mobile);
+  gap: var(--stack-lg);
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  color: var(--color-primary);
+  font-style: italic;
 }
 .close-btn {
-  align-self: flex-end;
   border: none;
   background: none;
   display: flex;
-  align-items: center;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
+  cursor: pointer;
 }
-.slide-enter-active, .slide-leave-active { transition: transform 0.25s ease; }
-.slide-enter-from, .slide-leave-to { transform: translateX(100%); }
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-lg);
+}
+.links a {
+  color: var(--color-on-surface);
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.25s ease;
+}
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(100%);
+}
 </style>

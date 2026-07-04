@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Peony Admin - Kirish</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#ffd9df",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#ffe9eb",
+                    "surface": "#fff8f7",
+                    "tertiary-fixed-dim": "#7adb91",
+                    "outline": "#8c7075",
+                    "primary-container": "#c2255c",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#00210b",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#edd4d7",
+                    "on-secondary-fixed": "#1a1b22",
+                    "on-primary-fixed-variant": "#90003d",
+                    "surface-container-low": "#fff0f1",
+                    "inverse-on-surface": "#ffecee",
+                    "tertiary": "#005c2a",
+                    "secondary-fixed-dim": "#c6c5cf",
+                    "tertiary-container": "#007739",
+                    "on-surface": "#26181a",
+                    "primary": "#9f0045",
+                    "on-tertiary-fixed-variant": "#005225",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#ffb1c1",
+                    "on-secondary-container": "#63646c",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#fce2e5",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#ffdfe3",
+                    "inverse-surface": "#3c2c2f",
+                    "on-secondary-fixed-variant": "#46464e",
+                    "on-tertiary-container": "#99fbae",
+                    "surface-tint": "#b61953",
+                    "on-primary-fixed": "#3f0017",
+                    "background": "#fff8f7",
+                    "surface-variant": "#f6dce0",
+                    "on-surface-variant": "#594045",
+                    "secondary-container": "#e3e1ec",
+                    "secondary-fixed": "#e3e1ec",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#ffb1c1",
+                    "outline-variant": "#e0bec3",
+                    "surface-bright": "#fff8f7",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#f6dce0",
+                    "on-background": "#26181a",
+                    "tertiary-fixed": "#95f8ab",
+                    "secondary": "#5d5e66"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container_margin": "32px",
+                    "section_gap": "20px",
+                    "grid_gutter": "20px",
+                    "element_gap": "16px",
+                    "page_padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7f7f8;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hidden-step {
+            opacity: 0;
+            transform: translateX(20px);
+            pointer-events: none;
+            position: absolute;
+        }
+        .active-step {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+        }
+        .otp-input:focus {
+            border-color: #c2255c;
+            box-shadow: 0 0 0 2px rgba(194, 37, 92, 0.1);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-page_padding relative">
+<!-- Subtle Floral Line-art Decoration -->
+<div class="absolute bottom-0 right-0 w-64 h-64 opacity-10 pointer-events-none overflow-hidden select-none">
+<div class="w-full h-full bg-contain bg-no-repeat bg-right-bottom" data-alt="A sophisticated minimalist line-art illustration of a peony flower with delicate, thin strokes. The drawing is elegant and editorial, rendered in a soft charcoal gray against a clean, bright background, capturing the quiet luxury aesthetic of a high-end floral boutique. The composition is artistic and ethereal, perfect for a corner branding element." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCE3vLjJ7vokJdqMGBBDd45Jsg1XRKXD1m4V_u6PRXfi652iIZd3HoaQCClFVJxd6RlyPr_qZYDzRwo97PHHmp18nhyEDhvolGtBvZKQ_pWPNqU2eA4DjZ-ebViNZGHLVFrwp-CVx7q9CLweK77bhXnZi232ZE-8DRQgULIhFHXtWu6HhKR52RTt5p6e0vT3HrpWynU-j80sliWeHYs-eb97u14Y54nKkjYUigzRa2Wa3cnE6YWGUpy')"></div>
+</div>
+<!-- Login Container -->
+<main class="w-full max-w-[400px] z-10">
+<!-- Brand Identity -->
+<div class="flex flex-col items-center mb-8 gap-2">
+<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center text-white mb-2">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Peony Admin</h1>
+</div>
+<!-- Centered Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)] overflow-hidden relative min-h-[420px] flex flex-col justify-center">
+<!-- Step 1: Phone -->
+<div class="step-transition active-step w-full" id="step-phone">
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Xush kelibsiz</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Telefon raqamingizni kiriting</p>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="phone">Telefon raqam</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-sm">+998</span>
+<input class="w-full pl-14 pr-4 py-3 bg-surface-bright border border-outline-variant rounded-lg font-body-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" id="phone" placeholder="90 123 45 67" type="text"/>
+</div>
+</div>
+<button class="w-full py-3 bg-primary-container hover:bg-primary transition-colors text-white font-semibold rounded-lg text-body-sm active:scale-[0.98] transition-transform duration-200" onclick="goToStep(2)">
+                        Kod yuborish
+                    </button>
+</div>
+</div>
+<!-- Step 2: OTP -->
+<div class="step-transition hidden-step w-full" id="step-otp">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors mb-6 group" onclick="goToStep(1)">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+<span class="font-label-md text-label-md">Orqaga</span>
+</button>
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Tasdiqlash</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">6 xonali kodni kiriting</p>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between gap-2">
+<input class="otp-input w-11 h-12 text-center border border-outline-variant rounded-lg bg-surface-bright font-headline-md text-primary focus:outline-none" maxlength="1" type="text"/>
+<input class="otp-input w-11 h-12 text-center border border-outline-variant rounded-lg bg-surface-bright font-headline-md text-primary focus:outline-none" maxlength="1" type="text"/>
+<input class="otp-input w-11 h-12 text-center border border-outline-variant rounded-lg bg-surface-bright font-headline-md text-primary focus:outline-none" maxlength="1" type="text"/>
+<input class="otp-input w-11 h-12 text-center border border-outline-variant rounded-lg bg-surface-bright font-headline-md text-primary focus:outline-none" maxlength="1" type="text"/>
+<input class="otp-input w-11 h-12 text-center border border-outline-variant rounded-lg bg-surface-bright font-headline-md text-primary focus:outline-none" maxlength="1" type="text"/>
+<input class="otp-input w-11 h-12 text-center border border-outline-variant rounded-lg bg-surface-bright font-headline-md text-primary focus:outline-none" maxlength="1" type="text"/>
+</div>
+<div class="flex flex-col items-center gap-4">
+<button class="text-primary hover:underline font-label-md text-label-md">
+                            Qayta yuborish
+                        </button>
+<button class="w-full py-3 bg-primary-container hover:bg-primary transition-colors text-white font-semibold rounded-lg text-body-sm active:scale-[0.98] transition-transform duration-200">
+                            Kirish
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-8 text-center">
+<p class="font-label-md text-label-md text-on-surface-variant opacity-60">Peony Flowers Studio © 2026</p>
+</footer>
+</main>
+<script>
+        function goToStep(step) {
+            const stepPhone = document.getElementById('step-phone');
+            const stepOtp = document.getElementById('step-otp');
+
+            if (step === 2) {
+                stepPhone.classList.remove('active-step');
+                stepPhone.classList.add('hidden-step');
+                
+                setTimeout(() => {
+                    stepOtp.classList.remove('hidden-step');
+                    stepOtp.classList.add('active-step');
+                    // Focus first OTP input
+                    document.querySelector('.otp-input').focus();
+                }, 100);
+            } else {
+                stepOtp.classList.remove('active-step');
+                stepOtp.classList.add('hidden-step');
+                
+                setTimeout(() => {
+                    stepPhone.classList.remove('hidden-step');
+                    stepPhone.classList.add('active-step');
+                }, 100);
+            }
+        }
+
+        // Simple OTP auto-focus logic
+        const inputs = document.querySelectorAll('.otp-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</body></html>

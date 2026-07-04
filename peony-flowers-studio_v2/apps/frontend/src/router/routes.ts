@@ -22,6 +22,21 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('../views/public/AboutView.vue'),
   },
   {
+    path: '/collaborations',
+    name: 'collaborations',
+    component: () => import('../views/public/CollaborationsView.vue'),
+  },
+  {
+    path: '/delivery',
+    name: 'delivery',
+    component: () => import('../views/public/DeliveryView.vue'),
+  },
+  {
+    path: '/payment-methods',
+    name: 'payment-methods',
+    component: () => import('../views/public/PaymentMethodsView.vue'),
+  },
+  {
     path: '/cart',
     name: 'cart',
     component: () => import('../views/public/CartView.vue'),
@@ -36,11 +51,13 @@ export const routes: RouteRecordRaw[] = [
     path: '/login',
     name: 'login',
     component: () => import('../views/auth/LoginView.vue'),
+    meta: { bare: true },
   },
   {
     path: '/register',
     name: 'register',
     component: () => import('../views/auth/RegisterView.vue'),
+    meta: { bare: true },
   },
   {
     path: '/account',

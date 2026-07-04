@@ -1,81 +1,202 @@
 <script setup lang="ts">
-import { Flower2, ShoppingCart } from '@lucide/vue';
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useCartStore } from '../../stores/cartStore';
 import { useAuthStore } from '../../stores/authStore';
 import { useUiStore } from '../../stores/uiStore';
+import MobileMenu from './MobileMenu.vue';
+import AppSelect from '../ui/AppSelect.vue';
+import Logo from '../../assets/images/favicons.svg'
 
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const uiStore = useUiStore();
+const mobileMenuOpen = ref(false);
+
+const localeOptions = [
+  { label: 'UZ', value: 'uz' },
+  { label: 'RU', value: 'ru' },
+];
 </script>
 
 <template>
-  <header class="header">
-    <RouterLink to="/" class="logo"><Flower2 :size="20" /> Peony Flowers</RouterLink>
-
-    <nav class="nav">
-      <RouterLink to="/catalog">{{ $t('nav.catalog') }}</RouterLink>
-      <RouterLink to="/about">{{ $t('nav.about') }}</RouterLink>
-    </nav>
-
-    <div class="actions">
-      <select v-model="uiStore.locale" @change="uiStore.setLocale(uiStore.locale as any)">
-        <option value="uz">O'zbekcha</option>
-        <option value="ru">Русский</option>
-      </select>
-
-      <RouterLink to="/cart" class="cart-link">
-        <ShoppingCart :size="18" /> {{ $t('nav.cart') }}
-        <span v-if="cartStore.totalItems" class="badge">{{ cartStore.totalItems }}</span>
+  <nav class="header">
+    <div class="header__inner container">
+      <RouterLink to="/" class="logo display-lg">
+        <img :src="Logo" alt="Peony Logo" />
       </RouterLink>
 
-      <RouterLink v-if="authStore.isAuthenticated" to="/account">{{ $t('nav.account') }}</RouterLink>
-      <RouterLink v-else to="/login">{{ $t('nav.login') }}</RouterLink>
+      <div class="nav-links">
+        <RouterLink to="/catalog" class="label-sm nav-link" active-class="nav-link--active">{{
+          $t('nav.catalog')
+          }}</RouterLink>
+        <RouterLink to="/about" class="label-sm nav-link" active-class="nav-link--active">{{
+          $t('nav.about')
+          }}</RouterLink>
+      </div>
+
+      <div class="actions">
+        <div class="locale-select">
+          <AppSelect :model-value="uiStore.locale" :options="localeOptions"
+            @update:model-value="(v) => uiStore.setLocale(v as 'uz' | 'ru')" />
+        </div>
+
+        <RouterLink v-if="authStore.isAuthenticated" to="/account/wishlist" class="icon-btn">
+          <span class="material-symbols-outlined">favorite</span>
+        </RouterLink>
+
+        <RouterLink to="/cart" class="icon-btn">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          <span v-if="cartStore.totalItems" class="badge">{{ cartStore.totalItems }}</span>
+        </RouterLink>
+
+        <RouterLink :to="authStore.isAuthenticated ? '/account' : '/login'" class="icon-btn">
+          <span class="material-symbols-outlined">person</span>
+        </RouterLink>
+
+        <button class="icon-btn hamburger" type="button" @click="mobileMenuOpen = true">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
     </div>
-  </header>
+
+    <MobileMenu :open="mobileMenuOpen" @close="mobileMenuOpen = false" />
+  </nav>
 </template>
 
 <style scoped lang="scss">
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 32px;
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--border);
+  height: 80px;
 }
+
 .logo {
-  display: flex;
+  color: var(--color-primary);
+  font-style: italic;
+  font-size: 28px;
+
+  @media (min-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.nav-links {
+  display: none;
   align-items: center;
-  gap: 8px;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--accent);
+  gap: var(--stack-lg);
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
 }
-.nav {
-  display: flex;
-  gap: 24px;
+
+.nav-link {
+  color: var(--color-on-surface-variant);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  &--active {
+    color: var(--color-primary);
+    font-weight: 600;
+    border-color: var(--color-primary);
+  }
 }
+
 .actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--stack-md);
 }
-.cart-link {
+
+.locale-select {
+  display: none;
+  width: 84px;
+
+  @media (min-width: 640px) {
+    display: block;
+  }
+
+  :deep(select) {
+    padding: 7px 30px 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border-radius: var(--radius-full, 999px);
+    border-color: var(--color-outline-variant);
+    color: var(--color-on-surface-variant);
+    background: var(--color-surface-container-low);
+
+    &:hover {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      background: var(--color-surface-container-lowest);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(111, 36, 53, 0.1);
+    }
+  }
+
+  :deep(.chevron) {
+    right: 10px;
+    font-size: 16px;
+  }
+}
+
+.icon-btn {
   position: relative;
   display: flex;
-  align-items: center;
-  gap: 6px;
+  color: var(--color-on-surface-variant);
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  .material-symbols-outlined {
+    font-size: 24px;
+  }
 }
+
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
 .badge {
   position: absolute;
-  top: -8px;
-  right: -12px;
-  background: var(--accent);
+  top: -6px;
+  right: -8px;
+  background: var(--color-primary);
   color: white;
-  font-size: 11px;
-  border-radius: 50%;
-  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
 }
 </style>

@@ -25,6 +25,7 @@ import notificationsRouter from './modules/notifications/notifications.router';
 import uploadRouter from './modules/upload/upload.router';
 import paymentsRouter from './modules/payments/payments.router';
 import analyticsRouter from './modules/analytics/analytics.router';
+import newsletterRouter from './modules/newsletter/newsletter.router';
 
 const app = express();
 
@@ -60,6 +61,7 @@ api.use('/notifications', notificationsRouter);
 api.use('/upload', uploadRouter);
 api.use('/payments', paymentsRouter);
 api.use('/analytics', analyticsRouter);
+api.use('/newsletter', newsletterRouter);
 
 app.use('/api', api);
 

@@ -247,3 +247,11 @@ model Transaction {
   @@index([orderId])
   @@index([status])
 }
+
+// ==================== NEWSLETTER ====================
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

@@ -20,20 +20,33 @@ async function save() {
 </script>
 
 <template>
-  <div class="account-layout">
+  <div class="account-layout container">
     <AccountSidebar />
     <div class="content">
-      <h1>Shaxsiy ma'lumot</h1>
+      <h1 class="headline-md">{{ $t('account.personalInfo.title') }}</h1>
       <form class="form" @submit.prevent="save">
-        <AppInput v-model="form.fullName" label="To'liq ism" />
-        <AppInput v-model="form.email" label="Email" type="email" />
-        <AppButton type="submit">Saqlash</AppButton>
+        <AppInput v-model="form.fullName" :label="$t('account.personalInfo.fullName')" />
+        <AppInput v-model="form.email" :label="$t('account.personalInfo.email')" type="email" />
+        <AppButton type="submit">{{ $t('account.personalInfo.save') }}</AppButton>
       </form>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.account-layout { display: grid; grid-template-columns: 240px 1fr; gap: 32px; padding: 32px; }
+.account-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+  padding-block: var(--stack-lg) var(--section-padding);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+.content {
+  flex: 1;
+  min-width: 0;
+}
 .form { display: flex; flex-direction: column; gap: 16px; max-width: 400px; }
 </style>

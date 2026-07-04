@@ -1,15 +1,23 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import AppBadge from '../ui/AppBadge.vue';
 
+const { t } = useI18n();
 const props = defineProps<{ status: string }>();
 
-const map: Record<string, { label: string; variant: 'success' | 'warning' | 'danger' | 'info' }> = {
-  pending: { label: 'Kutilmoqda', variant: 'warning' },
-  pending_cash: { label: 'Naqd (kutilmoqda)', variant: 'warning' },
-  paid: { label: "To'landi", variant: 'success' },
-  failed: { label: 'Xato', variant: 'danger' },
-  refunded: { label: 'Qaytarildi', variant: 'info' },
+const variants: Record<string, 'success' | 'warning' | 'danger' | 'info'> = {
+  pending: 'warning',
+  pending_cash: 'warning',
+  paid: 'success',
+  failed: 'danger',
+  refunded: 'info',
 };
+const map = computed(() =>
+  Object.fromEntries(
+    Object.entries(variants).map(([key, variant]) => [key, { label: t(`paymentStatus.${key}`), variant }])
+  )
+);
 </script>
 
 <template>

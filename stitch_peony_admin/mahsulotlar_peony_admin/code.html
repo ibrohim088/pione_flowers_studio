@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffd9df",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#ffe9eb",
+                        "surface": "#fff8f7",
+                        "tertiary-fixed-dim": "#7adb91",
+                        "outline": "#8c7075",
+                        "primary-container": "#c2255c",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#00210b",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#edd4d7",
+                        "on-secondary-fixed": "#1a1b22",
+                        "on-primary-fixed-variant": "#90003d",
+                        "surface-container-low": "#fff0f1",
+                        "inverse-on-surface": "#ffecee",
+                        "tertiary": "#005c2a",
+                        "secondary-fixed-dim": "#c6c5cf",
+                        "tertiary-container": "#007739",
+                        "on-surface": "#26181a",
+                        "primary": "#9f0045",
+                        "on-tertiary-fixed-variant": "#005225",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-secondary-container": "#63646c",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#fce2e5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#ffdfe3",
+                        "inverse-surface": "#3c2c2f",
+                        "on-secondary-fixed-variant": "#46464e",
+                        "on-tertiary-container": "#99fbae",
+                        "surface-tint": "#b61953",
+                        "on-primary-fixed": "#3f0017",
+                        "background": "#fff8f7",
+                        "surface-variant": "#f6dce0",
+                        "on-surface-variant": "#594045",
+                        "secondary-container": "#e3e1ec",
+                        "secondary-fixed": "#e3e1ec",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb1c1",
+                        "outline-variant": "#e0bec3",
+                        "surface-bright": "#fff8f7",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#f6dce0",
+                        "on-background": "#26181a",
+                        "tertiary-fixed": "#95f8ab",
+                        "secondary": "#5d5e66"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container_margin": "32px",
+                        "section_gap": "20px",
+                        "grid_gutter": "20px",
+                        "element_gap": "16px",
+                        "page_padding": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fff8f7;
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-backdrop {
+            background-color: rgba(60, 44, 47, 0.4);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- Sidebar Shell -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 bg-surface border-r border-outline-variant flex flex-col py-page_padding px-4 gap-section_gap z-50">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">local_florist</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-semibold text-primary">Peony Admin</h1>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-medium">Premium Florals</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 mt-4">
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-3 transition-all font-body-sm text-body-sm rounded-lg hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="bg-primary-fixed text-on-primary-fixed-variant rounded-full flex items-center gap-3 px-4 py-3 transition-all font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                Inventory
+            </a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-3 transition-all font-body-sm text-body-sm rounded-lg hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+                Orders
+            </a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-3 transition-all font-body-sm text-body-sm rounded-lg hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">group</span>
+                Customers
+            </a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-3 transition-all font-body-sm text-body-sm rounded-lg hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-1">
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-3 transition-all font-body-sm text-body-sm rounded-lg hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-3 transition-all font-body-sm text-body-sm rounded-lg hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Header Shell -->
+<header class="h-16 fixed top-0 right-0 z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center w-[calc(100%-280px)] ml-[280px] px-page_padding">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md text-primary font-semibold">Mahsulotlar</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Qidirish..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all" onclick="toggleModal(true)">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Yangi mahsulot
+            </button>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-secondary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a boutique owner in a high-end floral shop. The setting is bright with soft natural lighting illuminating vibrant flower arrangements in the background. She wears a clean linen apron, suggesting a blend of creative artistry and professional management. The aesthetic is modern, clean, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo2NQaDJSD7Sg66QLF3Th6xvZoa0DYeEPEjhhjKzinnCi2fJQjtdVeNpBKCC_gJOv54AbsKPDLuH5qTSzNsjIOrb-WxpHek5syuzHR5F7PwmiUR1mOY5dl0UTLXcD4Dy7W9nvYmPer8brMu3WkT7xpn0MCc_tiQY8ceDNfw-WmqnunnI2mJuBJCeqfMyL4jEpKoGmLLzoKTNhZHLmUq2MZ4otfqtZcqju943IDPtNRqLvEY4JHowkX"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[280px] pt-16 min-h-screen p-page_padding">
+<!-- Filters Area -->
+<div class="flex items-center justify-between mb-section_gap bg-surface p-4 rounded-xl border border-outline-variant">
+<div class="flex items-center gap-section_gap">
+<div class="flex flex-col gap-1">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Kategoriya</span>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary">
+<option>Barchasi</option>
+<option>Guldastalar</option>
+<option>Xonaki gullar</option>
+<option>Sovg'alar</option>
+<option>To'ylar uchun</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-label-md text-on-surface-variant uppercase tracking-wider">Holati</span>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary">
+<option>Sotuvda</option>
+<option>Tugagan</option>
+<option>Arxivlangan</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface rounded-xl border border-outline-variant overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Mahsulot</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Kategoriya</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider text-right">Narx</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Stok</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider text-right">Amallar</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded overflow-hidden bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A close-up, editorial style photograph of a luxurious 'Eternal Grace' floral arrangement featuring deep red peonies and delicate white lilies. The lighting is soft and artistic, highlighting the velvety texture of the petals. The background is a clean, neutral tone consistent with a high-end boutique brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBveoj7qakvXR29cY4QJHHJtvelKG4vmt2xrt56jtOOPB5yCpaBMN5MALaxcGLxsJqk94QHwyV9qkLrGqBGhoBqv-_Zt7bb6taZzHaCEu4lVvS0QwzYBTyJ5MVJX5xQeaO4wVJqBFTo6uL1BkBPZdXqBcKEqDXz-cORX0TgQhjlyoQ2O_DXlyMLmSlWq5ZLzKFjFF_F87pJ4NR1n65n6xzPYwncZUHn5zWqPUzpZ-VustmGqFbIbrEo"/>
+</div>
+<span class="font-body-sm text-on-surface font-medium">Abadiy Latofat Guldastasi</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-[11px] font-bold uppercase">Guldastalar</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex flex-col items-end">
+<span class="font-body-sm text-primary font-semibold">450,000 UZS</span>
+<span class="text-[11px] text-on-surface-variant line-through">520,000 UZS</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="font-body-sm text-on-surface">24 dona</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-primary-fixed/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error/10 text-error rounded-lg">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded overflow-hidden bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A minimalist photograph of a healthy Monstera Deliciosa in a sleek, off-white ceramic pot. The leaves are broad and glossy with perfect fenestrations. The setting is a bright modern interior with soft directional lighting creating elegant shadows on a pale wall. High-end, editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKz783p1atfjQiJQBNiql5A5SqHRBoKzFz4WJVCmKLBrYzs5-Mu5o4ry0BbpY1nKQ8V5AixZbEtdGxPK7ObrRB_iv9IfGlz3LIGBQ2RqJCZ-NJpszv3xs7kxWJ_GZeNZDhlphaBuD_fBMHqgktYjMxWbMpvAbnYhKzS5rAwCI9bzYETh9IMINzOyN7SXZrFB4j4k71satIE5UedcjOhajGhMpeZS_ABiUXn-nZl5CxN6kW6VzK4-_0"/>
+</div>
+<span class="font-body-sm text-on-surface font-medium">Monstera Tropik</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px] font-bold uppercase">Xonaki Gullar</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="font-body-sm text-on-surface font-semibold">180,000 UZS</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-error-container text-on-error-container rounded-full w-fit">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="text-[11px] font-bold uppercase">3 dona qoldi</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-primary-fixed/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error/10 text-error rounded-lg">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded overflow-hidden bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A stylish gift set featuring a box of artisan chocolates paired with a single premium long-stemmed rose. The packaging is minimalist and elegant in a matte deep burgundy. The lighting is low-key and dramatic, emphasizing the premium quality of the gift. The style is sophisticated and luxurious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmtSniOCTrluMMlh6gCpHg8vFsbpJ8eW4BJC29ulMDpa1pLRbcd7YVZqqrF1f7sCba8KdpIfwG0izz_uTGW-k31pWsE7gokRJ1VYgr5WPGWQZAxjmxtOl3dVsnoDlEcLiYaUsZaPLn6ay5bj-gfxJpLQ-Z3heP8nZdgB-ImFEf_ITv8Y6UUqk6xWNis4M6DvjtBS5i6mc_vRgVcUhjNUruDoOmSye53kT2DawdZdIfLwEGkltYVgrj"/>
+</div>
+<span class="font-body-sm text-on-surface font-medium">Shirin Lahzalar To'plami</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant text-[11px] font-bold uppercase">Sovg'alar</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="font-body-sm text-on-surface font-semibold">320,000 UZS</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="font-body-sm text-on-surface">12 dona</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-primary-fixed/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error/10 text-error rounded-lg">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 bg-surface border-t border-outline-variant flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Jami 36 ta mahsulotdan 1-3 tasi ko'rsatilmoqda</span>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-body-sm disabled:opacity-50" disabled="">Oldingi</button>
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-body-sm hover:bg-surface-container-low">Keyingi</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal: Add/Edit Product -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 hidden" id="productModal">
+<div class="modal-backdrop absolute inset-0" onclick="toggleModal(false)"></div>
+<div class="bg-surface w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col max-h-[921px]">
+<div class="px-6 py-4 border-b border-outline-variant flex items-center justify-between bg-surface">
+<h3 class="font-headline-md text-headline-md text-primary font-semibold">Mahsulot qo'shish</h3>
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-low text-on-surface-variant" onclick="toggleModal(false)">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-6 overflow-y-auto custom-scrollbar flex-grow grid grid-cols-2 gap-x-6 gap-y-4">
+<!-- Image Upload -->
+<div class="col-span-2 mb-2">
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-2">Mahsulot rasmi</label>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">cloud_upload</span>
+</div>
+<p class="text-body-sm text-on-surface font-medium">Rasm yuklash uchun bosing yoki sudrab keling</p>
+<p class="text-[11px] text-on-surface-variant">PNG, JPG 5MB gacha</p>
+</div>
+</div>
+<!-- Fields -->
+<div class="col-span-2">
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Nomi</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none" placeholder="Masalan: Qizil atirgullar to'plami" type="text"/>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Kategoriya</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none">
+<option>Guldastalar</option>
+<option>Xonaki gullar</option>
+<option>Sovg'alar</option>
+</select>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Turi</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none" placeholder="Sinf, navi" type="text"/>
+</div>
+<div class="col-span-2">
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Tavsif</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none" placeholder="Mahsulot haqida batafsil ma'lumot..." rows="3"></textarea>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Asosiy Narx (UZS)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none" placeholder="0.00" type="number"/>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Chegirma Narxi (ixtiyoriy)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none" placeholder="0.00" type="number"/>
+</div>
+<div>
+<label class="block text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Ombordagi qoldiq</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none" placeholder="0" type="number"/>
+</div>
+</form>
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-end gap-3 bg-surface-container-low/30">
+<button class="px-6 py-2 rounded-full font-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors" onclick="toggleModal(false)">
+                    Bekor qilish
+                </button>
+<button class="bg-primary text-on-primary px-8 py-2 rounded-full font-label-md hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                    Saqlash
+                </button>
+</div>
+</div>
+</div>
+<script>
+        function toggleModal(show) {
+            const modal = document.getElementById('productModal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') toggleModal(false);
+        });
+
+        // Search highlight micro-interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

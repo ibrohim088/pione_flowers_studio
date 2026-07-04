@@ -11,15 +11,15 @@ onMounted(fetchNotifications);
 </script>
 
 <template>
-  <div class="account-layout">
+  <div class="account-layout container">
     <AccountSidebar />
     <div class="content">
       <div class="header">
-        <h1>Bildirishnomalar</h1>
-        <AppButton variant="outline" @click="markAllRead">Barchasini o'qilgan deb belgilash</AppButton>
+        <h1 class="headline-md">{{ $t('account.notifications.title') }}</h1>
+        <AppButton variant="outline" @click="markAllRead">{{ $t('account.notifications.markAllRead') }}</AppButton>
       </div>
       <AppSpinner v-if="isLoading" />
-      <p v-else-if="!notifications.length">Bildirishnomalar yo'q</p>
+      <p v-else-if="!notifications.length">{{ $t('account.notifications.empty') }}</p>
       <div v-else class="list">
         <NotificationItem
           v-for="n in notifications"
@@ -33,7 +33,20 @@ onMounted(fetchNotifications);
 </template>
 
 <style scoped lang="scss">
-.account-layout { display: grid; grid-template-columns: 240px 1fr; gap: 32px; padding: 32px; }
+.account-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+  padding-block: var(--stack-lg) var(--section-padding);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+.content {
+  flex: 1;
+  min-width: 0;
+}
 .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .list { display: flex; flex-direction: column; gap: 10px; }
 </style>

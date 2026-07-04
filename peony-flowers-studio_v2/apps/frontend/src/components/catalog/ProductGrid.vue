@@ -2,22 +2,47 @@
 import ProductCard from './ProductCard.vue';
 import AppSkeleton from '../ui/AppSkeleton.vue';
 
-defineProps<{ products: any[]; isLoading?: boolean }>();
+withDefaults(defineProps<{ products: any[]; isLoading?: boolean; columns?: 2 | 3 | 4 }>(), {
+  columns: 3,
+});
 </script>
 
 <template>
-  <div class="grid">
+  <div class="grid" :class="`grid--${columns}`">
     <template v-if="isLoading">
-      <AppSkeleton v-for="i in 8" :key="i" height="320px" />
+      <AppSkeleton v-for="i in columns * 2" :key="i" height="320px" />
     </template>
-    <ProductCard v-else v-for="product in products" :key="product.id" :product="product" />
+    <template v-else-if="products.length">
+      <ProductCard v-for="product in products" :key="product.id" :product="product" />
+    </template>
+    <p v-else class="empty body-md">{{ $t('catalog.empty') }}</p>
   </div>
 </template>
 
 <style scoped lang="scss">
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gutter);
+
+  &--3 {
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  &--4 {
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-on-surface-variant);
+  padding: var(--stack-lg) 0;
 }
 </style>

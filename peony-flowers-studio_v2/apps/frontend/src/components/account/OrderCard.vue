@@ -1,44 +1,76 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { formatPrice, formatDate } from '../../lib/utils';
 import AppBadge from '../ui/AppBadge.vue';
 
+const { t } = useI18n();
 defineProps<{ order: any }>();
 
-const statusMap: Record<string, { label: string; variant: 'success' | 'warning' | 'danger' | 'info' }> = {
-  pending: { label: 'Kutilmoqda', variant: 'warning' },
-  confirmed: { label: 'Tasdiqlandi', variant: 'info' },
-  preparing: { label: 'Tayyorlanmoqda', variant: 'info' },
-  ready: { label: 'Tayyor', variant: 'info' },
-  delivering: { label: 'Yetkazilmoqda', variant: 'info' },
-  delivered: { label: 'Yetkazildi', variant: 'success' },
-  cancelled: { label: 'Bekor qilindi', variant: 'danger' },
+const statusVariants: Record<string, 'success' | 'warning' | 'danger' | 'info'> = {
+  pending: 'warning',
+  confirmed: 'info',
+  preparing: 'info',
+  ready: 'info',
+  delivering: 'info',
+  delivered: 'success',
+  cancelled: 'danger',
 };
+const statusMap = computed(() =>
+  Object.fromEntries(
+    Object.entries(statusVariants).map(([key, variant]) => [key, { label: t(`orderStatus.${key}`), variant }])
+  )
+);
 </script>
 
 <template>
   <RouterLink :to="`/account/orders/${order.id}`" class="order-card">
     <div class="row">
-      <span class="id">#{{ order.id.slice(-8) }}</span>
+      <span class="body-md id">{{ $t('account.orderDetail.title') }} #{{ order.id.slice(-8) }}</span>
       <AppBadge :variant="statusMap[order.status]?.variant || 'info'">
         {{ statusMap[order.status]?.label || order.status }}
       </AppBadge>
     </div>
-    <p class="date">{{ formatDate(order.createdAt) }}</p>
-    <p class="total">{{ formatPrice(order.total) }}</p>
+    <p class="label-sm date">{{ formatDate(order.createdAt) }}</p>
+    <div class="row">
+      <span class="label-sm items-count">{{ order.items?.length || 0 }} {{ $t('account.orders.itemsCount') }}</span>
+      <span class="body-md total">{{ formatPrice(order.total) }}</span>
+    </div>
   </RouterLink>
 </template>
 
 <style scoped lang="scss">
 .order-card {
-  display: block;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-sm);
+  padding: var(--stack-lg);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-container-lowest);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: var(--color-outline);
+  }
 }
-.row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.id { font-weight: 600; }
-.date { color: var(--text-secondary); font-size: 13px; }
-.total { font-weight: 700; color: var(--accent); }
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.id {
+  font-weight: 700;
+}
+.date {
+  color: var(--color-on-surface-variant);
+}
+.items-count {
+  color: var(--color-on-surface-variant);
+}
+.total {
+  font-weight: 700;
+  color: var(--color-primary);
+}
 </style>

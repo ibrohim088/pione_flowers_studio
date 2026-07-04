@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import AppHeader from './components/layout/AppHeader.vue';
 import AppFooter from './components/layout/AppFooter.vue';
-import { useUiStore } from './stores/uiStore';
 
-const uiStore = useUiStore();
+const route = useRoute();
 
-onMounted(() => {
-  document.documentElement.dataset.theme = uiStore.theme;
-});
+const isBare = computed(() => !!route.meta.bare);
 </script>
 
 <template>
   <div class="app-layout">
-    <AppHeader />
+    <AppHeader v-if="!isBare" />
     <main class="app-main">
       <router-view />
     </main>
-    <AppFooter />
+    <AppFooter v-if="!isBare" />
   </div>
 </template>
 

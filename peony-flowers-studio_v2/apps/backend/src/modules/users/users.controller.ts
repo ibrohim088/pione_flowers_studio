@@ -51,4 +51,11 @@ export const usersController = {
       return success(res, null, 'Foydalanuvchi bloklandi');
     } catch (err) { return next(err); }
   },
+
+  async createStaff(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = await usersService.createStaff(req.body);
+      return success(res, user, 'Xodim yaratildi', 201);
+    } catch (err) { return next(err); }
+  },
 };

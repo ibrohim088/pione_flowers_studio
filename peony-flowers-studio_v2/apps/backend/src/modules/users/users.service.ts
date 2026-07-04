@@ -1,7 +1,7 @@
 import { prisma } from '../../config/database';
 import { AppError } from '../../middleware/errorHandler';
 import { parsePagination, buildMeta } from '../../utils/pagination';
-import { UpdateUserInput, AdminUpdateUserInput } from './users.types';
+import { UpdateUserInput, AdminUpdateUserInput, CreateStaffInput } from './users.types';
 
 export const usersService = {
   async getMe(userId: string) {
@@ -59,5 +59,21 @@ export const usersService = {
     const user = await prisma.user.findUnique({ where: { id } });
     if (!user) throw new AppError('Foydalanuvchi topilmadi', 404);
     return prisma.user.update({ where: { id }, data: { isActive: false } });
+  },
+
+  async createStaff(data: CreateStaffInput) {
+    const existing = await prisma.user.findUnique({ where: { phone: data.phone } });
+    if (existing) {
+      throw new AppError("Bu telefon raqam bilan foydalanuvchi allaqachon mavjud", 409);
+    }
+
+    return prisma.user.create({
+      data: {
+        phone: data.phone,
+        fullName: data.fullName,
+        role: data.role,
+        isActive: true,
+      },
+    });
   },
 };

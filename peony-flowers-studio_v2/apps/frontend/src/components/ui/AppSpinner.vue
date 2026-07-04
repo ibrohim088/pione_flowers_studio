@@ -5,6 +5,34 @@
 </template>
 
 <style scoped lang="scss">
+.spinner-wrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--stack-lg);
+}
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-hairline);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+
+<!-- <template>
+  <div class="spinner-wrap">
+    <div class="spinner" />
+  </div>
+</template>
+
+<style scoped lang="scss">
 .spinner-wrap { display: flex; justify-content: center; padding: 24px; }
 .spinner {
   width: 32px; height: 32px;
@@ -14,4 +42,4 @@
   animation: spin 0.7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-</style>
+</style> -->

@@ -1,10 +1,7 @@
 <template>
   <div class="about">
-    <h1>Biz haqimizda</h1>
-    <p>
-      Peony Flowers Studio 2024-yilda tashkil etilgan bo'lib, Toshkent shahrida
-      premium gullar va sovg'alar yetkazib berish xizmatini ko'rsatadi.
-    </p>
+    <h1>{{ $t('about.title') }}</h1>
+    <p>{{ $t('about.text') }}</p>
   </div>
 </template>
 

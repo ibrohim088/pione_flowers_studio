@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffd9df",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#ffe9eb",
+                        "surface": "#fff8f7",
+                        "tertiary-fixed-dim": "#7adb91",
+                        "outline": "#8c7075",
+                        "primary-container": "#c2255c",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#00210b",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#edd4d7",
+                        "on-secondary-fixed": "#1a1b22",
+                        "on-primary-fixed-variant": "#90003d",
+                        "surface-container-low": "#fff0f1",
+                        "inverse-on-surface": "#ffecee",
+                        "tertiary": "#005c2a",
+                        "secondary-fixed-dim": "#c6c5cf",
+                        "tertiary-container": "#007739",
+                        "on-surface": "#26181a",
+                        "primary": "#9f0045",
+                        "on-tertiary-fixed-variant": "#005225",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-secondary-container": "#63646c",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#fce2e5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#ffdfe3",
+                        "inverse-surface": "#3c2c2f",
+                        "on-secondary-fixed-variant": "#46464e",
+                        "on-tertiary-container": "#99fbae",
+                        "surface-tint": "#b61953",
+                        "on-primary-fixed": "#3f0017",
+                        "background": "#fff8f7",
+                        "surface-variant": "#f6dce0",
+                        "on-surface-variant": "#594045",
+                        "secondary-container": "#e3e1ec",
+                        "secondary-fixed": "#e3e1ec",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb1c1",
+                        "outline-variant": "#e0bec3",
+                        "surface-bright": "#fff8f7",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#f6dce0",
+                        "on-background": "#26181a",
+                        "tertiary-fixed": "#95f8ab",
+                        "secondary": "#5d5e66"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container_margin": "32px",
+                        "section_gap": "20px",
+                        "grid_gutter": "20px",
+                        "element_gap": "16px",
+                        "page_padding": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for boutique feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e0bec3; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8c7075; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 bg-surface border-r border-outline-variant flex flex-col py-page_padding px-4 gap-section_gap z-50">
+<div class="flex items-center gap-3 px-2 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">local_florist</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-semibold text-primary">Peony Admin</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">Premium Florals</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 grow">
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-2 transition-all hover:bg-surface-container-high rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<a class="bg-primary-fixed text-on-primary-fixed-variant rounded-full flex items-center gap-3 px-4 py-2 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-body-sm text-body-sm font-medium">Orders</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-2 transition-all hover:bg-surface-container-high rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
+<span class="font-body-sm text-body-sm">Inventory</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-2 transition-all hover:bg-surface-container-high rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">group</span>
+<span class="font-body-sm text-body-sm">Customers</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-2 transition-all hover:bg-surface-container-high rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/30 flex flex-col gap-1">
+<button class="w-full bg-primary-container text-on-primary py-3 rounded-xl font-medium flex items-center justify-center gap-2 mb-4 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Delivery
+            </button>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-2 transition-all hover:bg-surface-container-high rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">help</span>
+<span class="font-body-sm text-body-sm">Support</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-4 py-2 transition-all hover:bg-surface-container-high rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-error">logout</span>
+<span class="font-body-sm text-body-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar Shell -->
+<header class="h-16 fixed top-0 right-0 z-40 bg-surface/80 backdrop-blur-md flex justify-between items-center w-[calc(100%-280px)] ml-[280px] px-page_padding border-b border-outline-variant">
+<div class="flex items-center gap-4 w-1/3">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-body-sm focus:ring-2 focus:ring-primary/20 placeholder:text-on-surface-variant/50" placeholder="Buyurtmalarni izlash..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-surface"></span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="font-label-md text-on-surface font-semibold">Anora Rahmonova</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Manager</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a boutique manager with a clean, light-mode background, wearing sophisticated minimal jewelry and a soft-pink blazer, reflecting the brand's quiet luxury aesthetic. High-end editorial photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQzeGsu_IRotr4t9Dv-LDp8OowyFP-1Q5oRY06E5NHFrAkiW3trL2pwt-iB60uEjDy2Mx-9pK8CI3JX8fhASAykkMRi6xfkc4WKJ6g9JP24D0QCCByobvXOQhcB829CCywVVbhzIJFBFDx4st4i45oZjBLqFUCervpvOjaOWT0bQd6CuqiKe2bfShBir-B3hQZw9FrAgBBCiyrIGfnC4vU5CuW8wBwstaYLRKjGtK_shJO2yCzoNUJ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] pt-16 min-h-screen">
+<div class="p-page_padding max-w-[1600px] mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-section_gap mb-8">
+<div>
+<nav class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="font-label-md">Asosiy</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="font-label-md text-primary">Buyurtmalar</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Buyurtmalar <span class="text-primary font-normal opacity-50">(312)</span></h2>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative group">
+<select class="appearance-none bg-white border border-outline-variant rounded-lg px-4 py-2.5 pr-10 text-body-sm text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/10 cursor-pointer">
+<option>Barcha statuslar</option>
+<option>Kutilmoqda</option>
+<option>Tasdiqlandi</option>
+<option>Yetkazildi</option>
+<option>Bekor qilindi</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<button class="flex items-center gap-2 bg-white border border-outline-variant px-4 py-2.5 rounded-lg text-body-sm font-medium hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+                        Export
+                    </button>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-lg text-body-sm font-medium hover:bg-primary-container transition-shadow shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        Buyurtma yaratish
+                    </button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">ID</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Mijoz</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Summa</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">To'lov</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider text-right">Sana</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<td class="px-6 py-5 font-body-sm text-primary font-semibold">#A3F91C2D</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-[12px] font-bold text-on-surface-variant">JD</div>
+<span class="font-body-sm text-on-surface font-medium">Jamshid Do'stov</span>
+</div>
+</td>
+<td class="px-6 py-5 font-body-sm text-on-surface">1,240,000 UZS</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-amber-100 text-amber-700">Kutilmoqda</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-red-100 text-red-700">To'lanmagan</span>
+</td>
+<td class="px-6 py-5 text-right font-body-sm text-on-surface-variant">Bugun, 14:20</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<td class="px-6 py-5 font-body-sm text-primary font-semibold">#B7X24K9L</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-[12px] font-bold text-on-surface-variant">MR</div>
+<span class="font-body-sm text-on-surface font-medium">Malika Rahmonova</span>
+</div>
+</td>
+<td class="px-6 py-5 font-body-sm text-on-surface">850,000 UZS</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-blue-100 text-blue-700">Tasdiqlandi</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-green-100 text-green-700">To'langan</span>
+</td>
+<td class="px-6 py-5 text-right font-body-sm text-on-surface-variant">Kecha, 18:45</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<td class="px-6 py-5 font-body-sm text-primary font-semibold">#C9W11Q0P</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-[12px] font-bold text-on-surface-variant">SK</div>
+<span class="font-body-sm text-on-surface font-medium">Sardor Komilov</span>
+</div>
+</td>
+<td class="px-6 py-5 font-body-sm text-on-surface">2,100,000 UZS</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-green-100 text-green-700">Yetkazildi</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-green-100 text-green-700">To'langan</span>
+</td>
+<td class="px-6 py-5 text-right font-body-sm text-on-surface-variant">12 May, 10:15</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<td class="px-6 py-5 font-body-sm text-primary font-semibold">#D5E88V3M</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-[12px] font-bold text-on-surface-variant">OU</div>
+<span class="font-body-sm text-on-surface font-medium">Oygul Umarova</span>
+</div>
+</td>
+<td class="px-6 py-5 font-body-sm text-on-surface">450,000 UZS</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-red-100 text-red-700">Bekor qilindi</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-surface-variant text-on-surface-variant">Qaytarildi</span>
+</td>
+<td class="px-6 py-5 text-right font-body-sm text-on-surface-variant">11 May, 16:30</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<td class="px-6 py-5 font-body-sm text-primary font-semibold">#F2G99H7J</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-[12px] font-bold text-on-surface-variant">AL</div>
+<span class="font-body-sm text-on-surface font-medium">Alisher Lutfullayev</span>
+</div>
+</td>
+<td class="px-6 py-5 font-body-sm text-on-surface">1,500,000 UZS</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-blue-100 text-blue-700">Tasdiqlandi</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-amber-100 text-amber-700">To'lov kutilmoqda</span>
+</td>
+<td class="px-6 py-5 text-right font-body-sm text-on-surface-variant">10 May, 09:00</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<td class="px-6 py-5 font-body-sm text-primary font-semibold">#H4J11K2L</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-[12px] font-bold text-on-surface-variant">NB</div>
+<span class="font-body-sm text-on-surface font-medium">Nigora Bekmirzayeva</span>
+</div>
+</td>
+<td class="px-6 py-5 font-body-sm text-on-surface">3,200,000 UZS</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-green-100 text-green-700">Yetkazildi</span>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-tighter bg-green-100 text-green-700">To'langan</span>
+</td>
+<td class="px-6 py-5 text-right font-body-sm text-on-surface-variant">09 May, 14:12</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between bg-surface-container-low">
+<p class="font-body-sm text-on-surface-variant">312 tadan 1-10 ko'rsatilmoqda</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg border border-outline-variant bg-white disabled:opacity-40 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary text-label-md font-bold">1</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant text-label-md hover:bg-surface-container transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant text-label-md hover:bg-surface-container transition-colors">3</button>
+<span class="px-1">...</span>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant text-label-md hover:bg-surface-container transition-colors">32</button>
+<button class="p-2 rounded-lg border border-outline-variant bg-white hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dashboard Stats Preview (Small Bento) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-section_gap mt-8">
+<div class="p-5 bg-white border border-outline-variant rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant">Kunlik tushum</p>
+<h4 class="font-headline-md text-on-surface">18,400,000 UZS</h4>
+</div>
+</div>
+<div class="p-5 bg-white border border-outline-variant rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant">Faol buyurtmalar</p>
+<h4 class="font-headline-md text-on-surface">42 ta</h4>
+</div>
+</div>
+<div class="p-5 bg-white border border-outline-variant rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant">Yo'lda</p>
+<h4 class="font-headline-md text-on-surface">15 ta</h4>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                const id = row.querySelector('td').innerText;
+                console.log('Navigating to order detail:', id);
+                // In a real app: window.location.href = `/orders/${id}`;
+            });
+        });
+    </script>
+</body></html>

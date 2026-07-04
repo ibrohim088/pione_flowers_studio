@@ -6,15 +6,31 @@ const authStore = useAuthStore();
 </script>
 
 <template>
-  <div class="account-layout">
+  <div class="account-layout container">
     <AccountSidebar />
     <div class="content">
-      <h1>Salom, {{ authStore.user?.fullName || 'Mijoz' }}!</h1>
-      <p>Bu yerda buyurtmalaringiz, manzillaringiz va sevimli mahsulotlaringizni boshqarishingiz mumkin.</p>
+      <h1 class="headline-md">{{ $t('account.greeting') }}, {{ authStore.user?.fullName || $t('account.guest') }}!</h1>
+      <p class="body-md subtitle">{{ $t('account.overviewText') }}</p>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.account-layout { display: grid; grid-template-columns: 240px 1fr; gap: 32px; padding: 32px; }
+.account-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+  padding-block: var(--stack-lg) var(--section-padding);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+.content {
+  flex: 1;
+}
+.subtitle {
+  color: var(--color-on-surface-variant);
+  margin-top: var(--stack-sm);
+}
 </style>

@@ -2,6 +2,23 @@
 import HeroSection from '../../components/home/HeroSection.vue';
 import FeaturedProducts from '../../components/home/FeaturedProducts.vue';
 import BrandStory from '../../components/home/BrandStory.vue';
+import NewsletterSection from '../../components/home/NewsletterSection.vue';
+</script>
+
+<template>
+  <div>
+    <HeroSection />
+    <FeaturedProducts />
+    <BrandStory />
+    <NewsletterSection />
+  </div>
+</template>
+
+
+<!-- <script setup lang="ts">
+import HeroSection from '../../components/home/HeroSection.vue';
+import FeaturedProducts from '../../components/home/FeaturedProducts.vue';
+import BrandStory from '../../components/home/BrandStory.vue';
 </script>
 
 <template>
@@ -10,4 +27,4 @@ import BrandStory from '../../components/home/BrandStory.vue';
     <FeaturedProducts />
     <BrandStory />
   </div>
-</template>
+</template> -->

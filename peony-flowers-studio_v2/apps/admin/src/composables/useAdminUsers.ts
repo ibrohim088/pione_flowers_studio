@@ -26,5 +26,11 @@ export function useAdminUsers() {
     await fetchAll();
   }
 
-  return { users, isLoading, fetchAll, updateUser, deleteUser };
+  async function createStaff(payload: { phone: string; fullName: string; role: string }) {
+    const { data } = await api.post('/users/staff', payload);
+    users.value.unshift(data.data);
+    return data.data;
+  }
+
+  return { users, isLoading, fetchAll, updateUser, deleteUser, createStaff };
 }

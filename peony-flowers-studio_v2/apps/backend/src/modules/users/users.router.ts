@@ -3,7 +3,7 @@ import { usersController } from './users.controller';
 import { authenticate } from '../../middleware/authenticate';
 import { requireRole } from '../../middleware/requireRole';
 import { validate } from '../../middleware/validate';
-import { updateMeSchema, adminUpdateUserSchema, listUsersQuerySchema, userIdParamSchema } from './users.validation';
+import { updateMeSchema, adminUpdateUserSchema, listUsersQuerySchema, userIdParamSchema, createStaffSchema } from './users.validation';
 
 const router = Router();
 
@@ -17,5 +17,6 @@ router.get('/', requireRole('admin'), validate({ query: listUsersQuerySchema }),
 router.get('/:id', requireRole('admin'), validate({ params: userIdParamSchema }), usersController.getById);
 router.put('/:id', requireRole('admin'), validate({ params: userIdParamSchema, body: adminUpdateUserSchema }), usersController.adminUpdate);
 router.delete('/:id', requireRole('admin'), validate({ params: userIdParamSchema }), usersController.adminDelete);
+router.post('/staff', requireRole('admin'), validate({ body: createStaffSchema }), usersController.createStaff);
 
 export default router;

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="uz"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Peony Admin - Courier Deliveries</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .tap-scale:active {
+            transform: scale(0.96);
+        }
+        /* Custom scrollbar for boutique feel */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e0bec3;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#ffd9df",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#ffe9eb",
+                        "surface": "#fff8f7",
+                        "tertiary-fixed-dim": "#7adb91",
+                        "outline": "#8c7075",
+                        "primary-container": "#c2255c",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#00210b",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#edd4d7",
+                        "on-secondary-fixed": "#1a1b22",
+                        "on-primary-fixed-variant": "#90003d",
+                        "surface-container-low": "#fff0f1",
+                        "inverse-on-surface": "#ffecee",
+                        "tertiary": "#005c2a",
+                        "secondary-fixed-dim": "#c6c5cf",
+                        "tertiary-container": "#007739",
+                        "on-surface": "#26181a",
+                        "primary": "#9f0045",
+                        "on-tertiary-fixed-variant": "#005225",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb1c1",
+                        "on-secondary-container": "#63646c",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#fce2e5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#ffdfe3",
+                        "inverse-surface": "#3c2c2f",
+                        "on-secondary-fixed-variant": "#46464e",
+                        "on-tertiary-container": "#99fbae",
+                        "surface-tint": "#b61953",
+                        "on-primary-fixed": "#3f0017",
+                        "background": "#fff8f7",
+                        "surface-variant": "#f6dce0",
+                        "on-surface-variant": "#594045",
+                        "secondary-container": "#e3e1ec",
+                        "secondary-fixed": "#e3e1ec",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb1c1",
+                        "outline-variant": "#e0bec3",
+                        "surface-bright": "#fff8f7",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#f6dce0",
+                        "on-background": "#26181a",
+                        "tertiary-fixed": "#95f8ab",
+                        "secondary": "#5d5e66"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container_margin": "32px",
+                        "section_gap": "20px",
+                        "grid_gutter": "20px",
+                        "element_gap": "16px",
+                        "page_padding": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-sm min-h-screen flex flex-col md:flex-row">
+<!-- Sidebar Navigation -->
+<!-- Applying style_shell_layout, style_component_shape, and style_bg_color from JSON -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 bg-surface dark:bg-surface-dim border-r border-outline-variant dark:border-outline flex flex-col py-6 px-4 gap-5 hidden md:flex z-50" id="sidebar">
+<div class="mb-8 px-4">
+<h1 class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed-dim">Peony Admin</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">Premium Florals</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<!-- Active State: Bugungi yetkazishlar -->
+<a class="bg-primary-fixed text-on-primary-fixed-variant rounded-full flex items-center gap-3 px-4 py-3 transition-all font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="delivery_dining">delivery_dining</span>
+<span>Bugungi yetkazishlar</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-6 px-4 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a professional florist delivery person in a minimal branded apron, warm natural lighting, indoor floral studio background with out of focus roses. High-end editorial style, clean and professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYFzs-l49FVBKICs7sZ_IaWDv3Suqi5ghOKqMDhNPWg_eV6eplU1g7164l137ElrhM3PdJQZ4PfVPfVO_MWmVsy1mnN8vsk0h54K73m1r9jubn9ubmrX7F6be5wk20E-lgx4KxZFOsp3adYTNi2dLPGStvhBQ8sOY25X6N0HrAL8E3bGoKYRpLg_38czOldimq-KYcp4wBD4x1g8dusC64uM9yR_e0LeOp_vyYakZVbJeG0JkSynod"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface font-bold">Courier User</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Logistika markazi</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary flex items-center gap-3 px-2 py-1 transition-all text-sm">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Chiqish</span>
+</button>
+</div>
+</aside>
+<!-- Mobile TopBar -->
+<header class="md:hidden sticky top-0 bg-surface/80 backdrop-blur-md z-40 px-page_padding h-16 flex items-center justify-between border-b border-outline-variant">
+<h1 class="font-headline-md text-headline-md font-semibold text-primary">Peony Admin</h1>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<!-- Responsive Margin Pivot: ml-[280px] on desktop, 0 on mobile -->
+<main class="flex-grow md:ml-[280px] min-h-screen p-page_padding flex flex-col gap-6 max-w-[1600px]">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">Bugungi yetkazishlar</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bugun uchun rejalashtirilgan 4 ta buyurtma mavjud</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-on-surface-variant font-label-md hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+<span>Filterlash</span>
+</button>
+</div>
+</div>
+<!-- Delivery Card Grid -->
+<!-- Responsive: 1 col mobile, 2 col tablet, 3 col wide desktop -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-grid_gutter" id="delivery-grid">
+<!-- Delivery Card 1 -->
+<div class="bg-white border border-[#E4E4E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow group">
+<div class="p-5 border-b border-outline-variant flex justify-between items-start">
+<div>
+<span class="text-primary font-bold font-label-md">#ORD-9021</span>
+<h3 class="font-headline-md text-on-surface mt-1">Lola Bouquet</h3>
+</div>
+<div class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                        14:00 - 16:00
+                    </div>
+</div>
+<div class="p-5 flex flex-col gap-4 flex-grow">
+<!-- Customer -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-bold text-xs">AM</div>
+<div>
+<p class="font-body-sm text-on-surface font-semibold">Anvar Mansurov</p>
+<p class="font-label-md text-on-surface-variant">+998 90 123 45 67</p>
+</div>
+</div>
+<a class="w-10 h-10 rounded-full bg-primary-fixed/30 text-primary flex items-center justify-center tap-scale transition-transform" href="tel:+998901234567">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</a>
+</div>
+<!-- Address -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-surface-variant mt-0.5" data-icon="location_on">location_on</span>
+<div class="flex-grow">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Yunusobod tumani, 19-kvartal, 45-uy, 12-xonadon</p>
+<button class="mt-2 flex items-center gap-1 text-primary font-label-md hover:underline">
+<span class="material-symbols-outlined text-[16px]" data-icon="map">map</span>
+                                Xaritada ko'rish
+                            </button>
+</div>
+</div>
+<!-- Flowers Thumbnail -->
+<div class="relative h-24 rounded-lg overflow-hidden bg-surface-container-lowest mt-2 border border-outline-variant/50">
+<img class="w-full h-full object-cover" data-alt="Elegant bouquet of fresh pink tulips and white baby's breath arranged in a designer craft paper wrap. Shot against a soft pastel background with professional studio lighting, emphasizing the vibrant textures and premium floral quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh58EkpHMrYDjrpe0aTZCFOohdJxPUk5CPKWuXhTMJS2JuxA-lPYaQpQOHdHw2VCFs-KTNRKcs7AfmUuCjhErCQjPT-KkOU2pJGhlBbWXX4aQ8ZNtmKIBv-InyfiqF7Y8P5nJ1lBfIINzBHLbaoIgh1Pqvsgk4PFeC1HltHhHvfuyxwiGjCus7BnuHcgmhshA0Mr4Wo1WlxX1UG6zeYV7kdGQvtyOFwbuxlQTmqlRfxZH-jS63H66c"/>
+</div>
+</div>
+<div class="p-5 pt-0">
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-label-md font-semibold tap-scale transition-all hover:bg-primary-container">
+                        Yetkazildi deb belgilash
+                    </button>
+</div>
+</div>
+<!-- Delivery Card 2 -->
+<div class="bg-white border border-[#E4E4E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow">
+<div class="p-5 border-b border-outline-variant flex justify-between items-start">
+<div>
+<span class="text-primary font-bold font-label-md">#ORD-9025</span>
+<h3 class="font-headline-md text-on-surface mt-1">Peony Gold</h3>
+</div>
+<div class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                        16:00 - 18:00
+                    </div>
+</div>
+<div class="p-5 flex flex-col gap-4 flex-grow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-bold text-xs">SK</div>
+<div>
+<p class="font-body-sm text-on-surface font-semibold">Saida Karimova</p>
+<p class="font-label-md text-on-surface-variant">+998 97 777 00 11</p>
+</div>
+</div>
+<a class="w-10 h-10 rounded-full bg-primary-fixed/30 text-primary flex items-center justify-center tap-scale transition-transform" href="tel:+998977770011">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</a>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-surface-variant mt-0.5" data-icon="location_on">location_on</span>
+<div class="flex-grow">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Mirobod tumani, Nukus ko'chasi, 89-uy, Business Center</p>
+<button class="mt-2 flex items-center gap-1 text-primary font-label-md hover:underline">
+<span class="material-symbols-outlined text-[16px]" data-icon="map">map</span>
+                                Xaritada ko'rish
+                            </button>
+</div>
+</div>
+<div class="relative h-24 rounded-lg overflow-hidden bg-surface-container-lowest mt-2 border border-outline-variant/50">
+<img class="w-full h-full object-cover" data-alt="Luxury arrangement of deep red peonies in a velvet box with gold foil lettering. Close-up high-angle shot, editorial fashion magazine aesthetic, soft shadows, warm luxury lighting highlights the silky petals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfdSLd0HmMHXxSBAUQhh1Qgd7uCSn4pM_R8IO7bytO1YOYH5tunEt49cKTuGVp1NRVPSv_FlNzTNKNnnkkExmqg6bcgnsuNp5ntI-HZ-5Apn2EJlgOt9bpa5jP1H3vso65FC6e50lirEZ6jUtk4Xx26PAg1Z19wzLlUJjTfXRD4TNoLL63MsSSfS2lmQ_L-2D9pLw8y18FuwJXOxrti458_nBFbzHmM0rZV6i4II9XZS-y5z74yEzG"/>
+</div>
+</div>
+<div class="p-5 pt-0">
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-label-md font-semibold tap-scale transition-all hover:bg-primary-container">
+                        Yetkazildi deb belgilash
+                    </button>
+</div>
+</div>
+<!-- Delivery Card 3 -->
+<div class="bg-white border border-[#E4E4E7] rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow">
+<div class="p-5 border-b border-outline-variant flex justify-between items-start">
+<div>
+<span class="text-primary font-bold font-label-md">#ORD-9028</span>
+<h3 class="font-headline-md text-on-surface mt-1">Wild Meadow</h3>
+</div>
+<div class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                        18:00 - 20:00
+                    </div>
+</div>
+<div class="p-5 flex flex-col gap-4 flex-grow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-bold text-xs">JO</div>
+<div>
+<p class="font-body-sm text-on-surface font-semibold">Jasur Olimov</p>
+<p class="font-label-md text-on-surface-variant">+998 93 444 55 66</p>
+</div>
+</div>
+<a class="w-10 h-10 rounded-full bg-primary-fixed/30 text-primary flex items-center justify-center tap-scale transition-transform" href="tel:+998934445566">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</a>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-surface-variant mt-0.5" data-icon="location_on">location_on</span>
+<div class="flex-grow">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Chilonzor tumani, Bunyodkor ko'chasi, 12-uy</p>
+<button class="mt-2 flex items-center gap-1 text-primary font-label-md hover:underline">
+<span class="material-symbols-outlined text-[16px]" data-icon="map">map</span>
+                                Xaritada ko'rish
+                            </button>
+</div>
+</div>
+<div class="relative h-24 rounded-lg overflow-hidden bg-surface-container-lowest mt-2 border border-outline-variant/50">
+<img class="w-full h-full object-cover" data-alt="Rustic wild floral arrangement featuring sunflowers, lavender, and field greens in a simple glass vase. Sunlight streaming through a window creating long, artistic shadows. Minimalist and organic boutique aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcbfpTsQq2758PNFt9nSyxHKl_k9CcNVqQ4TrAV9ijr2lcU4OFrEBSLMLQow4J76WMwbReHV8BTtSnpG95j0Rnu8rEmgfdsz3SWLxYyCwjnZFAavy3GifrEsljxm77eRmFsUhMIf8l2wu0fzi34JLsHKf-2AiuJNLIxNvJ9WkWIRZXxgy4yU_XjMIz0y2PP8UGs-JHvreL8R-jdeESrCIla4tBYj3BEK4HVXHvjPPpto1K9vfhIZ2z"/>
+</div>
+</div>
+<div class="p-5 pt-0">
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-label-md font-semibold tap-scale transition-all hover:bg-primary-container">
+                        Yetkazildi deb belgilash
+                    </button>
+</div>
+</div>
+</div>
+<!-- Empty State (Hidden by default, can be toggled via JS) -->
+<div class="hidden flex-grow flex flex-col items-center justify-center text-center p-12 animate-in fade-in duration-500" id="empty-state">
+<div class="w-64 h-64 mb-8">
+
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">Bugun yetkazish uchun buyurtmalar yo'q</h3>
+<p class="font-body-sm text-on-surface-variant max-w-sm">Hozircha sizga tayinlangan buyurtmalar mavjud emas. Yangi buyurtmalar kelishi bilan biz sizga xabar beramiz.</p>
+</div>
+</main>
+<!-- Floating Action Button for courier tasks -->
+<button class="fixed bottom-6 right-6 md:right-page_padding w-16 h-16 bg-primary-container text-on-primary-container rounded-full shadow-lg flex items-center justify-center z-50 tap-scale">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+</button>
+<script>
+        // Micro-interaction for delivery confirmation
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText === "Yetkazildi deb belgilash") {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('div').parentElement;
+                    
+                    // Visual feedback
+                    this.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Yuklanmoqda...';
+                    this.classList.add('opacity-70');
+                    this.disabled = true;
+
+                    setTimeout(() => {
+                        card.style.transition = "all 0.5s ease-out";
+                        card.style.opacity = "0";
+                        card.style.transform = "translateX(100px)";
+                        
+                        setTimeout(() => {
+                            card.remove();
+                            checkEmptyState();
+                        }, 500);
+                    }, 1500);
+                });
+            }
+        });
+
+        function checkEmptyState() {
+            const grid = document.getElementById('delivery-grid');
+            const empty = document.getElementById('empty-state');
+            if (grid.children.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+            }
+        }
+
+        // Simulating the "Empty State" scenario if no cards exist
+        // checkEmptyState(); // Uncomment to see empty state
+    </script>
+</body></html>

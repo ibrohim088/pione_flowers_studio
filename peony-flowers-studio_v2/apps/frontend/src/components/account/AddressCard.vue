@@ -6,13 +6,13 @@ defineEmits<{ edit: [id: string]; remove: [id: string] }>();
 <template>
   <div class="address-card">
     <div class="header">
-      <strong>{{ address.label || 'Manzil' }}</strong>
-      <span v-if="address.isDefault" class="default">Asosiy</span>
+      <strong>{{ address.label || $t('account.addresses.defaultLabel') }}</strong>
+      <span v-if="address.isDefault" class="default">{{ $t('account.addresses.default') }}</span>
     </div>
     <p>{{ address.city }}, {{ address.district }}, {{ address.street }} {{ address.house }}</p>
     <div class="actions">
-      <button @click="$emit('edit', address.id)">Tahrirlash</button>
-      <button @click="$emit('remove', address.id)">O'chirish</button>
+      <button @click="$emit('edit', address.id)">{{ $t('account.addresses.edit') }}</button>
+      <button @click="$emit('remove', address.id)">{{ $t('account.addresses.delete') }}</button>
     </div>
   </div>
 </template>

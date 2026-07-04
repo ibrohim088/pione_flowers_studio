@@ -36,12 +36,12 @@ async function save() {
 </script>
 
 <template>
-  <div class="account-layout">
+  <div class="account-layout container">
     <AccountSidebar />
     <div class="content">
       <div class="header">
-        <h1>Manzillarim</h1>
-        <AppButton @click="openCreate">+ Yangi manzil</AppButton>
+        <h1 class="headline-md">{{ $t('account.addresses.title') }}</h1>
+        <AppButton @click="openCreate">{{ $t('account.addresses.addNew') }}</AppButton>
       </div>
       <div class="list">
         <AddressCard
@@ -54,21 +54,34 @@ async function save() {
       </div>
     </div>
 
-    <AppModal :open="modalOpen" title="Manzil" @close="modalOpen = false">
+    <AppModal :open="modalOpen" :title="$t('account.addresses.modalTitle')" @close="modalOpen = false">
       <form class="form" @submit.prevent="save">
-        <AppInput v-model="form.label" label="Nomi (Uy, Ish)" />
-        <AppInput v-model="form.city" label="Shahar" />
-        <AppInput v-model="form.district" label="Tuman" />
-        <AppInput v-model="form.street" label="Ko'cha" />
-        <AppInput v-model="form.house" label="Uy raqami" />
-        <AppButton type="submit">Saqlash</AppButton>
+        <AppInput v-model="form.label" :label="$t('account.addresses.labelField')" />
+        <AppInput v-model="form.city" :label="$t('account.addresses.city')" />
+        <AppInput v-model="form.district" :label="$t('account.addresses.district')" />
+        <AppInput v-model="form.street" :label="$t('account.addresses.street')" />
+        <AppInput v-model="form.house" :label="$t('account.addresses.house')" />
+        <AppButton type="submit">{{ $t('account.addresses.save') }}</AppButton>
       </form>
     </AppModal>
   </div>
 </template>
 
 <style scoped lang="scss">
-.account-layout { display: grid; grid-template-columns: 240px 1fr; gap: 32px; padding: 32px; }
+.account-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+  padding-block: var(--stack-lg) var(--section-padding);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+.content {
+  flex: 1;
+  min-width: 0;
+}
 .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .list { display: flex; flex-direction: column; gap: 12px; }
 .form { display: flex; flex-direction: column; gap: 12px; min-width: 320px; }
