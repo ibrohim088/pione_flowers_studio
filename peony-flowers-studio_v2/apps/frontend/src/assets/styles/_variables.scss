@@ -1,40 +1,40 @@
 :root {
-  /* ==== Colors — Peony Flowers Studio design system ==== */
-  --color-surface: #fff8f8;
-  --color-surface-dim: #e7d6da;
-  --color-surface-bright: #fff8f8;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #fff0f3;
-  --color-surface-container: #fbeaee;
-  --color-surface-container-high: #f5e4e8;
-  --color-surface-container-highest: #efdee2;
+  /* ==== Colors — Peony Flowers Studio design system (Qora / Zumrad tun / Oltin) ==== */
+  --color-surface: #0a0c10;
+  --color-surface-dim: #05060a;
+  --color-surface-bright: #171c28;
+  --color-surface-container-lowest: #05060a;
+  --color-surface-container-low: #10131a;
+  --color-surface-container: #141824;
+  --color-surface-container-high: #191f2c;
+  --color-surface-container-highest: #1f2635;
 
-  --color-on-surface: #22191c;
-  --color-on-surface-variant: #544244;
+  --color-on-surface: #eef1f5;
+  --color-on-surface-variant: #9aa3b5;
 
-  --color-outline: #877274;
-  --color-outline-variant: #d9c1c3;
-  --color-hairline: #ebe2df;
-  --color-strong-border: #ddd0cd;
+  --color-outline: #4a5268;
+  --color-outline-variant: #262d3d;
+  --color-hairline: #232a3a;
+  --color-strong-border: #2c3448;
 
-  --color-primary: #6f2435;
-  --color-primary-container: #8c3b4b;
-  --color-on-primary: #ffffff;
-  --color-on-primary-container: #ffb9c2;
+  --color-primary: #c9a24a;
+  --color-primary-container: #35301f;
+  --color-on-primary: #1a1400;
+  --color-on-primary-container: #e8c874;
 
-  --color-secondary: #57624c;
-  --color-secondary-container: #dbe7cb;
-  --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #5d6852;
+  --color-secondary: #223256;
+  --color-secondary-container: #2a3c66;
+  --color-on-secondary: #eef1f5;
+  --color-on-secondary-container: #b9c4e0;
 
-  --color-error: #ba1a1a;
-  --color-on-error: #ffffff;
-  --color-error-container: #ffdad6;
-  --color-on-error-container: #93000a;
+  --color-error: #e2574c;
+  --color-on-error: #1a0a08;
+  --color-error-container: #3a1512;
+  --color-on-error-container: #ffb4a8;
 
-  --color-blush: #f6e9ea;
-  --color-sage: #e9ede4;
-  --color-background: #fff8f8;
+  --color-blush: #182238;
+  --color-sage: #1c2436;
+  --color-background: #0a0c10;
 
   /* Legacy aliases used across older components — kept in sync with the tokens above */
   --accent: var(--color-primary);
@@ -44,14 +44,14 @@
   --bg-primary: var(--color-surface-container-lowest);
   --bg-secondary: var(--color-surface);
   --border: var(--color-hairline);
-  --success: #2f9e44;
+  --success: #3fa66a;
   --danger: var(--color-error);
-  --warning: #f59f00;
+  --warning: #d4af37;
   --radius: 6px;
 
   /* ==== Typography ==== */
-  --font-display: 'Fraunces', serif;
-  --font-body: 'Manrope', sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Jost", sans-serif;
 
   /* ==== Spacing ==== */
   --unit: 4px;
@@ -71,25 +71,75 @@
   --radius-full: 9999px;
 }
 
-
 // :root {
-//   --accent: #d6336c;
-//   --accent-light: #f8c9dc;
-//   --text-primary: #1f1b24;
-//   --text-secondary: #6b6570;
-//   --bg-primary: #ffffff;
-//   --bg-secondary: #fdf6f8;
-//   --border: #ece3e7;
-//   --success: #2f9e44;
-//   --danger: #e03131;
-//   --warning: #f59f00;
-//   --radius: 12px;
-// }
+//   /* ==== Colors — Peony Flowers Studio design system ==== */
+//   --color-surface: #fff8f8;
+//   --color-surface-dim: #e7d6da;
+//   --color-surface-bright: #fff8f8;
+//   --color-surface-container-lowest: #ffffff;
+//   --color-surface-container-low: #fff0f3;
+//   --color-surface-container: #fbeaee;
+//   --color-surface-container-high: #f5e4e8;
+//   --color-surface-container-highest: #efdee2;
 
-// [data-theme='dark'] {
-//   --text-primary: #f5f0f2;
-//   --text-secondary: #b8b0b6;
-//   --bg-primary: #17141a;
-//   --bg-secondary: #201b24;
-//   --border: #33303a;
+//   --color-on-surface: #22191c;
+//   --color-on-surface-variant: #544244;
+
+//   --color-outline: #877274;
+//   --color-outline-variant: #d9c1c3;
+//   --color-hairline: #ebe2df;
+//   --color-strong-border: #ddd0cd;
+
+//   --color-primary: #6f2435;
+//   --color-primary-container: #8c3b4b;
+//   --color-on-primary: #ffffff;
+//   --color-on-primary-container: #ffb9c2;
+
+//   --color-secondary: #57624c;
+//   --color-secondary-container: #dbe7cb;
+//   --color-on-secondary: #ffffff;
+//   --color-on-secondary-container: #5d6852;
+
+//   --color-error: #ba1a1a;
+//   --color-on-error: #ffffff;
+//   --color-error-container: #ffdad6;
+//   --color-on-error-container: #93000a;
+
+//   --color-blush: #f6e9ea;
+//   --color-sage: #e9ede4;
+//   --color-background: #fff8f8;
+
+//   /* Legacy aliases used across older components — kept in sync with the tokens above */
+//   --accent: var(--color-primary);
+//   --accent-light: var(--color-blush);
+//   --text-primary: var(--color-on-surface);
+//   --text-secondary: var(--color-on-surface-variant);
+//   --bg-primary: var(--color-surface-container-lowest);
+//   --bg-secondary: var(--color-surface);
+//   --border: var(--color-hairline);
+//   --success: #2f9e44;
+//   --danger: var(--color-error);
+//   --warning: #f59f00;
+//   --radius: 6px;
+
+//   /* ==== Typography ==== */
+//   --font-display: 'Fraunces', serif;
+//   --font-body: 'Manrope', sans-serif;
+
+//   /* ==== Spacing ==== */
+//   --unit: 4px;
+//   --stack-sm: 8px;
+//   --stack-md: 16px;
+//   --stack-lg: 32px;
+//   --gutter: 24px;
+//   --margin-mobile: 16px;
+//   --margin-desktop: 64px;
+//   --section-padding: 80px;
+//   --container-max: 1280px;
+
+//   /* ==== Shape ==== */
+//   --radius-sm: 4px;
+//   --radius-md: 6px;
+//   --radius-lg: 12px;
+//   --radius-full: 9999px;
 // }

@@ -13,7 +13,7 @@ import {
   Users,
 } from '@lucide/vue';
 import { useAuthStore } from '../../stores/authStore';
-import logo from '../../assets/images/favicons.svg'
+import logo from '../../assets/images/favicons_gold.svg'
 
 
 const authStore = useAuthStore();

@@ -140,7 +140,7 @@ import { RouterLink } from 'vue-router';
 }
 
 .cta-btn {
-  background: var(--color-primary-container);
+  background: var(--color-primary);
   color: var(--color-on-primary);
   padding: 16px 32px;
   border-radius: var(--radius-lg);
@@ -381,32 +381,36 @@ import { RouterLink } from 'vue-router';
             </radialGradient>
           </defs>
 
+
           <path class="stem" d="M300 560 C 296 460, 304 380, 300 312" />
           <use href="#leafShape" class="leaf" transform="translate(298,430) rotate(20) scale(1.1)" />
           <use href="#leafShape" class="leaf" transform="translate(304,470) rotate(-160) scale(1.3)" />
 
-          <g class="bloom">
+
+          <g class="bloom" transform="translate(300,210)">
+
             <g class="ring ring--outer">
-              <use v-for="n in 10" :key="'o' + n" href="#petalOuter"
-                :transform="`translate(300,210) rotate(${n * 36})`" />
+              <use v-for="n in 10" :key="'o' + n" href="#petalOuter" :transform="`rotate(${n * 36})`" />
             </g>
+
 
             <g class="ring ring--mid">
-              <use v-for="n in 10" :key="'m' + n" href="#petalMid"
-                :transform="`translate(300,210) rotate(${n * 36 + 18})`" />
+              <use v-for="n in 10" :key="'m' + n" href="#petalMid" :transform="`rotate(${n * 36 + 18})`" />
             </g>
+
 
             <g class="ring ring--inner">
-              <use v-for="n in 8" :key="'i' + n" href="#petalInner" :transform="`translate(300,210) rotate(${n * 45})`" />
+              <use v-for="n in 8" :key="'i' + n" href="#petalInner" :transform="`rotate(${n * 45})`" />
             </g>
+
 
             <g class="ring ring--core">
-              <use v-for="n in 6" :key="'c' + n" href="#petalCore"
-                :transform="`translate(300,210) rotate(${n * 60 + 30})`" />
+              <use v-for="n in 6" :key="'c' + n" href="#petalCore" :transform="`rotate(${n * 60 + 30})`" />
             </g>
 
-            <circle class="center" cx="300" cy="210" r="10" />
+            <circle class="center" cx="0" cy="0" r="10" />
           </g>
+
 
           <g class="stem-group--bud">
             <path class="stem stem--bud" d="M120 470 C 118 420, 124 380, 118 344" />
@@ -414,8 +418,7 @@ import { RouterLink } from 'vue-router';
 
             <g class="bloom bloom--bud" transform="translate(118,320) scale(0.55)">
               <g class="ring ring--outer">
-                <use v-for="n in 10" :key="'bo' + n" href="#petalOuter" transform-origin="0 0"
-                  :transform="`rotate(${n * 36})`" />
+                <use v-for="n in 10" :key="'bo' + n" href="#petalOuter" :transform="`rotate(${n * 36})`" />
               </g>
               <g class="ring ring--mid">
                 <use v-for="n in 10" :key="'bm' + n" href="#petalMid" :transform="`rotate(${n * 36 + 18})`" />
@@ -534,8 +537,6 @@ import { RouterLink } from 'vue-router';
   width: 100%;
   height: 100%;
   overflow: visible;
-  animation: sway 9s ease-in-out infinite;
-  transform-origin: 300px 480px;
 }
 
 .stem {
@@ -554,9 +555,24 @@ import { RouterLink } from 'vue-router';
   opacity: 0.4;
 }
 
+.bloom,
+.bloom--bud {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ring {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 .ring--outer use {
   fill: url(#petalShade);
   opacity: 0.5;
+}
+
+.ring--outer {
+  animation: spinCW 46s linear infinite;
 }
 
 .ring--mid use {
@@ -564,14 +580,26 @@ import { RouterLink } from 'vue-router';
   opacity: 0.7;
 }
 
+.ring--mid {
+  animation: spinCCW 36s linear infinite;
+}
+
 .ring--inner use {
   fill: var(--color-primary);
   opacity: 0.9;
 }
 
+.ring--inner {
+  animation: spinCW 28s linear infinite;
+}
+
 .ring--core use {
   fill: var(--color-primary-container, #f6dde2);
   opacity: 1;
+}
+
+.ring--core {
+  animation: spinCCW 20s linear infinite;
 }
 
 .center {
@@ -581,6 +609,18 @@ import { RouterLink } from 'vue-router';
 
 .bloom--bud {
   opacity: 0.9;
+}
+
+.bloom--bud .ring--outer {
+  animation-duration: 30s;
+}
+
+.bloom--bud .ring--mid {
+  animation-duration: 24s;
+}
+
+.bloom--bud .ring--inner {
+  animation-duration: 18s;
 }
 
 .dot {
@@ -609,15 +649,23 @@ import { RouterLink } from 'vue-router';
   animation-delay: -3s;
 }
 
-@keyframes sway {
-
-  0%,
-  100% {
+@keyframes spinCW {
+  from {
     transform: rotate(0deg);
   }
 
-  50% {
-    transform: rotate(0.8deg);
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinCCW {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
   }
 }
 
@@ -637,7 +685,10 @@ import { RouterLink } from 'vue-router';
 
 @media (prefers-reduced-motion: reduce) {
 
-  .hero__decor,
+  .ring--outer,
+  .ring--mid,
+  .ring--inner,
+  .ring--core,
   .dot {
     animation: none;
   }

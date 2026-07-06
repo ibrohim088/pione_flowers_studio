@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Logo from '../../assets/images/favicons_gold.svg'
 import { RouterLink } from 'vue-router';
 import { useAuthStore } from '../../stores/authStore';
 
@@ -12,7 +13,8 @@ const authStore = useAuthStore();
   <transition name="slide">
     <div v-if="open" class="mobile-menu">
       <div class="top">
-        <span class="logo display-lg">Peony</span>
+        <img :src="Logo" alt="Peony Flowers Studio" />
+        <!-- <span class="logo display-lg">Peony</span> -->
         <button class="close-btn" type="button" @click="$emit('close')">
           <span class="material-symbols-outlined">close</span>
         </button>

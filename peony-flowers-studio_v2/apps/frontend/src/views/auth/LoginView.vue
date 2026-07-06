@@ -5,7 +5,7 @@ import { useAuth } from '../../composables/useAuth';
 import AppInput from '../../components/ui/AppInput.vue';
 import AppButton from '../../components/ui/AppButton.vue';
 import OtpInput from '../../components/ui/OtpInput.vue';
-import logo from '../../assets/images/favicons.svg'
+import logo from '../../assets/images/favicons_gold.svg'
 
 const router = useRouter();
 const route = useRoute();
@@ -50,7 +50,7 @@ onUnmounted(() => clearInterval(timer));
 <template>
   <div class="auth-page">
     <div class="card">
-      <div class="brand">
+      <div class="brand" @click="router.push('/')">
         <img :src="logo" alt="Peony Logo" width="120" height="40"/>
         <div class="divider" />
       </div>

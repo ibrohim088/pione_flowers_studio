@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Logo from '../../assets/images/favicons_gold.svg'
+
 const year = new Date().getFullYear();
 </script>
 
@@ -6,7 +8,8 @@ const year = new Date().getFullYear();
   <footer class="footer">
     <div class="footer__grid container">
       <div class="brand-col">
-        <span class="logo display-lg">Peony</span>
+        <img :src="Logo" alt="Peony Flowers Studio" />
+        <!-- <span class="logo display-lg">Peony</span> -->
         <p class="body-md muted">{{ $t('footer.description') }}</p>
         <div class="socials">
           <a href="https://www.instagram.com/peony.uz" target="_blank" rel="noopener" aria-label="Instagram">
@@ -25,15 +28,6 @@ const year = new Date().getFullYear();
                 stroke-linejoin="round" />
             </svg>
           </a>
-          <!-- <a href="https://t.me/peony_floboutique" target="_blank" rel="noopener" aria-label="Telegram">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M21.05 3.5 2.9 10.6c-1.2.47-1.19 1.13-.22 1.42l4.65 1.45 1.8 5.5c.22.6.38.84.78.84.35 0 .5-.16.7-.35l1.9-1.83 4.7 3.47c.87.48 1.5.23 1.72-.8l3.1-14.6c.32-1.26-.48-1.83-1.98-1.2Z"
-                stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-              <path d="M9.2 13.5 17.5 7l-6.7 7.4-.1 3.2-1.5-4.1Z" stroke="currentColor" stroke-width="1.6"
-                stroke-linejoin="round" />
-            </svg>
-          </a> -->
         </div>
       </div>
 

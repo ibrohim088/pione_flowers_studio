@@ -6,7 +6,7 @@ import { useAuthStore } from '../../stores/authStore';
 import { useUiStore } from '../../stores/uiStore';
 import MobileMenu from './MobileMenu.vue';
 import AppSelect from '../ui/AppSelect.vue';
-import Logo from '../../assets/images/favicons.svg'
+import Logo from '../../assets/images/favicons_gold.svg'
 
 const cartStore = useCartStore();
 const authStore = useAuthStore();
