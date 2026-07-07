@@ -20,7 +20,9 @@
     "qualityPerk": "Sifat kafolati va yangi gullar",
     "buyNow": "Hoziroq xarid qilish",
     "addToCart": "Savatga qo'shish",
-    "outOfStock": "Sotuvda yo'q"
+    "outOfStock": "Sotuvda yo'q",
+    "inStock": "dona mavjud",
+    "lowStock": "Oxirgi {count} dona qoldi!"
   },
   "checkout": {
     "title": "Buyurtmani rasmiylashtirish",
@@ -36,8 +38,6 @@
     "date": "Sana",
     "time": "Vaqt",
     "giftMessageOptional": "Sovg'a uchun xabar (ixtiyoriy)",
-    "coupon": "Kupon",
-    "couponCode": "Kupon kodi",
     "confirmOrder": "Buyurtmani tasdiqlash",
     "cashDesc": "Kuryerga naqd to'lov",
     "clickDesc": "Onlayn karta orqali"
@@ -60,6 +60,7 @@
     "terms": "foydalanish shartlari",
     "agreeSuffix": "va maxfiylik siyosatiga roziman.",
     "enterCodeText": "raqamiga yuborilgan kodni kiriting",
+    "code": "Tasdiqlash kodi",
     "confirm": "Tasdiqlash"
   },
   "home": {
@@ -77,14 +78,18 @@
     "newsletter": {
       "title": "Yangi to'plamlardan xabardor bo'ling",
       "text": "Bizning yangiliklarimizga obuna bo'ling va maxsus takliflar hamda yangi gullar haqida birinchilardan bo'lib biling.",
-      "placeholder": "Emailingizni kiriting",
+      "placeholder": "Telefon raqamingiz",
       "submit": "Yuborish",
       "sent": "Yuborildi"
     }
   },
   "about": {
     "title": "Biz haqimizda",
-    "text": "Peony Flowers Studio 2024-yilda tashkil etilgan bo'lib, Toshkent shahrida premium gullar va sovg'alar yetkazib berish xizmatini ko'rsatadi."
+    "foundedYear": "Tashkil topgan yil",
+    "customersCount": "Mamnun mijozlar",
+    "servicesTitle": "Xizmatlarimiz",
+    "valuesTitle": "Qadriyatlarimiz",
+    "loadError": "Ma'lumotni yuklab bo'lmadi. Birozdan so'ng qayta urinib ko'ring."
   },
   "catalog": {
     "title": "Guldastalar katalogi",

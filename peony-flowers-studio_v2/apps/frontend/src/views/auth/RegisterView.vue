@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useAuth } from '../../composables/useAuth';
 import AppInput from '../../components/ui/AppInput.vue';
+import PhoneInput from '../../components/ui/PhoneInput.vue';
 import AppButton from '../../components/ui/AppButton.vue';
 import OtpInput from '../../components/ui/OtpInput.vue';
 import logo from '../../assets/images/favicons_gold.svg'
@@ -31,27 +32,29 @@ async function handleVerify() {
 <template>
   <div class="auth-page">
     <div class="card">
-      <div class="brand" @click="router.push('/')">
-        <img :src="logo" alt="Peony Logo" width="120" height="40" />
-      </div>
+
+      <RouterLink to="/">
+        <div class="brand">
+          <img :src="logo" alt="Peony Logo" width="120" height="40" />
+        </div>
+      </RouterLink>
 
       <h1 class="headline-md heading">{{ $t('auth.registerTitle') }}</h1>
 
       <form v-if="step === 'form'" @submit.prevent="handleSendOtp">
         <div class="field">
           <label class="label-caps">{{ $t('auth.fullNameLabel') }}</label>
-          <AppInput v-model="fullName" :placeholder="$t('auth.namePlaceholder')" />
+          <AppInput v-model="fullName" :placeholder="$t('auth.namePlaceholder')" v-autofocus/>
         </div>
         <div class="field">
           <label class="label-caps">{{ $t('auth.phoneLabel') }}</label>
-          <AppInput v-model="phone" placeholder="+998" />
+          <PhoneInput v-model="phone" />
         </div>
 
         <label class="agree">
           <input v-model="agreed" type="checkbox" />
           <span class="body-md">
-            {{ $t('auth.agreePrefix') }} <a href="#" class="link">{{ $t('auth.terms') }}</a> {{ $t('auth.agreeSuffix')
-            }}
+            {{ $t('auth.agreePrefix') }} <a href="#" class="link">{{ $t('auth.terms') }}</a> {{ $t('auth.agreeSuffix') }}
           </span>
         </label>
 
@@ -62,8 +65,8 @@ async function handleVerify() {
       </form>
 
       <form v-else @submit.prevent="handleVerify">
-        <p class="body-md">{{ phone }} {{ $t('auth.enterCodeText') }}</p>
-        <OtpInput v-model="code" :length="4" />
+        <!-- <p class="body-md">{{ phone }} {{ $t('auth.enterCodeText') }}</p> -->
+        <OtpInput v-model="code" :length="6" style="margin: 0 auto;" v-autofocus/>
         <p v-if="error" class="error-text">{{ error }}</p>
         <AppButton type="submit" :loading="isLoading" style="width: 100%">{{ $t('auth.confirm') }}</AppButton>
       </form>

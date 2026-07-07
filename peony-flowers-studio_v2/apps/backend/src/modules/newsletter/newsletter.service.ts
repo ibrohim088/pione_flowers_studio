@@ -1,13 +1,13 @@
 import { prisma } from '../../config/database';
 
 export const newsletterService = {
-  async subscribe(email: string) {
-    const normalized = email.trim().toLowerCase();
-    const existing = await prisma.newsletterSubscriber.findUnique({ where: { email: normalized } });
+  async subscribe(phone: string) {
+    const normalized = phone.trim();
+    const existing = await prisma.newsletterSubscriber.findUnique({ where: { phone: normalized } });
     if (existing) {
       return { subscriber: existing, alreadySubscribed: true as const };
     }
-    const subscriber = await prisma.newsletterSubscriber.create({ data: { email: normalized } });
+    const subscriber = await prisma.newsletterSubscriber.create({ data: { phone: normalized } });
     return { subscriber, alreadySubscribed: false as const };
   },
 

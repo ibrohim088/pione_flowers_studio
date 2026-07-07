@@ -190,6 +190,56 @@ async function main() {
       });
     }
   }
+
+  // Sayt kontenti — "Biz haqimizda"
+  await prisma.siteContent.upsert({
+    where: { key: 'about' },
+    update: {},
+    create: {
+      key: 'about',
+      data: {
+        uz: {
+          title: 'Peony Flower Studio',
+          intro:
+            "Peony Flower Studio — nafislik, go'zallik va samimiy tuyg'ularni gullar orqali ifoda etuvchi zamonaviy gul studiyasi.\n\n" +
+            "2021-yildan buyon faoliyat yuritib kelayotgan studiyamiz shu kungacha 10 000 dan ortiq mijoz ishonchini qozonishga muvaffaq bo'ldi. " +
+            "Har bir buyurtma biz uchun alohida ahamiyatga ega bo'lib, mijozlarimizning eng quvonchli va unutilmas lahzalariga go'zallik ulashishni o'z oldimizga maqsad qilganmiz.\n\n" +
+            "Biz har bir guldastani tajribali floristlarimiz tomonidan did, mehr va yuqori professionallik bilan tayyorlaymiz. " +
+            "Faqat yangi va sifatli gullardan foydalanib, zamonaviy floristika yo'nalishlariga mos, betakror kompozitsiyalar yaratamiz.",
+          foundedYear: 2021,
+          customersCount: 10000,
+          services: [
+            'Mualliflik va eksklyuziv guldastalar',
+            'Individual buyurtmalar asosida gul kompozitsiyalari',
+            "To'y, nikoh, tug'ilgan kun, yubiley va boshqa tadbirlarni gullar bilan bezatish",
+            'Korporativ buyurtmalar',
+            'Tezkor va ishonchli yetkazib berish xizmati',
+          ],
+          values: ['Sifat', 'Ishonch', 'Nafis dizayn', 'Mijozlar mamnunligi'],
+        },
+        ru: {
+          title: 'Peony Flower Studio',
+          intro:
+            'Peony Flower Studio — современная цветочная студия, передающая изящество, красоту и искренние чувства через цветы.\n\n' +
+            'Работая с 2021 года, наша студия завоевала доверие более 10 000 клиентов. Каждый заказ важен для нас — ' +
+            'мы стремимся дарить красоту в самые радостные и незабываемые моменты жизни наших клиентов.\n\n' +
+            'Каждый букет создаётся нашими опытными флористами со вкусом, любовью и высоким профессионализмом. ' +
+            'Мы используем только свежие и качественные цветы, создавая неповторимые композиции в духе современной флористики.',
+          foundedYear: 2021,
+          customersCount: 10000,
+          services: [
+            'Авторские и эксклюзивные букеты',
+            'Цветочные композиции по индивидуальному заказу',
+            'Оформление свадеб, дней рождения, юбилеев и других мероприятий',
+            'Корпоративные заказы',
+            'Быстрая и надёжная доставка',
+          ],
+          values: ['Качество', 'Доверие', 'Изысканный дизайн', 'Удовлетворённость клиентов'],
+        },
+      },
+      updatedBy: null,
+    },
+  });
  
   console.log('✅ Seed muvaffaqiyatli yakunlandi');
 }
@@ -202,57 +252,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-  
-
-// import { PrismaClient } from '@prisma/client';
-
-// const prisma = new PrismaClient();
-
-// async function main() {
-//   console.log('🌱 Seed boshlandi...');
-
-//   // Admin foydalanuvchi
-//   await prisma.user.upsert({
-//     where: { phone: '+998901234567' },
-//     update: {},
-//     create: {
-//       phone: '+998901234567',
-//       fullName: 'Admin User',
-//       role: 'admin',
-//     },
-//   });
-
-//   // Florist
-//   await prisma.user.upsert({
-//     where: { phone: '+998901234568' },
-//     update: {},
-//     create: {
-//       phone: '+998901234568',
-//       fullName: 'Florist Aziza',
-//       role: 'florist',
-//     },
-//   });
-
-//   // Courier
-//   await prisma.user.upsert({
-//     where: { phone: '+998901234569' },
-//     update: {},
-//     create: {
-//       phone: '+998901234569',
-//       fullName: 'Kuryer Jasur',
-//       role: 'courier',
-//     },
-//   });
-
-//   console.log('✅ Seed muvaffaqiyatli yakunlandi');
-// }
-
-// main()
-//   .catch((e) => {
-//     console.error(e);
-//     process.exit(1);
-//   })
-//   .finally(async () => {
-//     await prisma.$disconnect();
-//   });

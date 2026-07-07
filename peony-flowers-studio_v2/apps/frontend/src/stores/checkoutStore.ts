@@ -8,7 +8,6 @@ interface CheckoutState {
   deliveryTime: string;
   giftMessage: string;
   paymentMethod: 'click' | 'cash';
-  couponCode: string;
 }
 
 function loadFromSession(): CheckoutState {
@@ -27,7 +26,6 @@ function defaults(): CheckoutState {
     deliveryTime: '',
     giftMessage: '',
     paymentMethod: 'cash',
-    couponCode: '',
   };
 }
 

@@ -2,7 +2,7 @@
 import { ref, onUnmounted } from 'vue';
 import { RouterLink, useRouter, useRoute } from 'vue-router';
 import { useAuth } from '../../composables/useAuth';
-import AppInput from '../../components/ui/AppInput.vue';
+import PhoneInput from '../../components/ui/PhoneInput.vue';
 import AppButton from '../../components/ui/AppButton.vue';
 import OtpInput from '../../components/ui/OtpInput.vue';
 import logo from '../../assets/images/favicons_gold.svg'
@@ -50,10 +50,13 @@ onUnmounted(() => clearInterval(timer));
 <template>
   <div class="auth-page">
     <div class="card">
-      <div class="brand" @click="router.push('/')">
-        <img :src="logo" alt="Peony Logo" width="120" height="40"/>
-        <div class="divider" />
-      </div>
+
+      <RouterLink to="/">
+        <div class="brand">
+          <img :src="logo" alt="Peony Logo" width="120" height="40" />
+          <div class="divider" />
+        </div>
+      </RouterLink>
 
       <div class="heading">
         <p class="label-caps welcome">{{ $t('auth.welcome') }}</p>
@@ -61,16 +64,16 @@ onUnmounted(() => clearInterval(timer));
       </div>
 
       <form v-if="step === 'phone'" @submit.prevent="handleSendOtp">
-        <AppInput v-model="phone" :label="$t('auth.phoneLabel')" icon="call" placeholder="+998 90 000 00 00" />
+        <PhoneInput v-model="phone" :label="$t('auth.phoneLabel')" v-autofocus />
         <p v-if="error" class="error-text">{{ error }}</p>
         <AppButton type="submit" :loading="isLoading" style="width: 100%">{{ $t('auth.continue') }}</AppButton>
       </form>
 
       <form v-else @submit.prevent="handleVerify">
-        <AppInput v-model="phone" :label="$t('auth.phoneLabel')" icon="call" disabled />
+        <PhoneInput v-model="phone" :label="$t('auth.phoneLabel')" disabled />
         <div class="field">
           <label class="label-caps">{{ $t('auth.code') }}</label>
-          <OtpInput v-model="code" :length="4" />
+          <OtpInput v-model="code" :length="6" style="margin: 0 auto;" v-autofocus />
         </div>
         <div class="resend-row label-sm">
           <span v-if="secondsLeft > 0">{{ $t('auth.waitCode') }}: {{ formatTime(secondsLeft) }}</span>

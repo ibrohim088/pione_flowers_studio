@@ -20,12 +20,12 @@ import ordersRouter from './modules/orders/orders.router';
 import addressesRouter from './modules/addresses/addresses.router';
 import reviewsRouter from './modules/reviews/reviews.router';
 import wishlistRouter from './modules/wishlist/wishlist.router';
-import couponsRouter from './modules/coupons/coupons.router';
 import notificationsRouter from './modules/notifications/notifications.router';
 import uploadRouter from './modules/upload/upload.router';
 import paymentsRouter from './modules/payments/payments.router';
 import analyticsRouter from './modules/analytics/analytics.router';
 import newsletterRouter from './modules/newsletter/newsletter.router';
+import contentRouter from './modules/content/content.router';
 
 const app = express();
 
@@ -56,12 +56,12 @@ api.use('/orders', ordersRouter);
 api.use('/addresses', addressesRouter);
 api.use('/', reviewsRouter); // /products/:id/reviews va /reviews/:id o'zi ichida to'liq path bilan
 api.use('/wishlist', wishlistRouter);
-api.use('/coupons', couponsRouter);
 api.use('/notifications', notificationsRouter);
 api.use('/upload', uploadRouter);
 api.use('/payments', paymentsRouter);
 api.use('/analytics', analyticsRouter);
 api.use('/newsletter', newsletterRouter);
+api.use('/content', contentRouter);
 
 app.use('/api', api);
 

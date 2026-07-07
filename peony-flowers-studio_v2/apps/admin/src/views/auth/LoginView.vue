@@ -3,9 +3,10 @@ import { Flower2, ArrowLeft } from '@lucide/vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/authStore';
-import AppInput from '../../components/ui/AppInput.vue';
+import PhoneInput from '../../components/ui/PhoneInput.vue';
+import OtpInput from '../../components/ui/OtpInput.vue';
 import AppButton from '../../components/ui/AppButton.vue';
-import logo from '../../assets/images/favicons.svg';
+import logo from '../../assets/images/favicons_gold.svg';
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -58,38 +59,39 @@ async function verify() {
 
 <template>
   <div class="login-page">
-    <main class="login-container">
-      <div class="brand">
-        <img :src="logo" alt="Peony Logo" />
-      </div>
+    <div class="login-container">
+      <main class="card">
+        <div class="brand">
+          <img :src="logo" alt="Peony Logo" width="120" height="40" />
+        </div>
 
-      <div class="card">
+        <button v-if="step === 'otp'" type="button" class="back" @click="backToPhone">
+          <ArrowLeft :size="16" /> Orqaga
+        </button>
+
         <form v-if="step === 'phone'" @submit.prevent="sendOtp">
           <div class="intro">
             <h2>Xush kelibsiz</h2>
             <p>Telefon raqamingizni kiriting</p>
           </div>
-          <AppInput v-model="phone" label="Telefon raqam" placeholder="+998901234567" />
+          <PhoneInput v-model="phone" label="Telefon raqam" v-autofocus/>
           <p v-if="error" class="error">{{ error }}</p>
           <AppButton type="submit" :loading="isLoading">Kod yuborish</AppButton>
         </form>
 
         <form v-else @submit.prevent="verify">
-          <button type="button" class="back" @click="backToPhone">
-            <ArrowLeft :size="16" /> Orqaga
-          </button>
           <div class="intro">
             <h2>Tasdiqlash</h2>
-            <p>Telefoningizga yuborilgan kodni kiriting</p>
+            <p>{{ phone }} raqamiga yuborilgan kodni kiriting</p>
           </div>
-          <AppInput v-model="code" label="Tasdiqlash kodi" placeholder="123456" />
+          <OtpInput style="margin: 0 auto;" v-model="code" :length="6" v-autofocus/>
           <p v-if="error" class="error">{{ error }}</p>
           <AppButton type="submit" :loading="isLoading">Kirish</AppButton>
         </form>
-      </div>
+      </main>
 
       <footer>Peony Flowers Studio © 2026</footer>
-    </main>
+    </div>
   </div>
 </template>
 
@@ -108,26 +110,27 @@ async function verify() {
   max-width: 400px;
 }
 
-.brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 32px;
-}
-
-
-.brand h1 {
-  font-size: 20px;
-  letter-spacing: -0.01em;
-}
-
 .card {
   background: var(--bg-primary);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand h1 {
+  font-size: 20px;
+  letter-spacing: -0.01em;
 }
 
 form {
@@ -163,6 +166,7 @@ form {
   font-size: 12px;
   font-weight: 500;
   padding: 0;
+  margin-top: -8px;
 
   &:hover {
     color: var(--accent);
@@ -176,7 +180,7 @@ form {
 }
 
 footer {
-  margin-top: 32px;
+  margin-top: 24px;
   text-align: center;
   font-size: 12px;
   color: var(--text-secondary);

@@ -3,6 +3,7 @@ import { AppError } from '../../middleware/errorHandler';
 import { canTransition, OrderStatus } from '../../constants/orderStatus';
 import { parsePagination, buildMeta } from '../../utils/pagination';
 import { CreateOrderInput } from './orders.types';
+import { loyaltyService } from '../loyalty/loyalty.service';
 
 const DELIVERY_FEE = 25000;
 
@@ -30,24 +31,8 @@ export const ordersService = {
       return { productId: item.productId, quantity: item.quantity, price };
     });
 
-    let discount = 0;
-    let couponId: string | undefined;
-
-    if (input.couponCode) {
-      const coupon = await prisma.coupon.findUnique({ where: { code: input.couponCode } });
-      if (!coupon || !coupon.isActive) throw new AppError('Kupon topilmadi yoki faol emas', 400);
-      if (coupon.expiresAt && coupon.expiresAt < new Date()) throw new AppError('Kupon muddati o\'tgan', 400);
-      if (subtotal < coupon.minOrderTotal) {
-        throw new AppError(`Minimal buyurtma summasi: ${coupon.minOrderTotal} so'm`, 400);
-      }
-      if (coupon.usageLimit && coupon.usedCount >= coupon.usageLimit) {
-        throw new AppError('Kupon limiti tugagan', 400);
-      }
-      discount = coupon.discountType === 'percent'
-        ? Math.round((subtotal * coupon.discountValue) / 100)
-        : coupon.discountValue;
-      couponId = coupon.id;
-    }
+    const loyalty = await loyaltyService.calculate(userId, subtotal);
+    const discount = loyalty.discount;
 
     const total = subtotal - discount + DELIVERY_FEE;
 
@@ -63,9 +48,10 @@ export const ordersService = {
           giftMessage: input.giftMessage,
           subtotal,
           discount,
+          loyaltyDiscount: loyalty.discount,
+          loyaltyTier: loyalty.tier,
           deliveryFee: DELIVERY_FEE,
           total,
-          couponId,
           items: { create: orderItemsData },
         },
         include: { items: { include: { product: true } } },
@@ -76,10 +62,6 @@ export const ordersService = {
           where: { id: item.productId },
           data: { stock: { decrement: item.quantity } },
         });
-      }
-
-      if (couponId) {
-        await tx.coupon.update({ where: { id: couponId }, data: { usedCount: { increment: 1 } } });
       }
 
       await tx.transaction.create({

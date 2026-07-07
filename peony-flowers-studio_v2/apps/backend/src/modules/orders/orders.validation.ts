@@ -9,7 +9,6 @@ export const createOrderSchema = z.object({
   deliveryDate: z.string().min(1),
   deliveryTime: z.string().min(1),
   giftMessage: z.string().optional(),
-  couponCode: z.string().optional(),
 });
 
 export const updateOrderStatusSchema = z.object({

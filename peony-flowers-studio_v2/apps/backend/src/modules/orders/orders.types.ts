@@ -5,7 +5,6 @@ export interface CreateOrderInput {
   deliveryDate: string;
   deliveryTime: string;
   giftMessage?: string;
-  couponCode?: string;
 }
 
 export interface UpdateOrderStatusInput {

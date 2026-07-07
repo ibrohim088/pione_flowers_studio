@@ -25,7 +25,6 @@ const form = reactive({
   deliveryTime: '',
   giftMessage: '',
   paymentMethod: 'cash' as 'click' | 'cash',
-  couponCode: '',
 });
 
 onMounted(fetchAddresses);
@@ -38,7 +37,6 @@ async function submit() {
     deliveryDate: form.deliveryDate,
     deliveryTime: form.deliveryTime,
     giftMessage: form.giftMessage || undefined,
-    couponCode: form.couponCode || undefined,
   });
 
   cartStore.clear();
@@ -76,10 +74,6 @@ async function submit() {
           <PaymentMethodSelector v-model="form.paymentMethod" />
         </section>
 
-        <section class="block">
-          <h2 class="label-caps block-title">Kupon</h2>
-          <AppInput v-model="form.couponCode" placeholder="Kupon kodi" />
-        </section>
       </div>
 
       <div class="summary-col">

@@ -5,7 +5,7 @@ import { success, created } from '../../utils/apiResponse';
 export const newsletterController = {
   async subscribe(req: Request, res: Response, next: NextFunction) {
     try {
-      const { subscriber, alreadySubscribed } = await newsletterService.subscribe(req.body.email);
+      const { subscriber, alreadySubscribed } = await newsletterService.subscribe(req.body.phone);
       if (alreadySubscribed) {
         return success(res, subscriber, 'Siz allaqachon obuna bo\'lgansiz');
       }
