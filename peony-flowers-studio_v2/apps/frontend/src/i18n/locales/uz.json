@@ -10,13 +10,13 @@
   "hero": {
     "eyebrow": "Yangi to'plam",
     "title": "Tabiiylik va go'zallik uyg'unligi",
-    "subtitle": "Toshkent bo'ylab premium gullar yetkazib berish xizmati. Biz har bir guldastani nafislik va mehr bilan tayyorlaymiz.",
+    "subtitle": "Andijan bo'ylab premium gullar yetkazib berish xizmati. Biz har bir guldastani nafislik va mehr bilan tayyorlaymiz.",
     "cta": "Katalogni ko'rish",
     "aboutLink": "Brend haqida"
   },
   "product": {
     "premiumBadge": "Premium guldastalar",
-    "deliveryPerk": "Toshkent bo'ylab 60 daqiqada yetkazish",
+    "deliveryPerk": "Andijan bo'ylab 60 daqiqada yetkazish",
     "qualityPerk": "Sifat kafolati va yangi gullar",
     "buyNow": "Hoziroq xarid qilish",
     "addToCart": "Savatga qo'shish",
@@ -66,7 +66,7 @@
   "home": {
     "brandStory": {
       "title": "Bizning falsafamiz",
-      "text": "Har bir guldasta — bu kichik bir hikoya. Peony Flowers Studio'da biz faqatgina gullar sotmaymiz, biz sizning his-tuyg'ularingizni ifodalashga yordam beramiz. Premium sifat, o'ziga xos dizayn va Toshkentdagi eng tezkor yetkazib berish xizmati — bularning barchasi sizning quvonchingiz uchun.",
+      "text": "Har bir guldasta — bu kichik bir hikoya. Peony Flowers Studio'da biz faqatgina gullar sotmaymiz, biz sizning his-tuyg'ularingizni ifodalashga yordam beramiz. Premium sifat, o'ziga xos dizayn va Andijandagi eng tezkor yetkazib berish xizmati — bularning barchasi sizning quvonchingiz uchun.",
       "quality": "Sifat kafolati",
       "design": "Eksklyuziv dizayn",
       "delivery": "Tezkor yetkazib berish"
@@ -89,7 +89,10 @@
     "customersCount": "Mamnun mijozlar",
     "servicesTitle": "Xizmatlarimiz",
     "valuesTitle": "Qadriyatlarimiz",
-    "loadError": "Ma'lumotni yuklab bo'lmadi. Birozdan so'ng qayta urinib ko'ring."
+    "loadError": "Ma'lumotni yuklab bo'lmadi. Birozdan so'ng qayta urinib ko'ring.",
+    "locationTitle": "Bizni qanday topish mumkin",
+    "mapError": "Xaritani yuklab bo'lmadi.",
+    "mapOpenExternal": "Google Maps'da ochish"
   },
   "catalog": {
     "title": "Guldastalar katalogi",
@@ -175,7 +178,7 @@
     }
   },
   "footer": {
-    "description": "Toshkentdagi zamonaviy floristika studiyasi. Biz faqat gullar emas, balki his-tuyg'ularni ulashamiz.",
+    "description": "Andijandagi zamonaviy floristika studiyasi. Biz faqat gullar emas, balki his-tuyg'ularni ulashamiz.",
     "shop": "Do'kon",
     "bouquets": "Guldastalar",
     "collaborations": "Kollaboratsiyalar",
@@ -237,7 +240,7 @@
   "delivery": {
     "eyebrow": "Yetkazib berish",
     "title": "Yetkazib berish shartlari",
-    "intro": "Toshkent bo'ylab tezkor va ehtiyotkorlik bilan yetkazib berish xizmati.",
+    "intro": "Andijan bo'ylab tezkor va ehtiyotkorlik bilan yetkazib berish xizmati.",
     "fast": {
       "title": "60 daqiqada",
       "text": "Shahar markazida buyurtmalar o'rtacha 60 daqiqa ichida yetkaziladi."

@@ -9,6 +9,9 @@ const aboutLocaleSchema = z.object({
   customersCount: z.number().int().optional(),
   services: z.array(z.string().min(1)).default([]),
   values: z.array(z.string().min(1)).default([]),
+  address: z.string().min(1).optional(),
+  lat: z.number().optional(),
+  lng: z.number().optional(),
 });
 
 export const upsertContentSchema = z.object({

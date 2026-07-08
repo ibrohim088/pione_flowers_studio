@@ -12,6 +12,9 @@ export interface AboutContent {
   customersCount?: number;
   services: string[];
   values: string[];
+  address?: string;
+  lat?: number;
+  lng?: number;
 }
 
 export type LocalizedContent<T> = Record<ContentLocale, T>;
