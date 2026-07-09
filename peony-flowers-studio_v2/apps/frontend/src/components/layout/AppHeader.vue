@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router';
 import { useCartStore } from '../../stores/cartStore';
 import { useAuthStore } from '../../stores/authStore';
 import { useUiStore } from '../../stores/uiStore';
+import { useWishlistStore } from '../../stores/wishlistStore';
 import MobileMenu from './MobileMenu.vue';
 import AppSelect from '../ui/AppSelect.vue';
 import Logo from '../../assets/images/favicons_gold.svg'
@@ -11,6 +12,7 @@ import Logo from '../../assets/images/favicons_gold.svg'
 const cartStore = useCartStore();
 const authStore = useAuthStore();
 const uiStore = useUiStore();
+const wishlistStore = useWishlistStore();
 const mobileMenuOpen = ref(false);
 
 const localeOptions = [
@@ -43,6 +45,7 @@ const localeOptions = [
 
         <RouterLink v-if="authStore.isAuthenticated" to="/account/wishlist" class="icon-btn">
           <span class="material-symbols-outlined">favorite</span>
+          <span v-if="wishlistStore.totalItems" class="badge">{{ wishlistStore.totalItems }}</span>
         </RouterLink>
 
         <RouterLink to="/cart" class="icon-btn">
@@ -187,9 +190,12 @@ const localeOptions = [
   position: absolute;
   top: -6px;
   right: -8px;
+  z-index: 2;
   background: var(--color-primary);
-  color: white;
+  color: #ffffff;
+  font-family: var(--font-body);
   font-size: 10px;
+  line-height: 1;
   font-weight: 700;
   min-width: 16px;
   height: 16px;
@@ -198,5 +204,6 @@ const localeOptions = [
   align-items: center;
   justify-content: center;
   padding: 0 3px;
+  pointer-events: none;
 }
 </style>

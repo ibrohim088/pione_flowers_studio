@@ -112,6 +112,8 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 .store-map {
   position: relative;
+  isolation: isolate;
+  z-index: 0;
   width: 100%;
   aspect-ratio: 4 / 3;
   min-height: 420px;
@@ -175,6 +177,17 @@ onBeforeUnmount(() => {
   font-family: var(--font-body);
   background: var(--color-surface-container-low);
 }
+
+// Leaflet o'zining ichki boshqaruv elementlariga (zoom tugmalari, attribution)
+// standart holda z-index: 1000 beradi — bu saytning header'i (z-index: 50)
+// dan ancha katta. .store-map konteyneri isolate qilingani uchun bu qiymatlar
+// tashqariga chiqib keta olmaydi, lekin baribir xavfsizlik uchun pastroq
+// (lekin xarita ichida hamon eng tepada) qiymatga tushiramiz.
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 10;
+}
+
 .leaflet-control-attribution {
   background: color-mix(in srgb, var(--color-surface) 80%, transparent) !important;
   color: var(--color-on-surface-variant) !important;

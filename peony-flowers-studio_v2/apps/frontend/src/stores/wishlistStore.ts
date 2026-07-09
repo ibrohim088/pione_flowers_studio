@@ -22,6 +22,10 @@ export const useWishlistStore = defineStore('wishlist', {
     productIds: loadGuestWishlist() as string[],
   }),
 
+  getters: {
+    totalItems: (state) => state.productIds.length,
+  },
+
   actions: {
     async toggle(productId: string) {
       const authStore = useAuthStore();

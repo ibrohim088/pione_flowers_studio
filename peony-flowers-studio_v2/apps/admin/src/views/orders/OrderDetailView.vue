@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { api } from '../../lib/api';
 import { useAdminOrders } from '../../composables/useAdminOrders';
@@ -12,16 +12,39 @@ const route = useRoute();
 const { updateStatus } = useAdminOrders();
 const order = ref<any>(null);
 const isLoading = ref(false);
+const isUpdatingStatus = ref(false);
+const statusError = ref<string | null>(null);
 
-const statusOptions = [
-  { label: 'Kutilmoqda', value: 'pending' },
-  { label: 'Tasdiqlandi', value: 'confirmed' },
-  { label: 'Tayyorlanmoqda', value: 'preparing' },
-  { label: 'Tayyor', value: 'ready' },
-  { label: 'Yetkazilmoqda', value: 'delivering' },
-  { label: 'Yetkazildi', value: 'delivered' },
-  { label: 'Bekor qilindi', value: 'cancelled' },
-];
+const STATUS_LABELS: Record<string, string> = {
+  pending: 'Kutilmoqda',
+  confirmed: 'Tasdiqlandi',
+  preparing: 'Tayyorlanmoqda',
+  ready: 'Tayyor',
+  delivering: 'Yetkazilmoqda',
+  delivered: 'Yetkazildi',
+  cancelled: 'Bekor qilindi',
+};
+
+// Backenddagi ORDER_STATUS_TRANSITIONS bilan bir xil — faqat haqiqatan
+// ruxsat etilgan keyingi statuslar ko'rsatiladi, aks holda server 400
+// qaytaradi va tanlov "ishlamay qoladi".
+const ORDER_STATUS_TRANSITIONS: Record<string, string[]> = {
+  pending: ['confirmed', 'cancelled'],
+  confirmed: ['preparing', 'cancelled'],
+  preparing: ['ready', 'cancelled'],
+  ready: ['delivering', 'cancelled'],
+  delivering: ['delivered'],
+  delivered: [],
+  cancelled: [],
+};
+
+const statusOptions = computed(() => {
+  if (!order.value) return [];
+  const current = order.value.status as string;
+  const next = ORDER_STATUS_TRANSITIONS[current] ?? [];
+  const values = [current, ...next];
+  return values.map((value) => ({ label: STATUS_LABELS[value] ?? value, value }));
+});
 
 async function load() {
   isLoading.value = true;
@@ -36,8 +59,17 @@ async function load() {
 onMounted(load);
 
 async function changeStatus(status: string) {
-  await updateStatus(order.value.id, status);
-  await load();
+  if (!order.value || status === order.value.status) return;
+  statusError.value = null;
+  isUpdatingStatus.value = true;
+  try {
+    await updateStatus(order.value.id, status);
+    await load();
+  } catch (err: any) {
+    statusError.value = err.response?.data?.message ?? 'Statusni o\'zgartirib bo\'lmadi';
+  } finally {
+    isUpdatingStatus.value = false;
+  }
 }
 </script>
 
@@ -55,6 +87,8 @@ async function changeStatus(status: string) {
       <div class="section">
         <strong>Status:</strong>
         <AppSelect :model-value="order.status" :options="statusOptions" @update:model-value="changeStatus" />
+        <p v-if="isUpdatingStatus" class="status-hint">Yangilanmoqda...</p>
+        <p v-if="statusError" class="status-error">{{ statusError }}</p>
       </div>
 
       <div class="section">
@@ -75,6 +109,8 @@ async function changeStatus(status: string) {
 
 <style scoped lang="scss">
 .section { margin: 16px 0; }
+.status-hint { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+.status-error { font-size: 13px; color: var(--danger); margin-top: 4px; }
 .items { margin: 20px 0; display: flex; flex-direction: column; gap: 8px; }
 .item { display: flex; justify-content: space-between; }
 .total { font-size: 18px; font-weight: 700; color: var(--accent); }

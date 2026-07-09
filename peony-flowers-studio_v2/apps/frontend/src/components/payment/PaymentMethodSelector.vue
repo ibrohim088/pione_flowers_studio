@@ -1,13 +1,20 @@
 <script setup lang="ts">
-defineProps<{ modelValue: string }>();
+const props = defineProps<{ modelValue: string; deliveryMethod?: 'delivery' | 'pickup' }>();
 defineEmits<{ 'update:modelValue': [value: string] }>();
 
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 const methods = computed(() => [
-  { value: 'cash', label: t('checkout.cash'), icon: 'payments', desc: t('checkout.cashDesc') },
-  { value: 'click', label: 'Click', icon: 'credit_card', desc: t('checkout.clickDesc') },
+  {
+    value: 'cash',
+    label: t('checkout.cash'),
+    icon: 'payments',
+    desc: props.deliveryMethod === 'pickup' ? t('checkout.cashDescPickup') : t('checkout.cashDesc'),
+  },
+  // Click, Payme, Uzum va boshqa to'lov tizimlari uchun hali merchant
+  // kalitlari (API keys) mavjud emas. Kalitlar tayyor bo'lgach, shu yerga
+  // qo'shiladi (masalan: { value: 'click', label: 'Click', icon: 'credit_card', desc: ... }).
 ]);
 </script>
 
