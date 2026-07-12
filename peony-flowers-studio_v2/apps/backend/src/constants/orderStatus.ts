@@ -12,7 +12,8 @@ export type OrderStatus = (typeof ORDER_STATUSES)[number];
 /** Ruxsat etilgan status o'tishlari (state machine). */
 export const ORDER_STATUS_TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
   pending: ['confirmed', 'cancelled'],
-  confirmed: ['preparing', 'cancelled'],
+  // confirmed: ['preparing', 'cancelled'],
+  confirmed: ['preparing', 'ready', 'cancelled'],
   preparing: ['ready', 'cancelled'],
   ready: ['delivering', 'cancelled'],
   delivering: ['delivered'],

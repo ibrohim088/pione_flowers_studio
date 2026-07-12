@@ -19,6 +19,16 @@ export function useOrders() {
     }
   }
 
+  /** Fonda, spinner chiqarmasdan yangilash — pollingda ishlatiladi. */
+  async function refreshOrdersSilently() {
+    try {
+      const { data } = await api.get('/orders');
+      orders.value = data.data;
+    } catch {
+      // Fon yangilanishida xatoni jim o'tkazamiz.
+    }
+  }
+
   async function createOrder(payload: Record<string, unknown>) {
     const { data } = await api.post('/orders', payload);
     return data.data;
@@ -29,5 +39,5 @@ export function useOrders() {
     return data.data;
   }
 
-  return { orders, isLoading, error, fetchOrders, createOrder, cancelOrder };
+  return { orders, isLoading, error, fetchOrders, refreshOrdersSilently, createOrder, cancelOrder };
 }

@@ -60,6 +60,20 @@ export const ordersController = {
     } catch (err) { return next(err); }
   },
 
+  async availableForPickup(req: Request, res: Response, next: NextFunction) {
+    try {
+      const orders = await ordersService.availableForPickup();
+      return success(res, orders);
+    } catch (err) { return next(err); }
+  },
+
+  async acceptDelivery(req: Request, res: Response, next: NextFunction) {
+    try {
+      const order = await ordersService.acceptDelivery(req.params.id!, req.user!.userId);
+      return success(res, order, 'Buyurtma qabul qilindi');
+    } catch (err) { return next(err); }
+  },
+
   async courierToday(req: Request, res: Response, next: NextFunction) {
     try {
       const orders = await ordersService.courierToday(req.user!.userId);

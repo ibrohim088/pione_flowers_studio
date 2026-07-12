@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const updateMeSchema = z.object({
   fullName: z.string().min(2).optional(),
-  email: z.string().email().optional(),
+  email: z.union([z.string().email(), z.literal('')]).optional(),
 });
 
 export const adminUpdateUserSchema = updateMeSchema.extend({

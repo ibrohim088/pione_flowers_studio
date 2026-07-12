@@ -7,6 +7,13 @@ export function formatDate(date: string | Date): string {
   return d.toLocaleDateString('uz-UZ', { day: '2-digit', month: 'long', year: 'numeric' });
 }
 
+export function formatDateTime(date: string | Date): string {
+  const d = new Date(date);
+  const datePart = d.toLocaleDateString('uz-UZ', { day: '2-digit', month: 'long', year: 'numeric' });
+  const timePart = d.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' });
+  return `${datePart}, ${timePart}`;
+}
+
 export function debounce<T extends (...args: any[]) => void>(fn: T, delay = 400) {
   let timer: ReturnType<typeof setTimeout>;
   return (...args: Parameters<T>) => {

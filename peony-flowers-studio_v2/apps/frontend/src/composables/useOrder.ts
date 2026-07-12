@@ -19,5 +19,15 @@ export function useOrder() {
     }
   }
 
-  return { order, isLoading, error, fetchById };
+  /** Fonda, spinner chiqarmasdan yangilash — pollingda ishlatiladi. */
+  async function refreshSilently(id: string) {
+    try {
+      const { data } = await api.get(`/orders/${id}`);
+      order.value = data.data;
+    } catch {
+      // Fon yangilanishida xatoni jim o'tkazamiz — foydalanuvchini bezovta qilmaslik uchun.
+    }
+  }
+
+  return { order, isLoading, error, fetchById, refreshSilently };
 }

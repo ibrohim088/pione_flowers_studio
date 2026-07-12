@@ -17,9 +17,14 @@ function saveGuestWishlist(ids: string[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
 }
 
+function clearGuestWishlist() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
 export const useWishlistStore = defineStore('wishlist', {
   state: () => ({
-    productIds: loadGuestWishlist() as string[],
+    productIds: [] as string[],
+    isReady: false,
   }),
 
   getters: {
@@ -50,6 +55,30 @@ export const useWishlistStore = defineStore('wishlist', {
     async syncFromBackend() {
       const { data } = await api.get('/wishlist');
       this.productIds = data.data.map((i: any) => i.productId);
+    },
+
+    async migrateGuestWishlist() {
+      const guestIds = loadGuestWishlist();
+      if (guestIds.length > 0) {
+        await Promise.all(guestIds.map((productId) => api.post(`/wishlist/${productId}`)));
+      }
+      clearGuestWishlist();
+      await this.syncFromBackend();
+    },
+
+    async init() {
+      const authStore = useAuthStore();
+      if (authStore.isAuthenticated) {
+        await this.syncFromBackend();
+      } else {
+        this.productIds = loadGuestWishlist();
+      }
+      this.isReady = true;
+    },
+
+    reset() {
+      this.productIds = [];
+      clearGuestWishlist();
     },
   },
 });

@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/authStore';
 
 const authStore = useAuthStore();
+const router = useRouter();
+
+async function handleLogout() {
+  await authStore.logout();
+  router.push('/');
+}
 
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -21,7 +27,7 @@ const links = computed(() => [
   <aside class="sidebar">
     <div class="profile-summary">
       <div class="avatar">{{ (authStore.user?.fullName || 'M').charAt(0).toUpperCase() }}</div>
-      <div>
+      <div class="info">
         <p class="body-md name">{{ authStore.user?.fullName || $t('account.guest') }}</p>
         <p class="label-sm phone">{{ authStore.user?.phone }}</p>
       </div>
@@ -39,7 +45,7 @@ const links = computed(() => [
         <span class="material-symbols-outlined">{{ link.icon }}</span>
         {{ link.label }}
       </RouterLink>
-      <button class="link logout label-sm" type="button" @click="authStore.logout()">
+      <button class="link logout label-sm" type="button" @click="handleLogout">
         <span class="material-symbols-outlined">logout</span>
         {{ $t('account.sidebar.logout') }}
       </button>
@@ -55,7 +61,7 @@ const links = computed(() => [
   width: 100%;
 
   @media (min-width: 768px) {
-    width: 260px;
+    width: 240px;
     flex-shrink: 0;
     position: sticky;
     top: 100px;
@@ -80,10 +86,18 @@ const links = computed(() => [
   font-weight: 700;
   flex-shrink: 0;
 }
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
 .name {
+  margin: 0;
   font-weight: 700;
 }
 .phone {
+  margin: 0;
   color: var(--color-on-surface-variant);
 }
 .links {

@@ -39,6 +39,8 @@ router.post(
 );
 
 // Courier
+router.get('/courier/available', requireRole('courier', 'admin'), ordersController.availableForPickup);
+router.patch('/:id/accept', requireRole('courier', 'admin'), validate({ params: orderIdParamSchema }), ordersController.acceptDelivery);
 router.get('/courier/today', requireRole('courier', 'admin'), ordersController.courierToday);
 router.patch('/:id/delivered', requireRole('courier', 'admin'), validate({ params: orderIdParamSchema }), ordersController.markDelivered);
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/authStore';
 import { useUiStore } from '../../stores/uiStore';
 import AppSelect from '../ui/AppSelect.vue';
@@ -9,15 +9,17 @@ defineEmits<{ close: [] }>();
 
 const authStore = useAuthStore();
 const uiStore = useUiStore();
+const router = useRouter();
 
 const localeOptions = [
   { label: 'UZ', value: 'uz' },
   { label: 'RU', value: 'ru' },
 ];
 
-function onLogout(close: () => void) {
-  authStore.logout();
+async function onLogout(close: () => void) {
+  await authStore.logout();
   close();
+  router.push('/');
 }
 </script>
 

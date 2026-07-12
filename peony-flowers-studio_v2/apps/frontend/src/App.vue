@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import AppHeader from './components/layout/AppHeader.vue';
 import AppFooter from './components/layout/AppFooter.vue';
+import { useWishlistStore } from './stores/wishlistStore';
 
 const route = useRoute();
+const wishlistStore = useWishlistStore();
 
 const isBare = computed(() => !!route.meta.bare);
+
+onMounted(() => {
+  wishlistStore.init();
+});
 </script>
 
 <template>

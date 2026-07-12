@@ -10,7 +10,7 @@ function setRefreshCookie(res: Response, token: string) {
   res.cookie(REFRESH_COOKIE_NAME, token, {
     httpOnly: true,
     secure: env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    sameSite: env.NODE_ENV === 'production' ? 'strict' : 'lax',
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 kun
   });
 }
@@ -73,4 +73,3 @@ export const authController = {
     }
   },
 };
-

@@ -96,10 +96,11 @@ export const ordersService = {
     const order = await prisma.order.findUnique({
       where: { id },
       include: {
-        items: { include: { product: true } },
+        items: { include: { product: { include: { images: true } } } },
         address: true,
         transaction: true,
         user: { select: { id: true, fullName: true, phone: true } },
+        courier: { select: { id: true, fullName: true, phone: true } },
       },
     });
     if (!order) throw new AppError('Buyurtma topilmadi', 404);
@@ -142,9 +143,18 @@ export const ordersService = {
   async updateStatus(id: string, newStatus: OrderStatus) {
     const order = await prisma.order.findUnique({ where: { id } });
     if (!order) throw new AppError('Buyurtma topilmadi', 404);
+
+    if (newStatus === 'delivering' || newStatus === 'delivered') {
+      throw new AppError(
+        'Bu statusni faqat kuryer o\'zi belgilashi mumkin (buyurtmani qabul qilish / yetkazildi tugmalari orqali)',
+        400
+      );
+    }
+
     if (!canTransition(order.status as OrderStatus, newStatus)) {
       throw new AppError(`"${order.status}" dan "${newStatus}" ga o'tish mumkin emas`, 400);
     }
+
     return prisma.order.update({ where: { id }, data: { status: newStatus } });
   },
 
@@ -168,6 +178,29 @@ export const ordersService = {
     });
   },
 
+  async availableForPickup() {
+    return prisma.order.findMany({
+      where: { status: 'ready', courierId: null, addressId: { not: null } },
+      include: { address: true, user: { select: { fullName: true, phone: true } } },
+      orderBy: { deliveryDate: 'asc' },
+    });
+  },
+
+  async acceptDelivery(id: string, courierId: string) {
+    const order = await prisma.order.findUnique({ where: { id } });
+    if (!order) throw new AppError('Buyurtma topilmadi', 404);
+    if (order.status !== 'ready') {
+      throw new AppError('Bu buyurtma hali yetkazishga tayyor emas', 400);
+    }
+    if (order.courierId) {
+      throw new AppError('Bu buyurtmani boshqa kuryer allaqachon qabul qilgan', 400);
+    }
+    return prisma.order.update({
+      where: { id },
+      data: { status: 'delivering', courierId },
+    });
+  },
+
   async courierToday(courierId: string) {
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
@@ -187,6 +220,9 @@ export const ordersService = {
   async markDelivered(id: string, courierId: string) {
     const order = await prisma.order.findUnique({ where: { id } });
     if (!order) throw new AppError('Buyurtma topilmadi', 404);
+    if (order.courierId !== courierId) {
+      throw new AppError('Bu buyurtma sizga tayinlanmagan', 403);
+    }
     if (!canTransition(order.status as OrderStatus, 'delivered')) {
       throw new AppError('Bu buyurtma yetkazildi deb belgilanishi mumkin emas', 400);
     }

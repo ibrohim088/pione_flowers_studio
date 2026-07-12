@@ -25,15 +25,16 @@ const STATUS_LABELS: Record<string, string> = {
   cancelled: 'Bekor qilindi',
 };
 
-// Backenddagi ORDER_STATUS_TRANSITIONS bilan bir xil — faqat haqiqatan
-// ruxsat etilgan keyingi statuslar ko'rsatiladi, aks holda server 400
-// qaytaradi va tanlov "ishlamay qoladi".
+// Backenddagi ORDER_STATUS_TRANSITIONS bilan bir xil, LEKIN admin panelidan
+// faqat 'ready' gacha bo'lgan bosqichlarni o'zgartirish mumkin. 'delivering'
+// (kuryer o'zi qabul qiladi) va 'delivered' (kuryer o'zi belgilaydi) statuslari
+// bu yerdan chiqarib tashlangan — bularni faqat kuryer o'z ilovasida amalga oshiradi.
 const ORDER_STATUS_TRANSITIONS: Record<string, string[]> = {
   pending: ['confirmed', 'cancelled'],
   confirmed: ['preparing', 'cancelled'],
   preparing: ['ready', 'cancelled'],
-  ready: ['delivering', 'cancelled'],
-  delivering: ['delivered'],
+  ready: ['cancelled'],
+  delivering: [],
   delivered: [],
   cancelled: [],
 };
@@ -85,10 +86,35 @@ async function changeStatus(status: string) {
       </div>
 
       <div class="section">
+        <strong>Yetkazib berish:</strong>
+        <template v-if="order.address">
+          <p class="address">
+            {{ order.address.city }}<template v-if="order.address.district">, {{ order.address.district }}</template>,
+            {{ order.address.street }}<template v-if="order.address.house"> {{ order.address.house }}</template>
+          </p>
+          <p v-if="order.address.entrance || order.address.floor || order.address.apartment" class="address-extra">
+            <template v-if="order.address.entrance">Podyezd: {{ order.address.entrance }} </template>
+            <template v-if="order.address.floor">Qavat: {{ order.address.floor }} </template>
+            <template v-if="order.address.apartment">Xonadon: {{ order.address.apartment }}</template>
+          </p>
+          <p v-if="order.address.landmark" class="address-extra">Mo'ljal: {{ order.address.landmark }}</p>
+        </template>
+        <p v-else class="address-pickup">Do'kondan olib ketish (o'zi olib ketadi)</p>
+        <p>Yetkazish sanasi: {{ order.deliveryDate?.slice(0, 10) }}, {{ order.deliveryTime }}</p>
+      </div>
+
+      <div class="section">
         <strong>Status:</strong>
         <AppSelect :model-value="order.status" :options="statusOptions" @update:model-value="changeStatus" />
         <p v-if="isUpdatingStatus" class="status-hint">Yangilanmoqda...</p>
         <p v-if="statusError" class="status-error">{{ statusError }}</p>
+        <p v-if="order.status === 'ready'" class="status-hint">
+          Buyurtma tayyor — kuryer uni o'z ilovasidan qabul qilishi kutilmoqda.
+        </p>
+
+        <div v-if="(order.status === 'delivering' || order.status === 'delivered') && order.courier" class="section">
+          <strong>Kuryer:</strong> {{ order.courier.fullName }} ({{ order.courier.phone }})
+        </div>
       </div>
 
       <div class="section">
@@ -114,4 +140,7 @@ async function changeStatus(status: string) {
 .items { margin: 20px 0; display: flex; flex-direction: column; gap: 8px; }
 .item { display: flex; justify-content: space-between; }
 .total { font-size: 18px; font-weight: 700; color: var(--accent); }
+.address { color: var(--text-primary); margin: 4px 0; }
+.address-extra { color: var(--text-secondary); font-size: 13px; margin: 2px 0; }
+.address-pickup { color: var(--accent); margin: 4px 0; }
 </style>

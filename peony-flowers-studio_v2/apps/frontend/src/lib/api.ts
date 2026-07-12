@@ -1,13 +1,20 @@
 import axios from 'axios';
 import { useAuthStore } from '../stores/authStore';
+import { router } from '../router';
+import { getApiBase } from './apiBase';
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL + '/api',
   withCredentials: true, // httpOnly refresh token cookie uchun shart
 });
 
-// So'rovga access token qo'shish
-api.interceptors.request.use((config) => {
+// Har so'rovdan oldin: backend manzilini aniqlaydi (localhost ishlasa — shu,
+// bo'lmasa tarmoq IP'siga o'tadi) va token qo'shadi. getApiBase() natijani
+// keshlaydi, shuning uchun bu faqat birinchi so'rovda real tekshiruv qiladi.
+api.interceptors.request.use(async (config) => {
+  if (!config.baseURL) {
+    config.baseURL = `${await getApiBase()}/api`;
+  }
+
   const authStore = useAuthStore();
   if (authStore.accessToken) {
     config.headers.Authorization = `Bearer ${authStore.accessToken}`;
@@ -41,7 +48,10 @@ api.interceptors.response.use(
         pendingQueue = [];
         return api(originalRequest);
       } catch (refreshError) {
-        authStore.logout();
+        await authStore.logout();
+        if (router.currentRoute.value.meta.requiresAuth) {
+          router.push('/');
+        }
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

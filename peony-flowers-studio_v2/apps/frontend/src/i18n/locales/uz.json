@@ -30,7 +30,7 @@
     "deliveryTime": "Yetkazish vaqti",
     "giftMessage": "Tabrik matni",
     "paymentMethod": "To'lov usuli",
-    "click": "Click orqali",
+    "click": "Onlayn to'lov",
     "cash": "Naqd pul",
     "submit": "Buyurtma berish",
     "delivery": "Yetkazib berish",
@@ -160,11 +160,33 @@
     "orderDetail": {
       "title": "Buyurtma",
       "total": "Jami",
-      "cancel": "Bekor qilish"
+      "cancel": "Bekor qilish",
+      "selfPickup": "Do'kondan olib ketish",
+      "back": "Buyurtmalarim",
+      "items": "Mahsulotlar",
+      "summary": "Buyurtma xulosasi",
+      "subtotal": "Mahsulotlar summasi",
+      "discount": "Chegirma",
+      "loyaltyDiscount": "Sodiqlik chegirmasi",
+      "deliveryFee": "Yetkazish narxi",
+      "courier": "Kuryer",
+      "orderedOn": "Buyurtma sanasi",
+      "notFound": "Buyurtma topilmadi",
+      "paymentStatusLabel": "Holati",
+      "copyId": "Buyurtma raqamini nusxalash",
+      "copied": "Nusxalandi",
+      "callCourier": "Kuryerga qo'ng'iroq qilish",
+      "cancelConfirmTitle": "Buyurtmani bekor qilasizmi?",
+      "cancelConfirmBody": "Bu amalni ortga qaytarib bo'lmaydi. Buyurtma butunlay bekor qilinadi.",
+      "cancelConfirmYes": "Ha, bekor qilish",
+      "cancelConfirmNo": "Yo'q, qoldirish",
+      "cancelling": "Bekor qilinmoqda…"
     },
     "orders": {
       "title": "Buyurtmalarim",
       "empty": "Hozircha buyurtmalar yo'q",
+      "emptyFiltered": "Bu statusda buyurtma yo'q",
+      "all": "Barchasi",
       "itemsCount": "ta mahsulot"
     },
     "personalInfo": {
@@ -202,7 +224,7 @@
   },
   "paymentStatus": {
     "pending": "Kutilmoqda",
-    "pending_cash": "Naqd (kutilmoqda)",
+    "pending_cash": "Kutilmoqda",
     "paid": "To'landi",
     "failed": "Xato",
     "refunded": "Qaytarildi"
@@ -265,8 +287,47 @@
       "text": "Buyurtmani qabul qilishda kuryerga naqd to'lov qilishingiz mumkin."
     },
     "click": {
-      "text": "Click orqali onlayn, xavfsiz va tezkor to'lov."
+      "title": "Onlayn to'lov",
+      "text": "Bank kartangiz orqali onlayn, xavfsiz va tezkor to'lov qiling."
     },
-    "note": "Barcha onlayn to'lovlar xavfsiz ulanish orqali amalga oshiriladi."
+    "note": "Barcha onlayn to'lovlar xavfsiz ulanish orqali amalga oshiriladi. Karta ma'lumotlaringiz saytimizda saqlanmaydi.",
+    "stepsTitle": "Onlayn to'lov qanday amalga oshiriladi?",
+    "steps": {
+      "step1": {
+        "title": "Buyurtmani rasmiylashtiring",
+        "text": "Savatchani to'ldiring va yetkazib berish manzilini kiriting."
+      },
+      "step2": {
+        "title": "To'lov usulini tanlang",
+        "text": "\"Onlayn to'lov\" bandini belgilang va davom eting tugmasini bosing."
+      },
+      "step3": {
+        "title": "Karta ma'lumotlarini kiriting",
+        "text": "Xavfsiz to'lov sahifasida karta raqami va SMS-kodni kiriting."
+      },
+      "step4": {
+        "title": "Tasdiqlash",
+        "text": "To'lov muvaffaqiyatli amalga oshirilgach, buyurtmangiz qabul qilinadi."
+      }
+    },
+    "faqTitle": "Ko'p beriladigan savollar",
+    "faq": {
+      "q1": {
+        "question": "Qaysi kartalar qabul qilinadi?",
+        "answer": "Uzcard va Humo kartalari orqali to'lov qilishingiz mumkin."
+      },
+      "q2": {
+        "question": "To'lov xavfsizmi?",
+        "answer": "Ha, to'lovlar shifrlangan ulanish orqali amalga oshiriladi va karta ma'lumotlari saytimizda saqlanmaydi."
+      },
+      "q3": {
+        "question": "Buyurtmani bekor qilsam, pulim qaytariladimi?",
+        "answer": "Ha, buyurtma bekor qilinganda mablag' 3-7 ish kuni ichida kartangizga qaytariladi."
+      },
+      "q4": {
+        "question": "Yetkazib berishda naqd to'lasam bo'ladimi?",
+        "answer": "Albatta, buyurtma berishda \"Naqd pul\" usulini tanlashingiz kifoya."
+      }
+    }
   }
 }

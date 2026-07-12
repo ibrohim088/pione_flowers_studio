@@ -11,7 +11,8 @@ export const usersService = {
   },
 
   async updateMe(userId: string, data: UpdateUserInput) {
-    return prisma.user.update({ where: { id: userId }, data });
+    const payload = { ...data, email: data.email === '' ? null : data.email };
+    return prisma.user.update({ where: { id: userId }, data: payload });
   },
 
   async deleteMe(userId: string) {

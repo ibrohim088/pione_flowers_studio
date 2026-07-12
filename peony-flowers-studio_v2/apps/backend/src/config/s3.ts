@@ -1,8 +1,10 @@
 import { S3Client } from '@aws-sdk/client-s3';
 import { env } from './env';
 
+export const S3_REGION = env.S3_REGION || 'us-east-1';
+
 export const s3Client = new S3Client({
-  region: env.S3_REGION || 'auto',
+  region: S3_REGION,
   credentials: {
     accessKeyId: env.S3_ACCESS_KEY_ID || '',
     secretAccessKey: env.S3_SECRET_ACCESS_KEY || '',
@@ -10,3 +12,17 @@ export const s3Client = new S3Client({
 });
 
 export const S3_BUCKET = env.S3_BUCKET_NAME || '';
+
+
+// import { S3Client } from '@aws-sdk/client-s3';
+// import { env } from './env';
+
+// export const s3Client = new S3Client({
+//   region: env.S3_REGION || 'auto',
+//   credentials: {
+//     accessKeyId: env.S3_ACCESS_KEY_ID || '',
+//     secretAccessKey: env.S3_SECRET_ACCESS_KEY || '',
+//   },
+// });
+
+// export const S3_BUCKET = env.S3_BUCKET_NAME || '';

@@ -16,9 +16,30 @@ router.beforeEach((to, _from, next) => {
   }
 
   const allowedRoles = to.meta.roles as string[] | undefined;
-  if (allowedRoles && authStore.user && !allowedRoles.includes(authStore.user.role)) {
-    return next({ name: 'login' });
+  if (allowedRoles) {
+    const role = authStore.user?.role;
+    if (!role || !allowedRoles.includes(role)) {
+      if (authStore.isFlorist) return next({ name: 'florist-queue' });
+      if (authStore.isCourier) return next({ name: 'courier-today' });
+      return next({ name: 'login' });
+    }
   }
 
   return next();
 });
+
+
+// router.beforeEach((to, _from, next) => {
+//   const authStore = useAuthStore();
+
+//   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+//     return next({ name: 'login' });
+//   }
+
+//   const allowedRoles = to.meta.roles as string[] | undefined;
+//   if (allowedRoles && authStore.user && !allowedRoles.includes(authStore.user.role)) {
+//     return next({ name: 'login' });
+//   }
+
+//   return next();
+// });
