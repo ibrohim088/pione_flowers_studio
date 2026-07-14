@@ -76,7 +76,8 @@ async function onSave() {
               @update:model-value="(v: string) => (data[locale].customersCount = v ? Number(v) : undefined)" />
           </div>
 
-          <AppInput v-model="data[locale].address" label="Manzil (do'kon joylashuvi)" />
+          <AppInput :model-value="data[locale].address ?? ''" label="Manzil (do'kon joylashuvi)"
+            @update:model-value="(v: string) => (data[locale].address = v)" />
 
           <div class="row">
             <AppInput :model-value="String(data[locale].lat ?? '')" label="Kenglik (latitude)" type="number"

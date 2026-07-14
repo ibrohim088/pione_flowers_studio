@@ -40,7 +40,7 @@ onMounted(() => {
 });
 
 const aboutContent = computed<AboutContent | null>(
-  () => (contentStore.cache[`about:${locale.value}`] as AboutContent) ?? null
+  () => (contentStore.cache[`about:${locale.value}`] as unknown as AboutContent) ?? null
 );
 
 const addressModalOpen = ref(false);
