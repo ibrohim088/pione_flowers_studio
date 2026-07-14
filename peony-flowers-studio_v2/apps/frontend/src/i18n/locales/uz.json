@@ -134,7 +134,7 @@
       "orders": "Buyurtmalar",
       "addresses": "Manzillar",
       "wishlist": "Sevimlilar",
-      "notifications": "Bildirishnomalar",
+      "notifications": "Xabarlar",
       "logout": "Chiqish"
     },
     "addresses": {
@@ -153,9 +153,9 @@
       "delete": "O'chirish"
     },
     "notifications": {
-      "title": "Bildirishnomalar",
+      "title": "Xabarlar",
       "markAllRead": "Barchasini o'qilgan deb belgilash",
-      "empty": "Bildirishnomalar yo'q"
+      "empty": "Xabarlar yo'q"
     },
     "orderDetail": {
       "title": "Buyurtma",

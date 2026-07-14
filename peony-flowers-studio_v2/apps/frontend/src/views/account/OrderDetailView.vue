@@ -231,12 +231,17 @@ const priceBreakdown = computed(() => {
 }
 
 .order-header {
+  position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--stack-md);
   margin-bottom: var(--stack-lg);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+.heading-block {
+  min-width: 0;
+  padding-right: 96px;
 }
 .order-id {
   font-family: inherit;
@@ -250,9 +255,30 @@ const priceBreakdown = computed(() => {
   margin-bottom: 4px;
 }
 .status-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
   flex-shrink: 0;
   padding: 6px 16px;
   font-size: 11px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .heading-block {
+    padding-right: 84px;
+  }
+  .status-badge {
+    padding: 4px 10px;
+    font-size: 9px;
+  }
+  .ordered-on {
+    font-size: 11px;
+  }
+  .order-header .headline-md {
+    font-size: 18px;
+    line-height: 1.3;
+  }
 }
 
 .cancelled-banner {
@@ -275,6 +301,12 @@ const priceBreakdown = computed(() => {
   padding: 0;
   margin: 0;
   overflow-x: auto;
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE/Edge
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari — mobil brauzerlardagi pastki scroll-barni yo'qotish
+  }
 }
 .stepper-item {
   flex: 1;
@@ -505,4 +537,51 @@ const priceBreakdown = computed(() => {
 .not-found {
   color: var(--color-on-surface-variant);
 }
-</style>
+
+// --- Mobil ekranlar uchun kichikroq matn o'lchamlari ---
+@media (max-width: 600px) {
+  .hero-panel,
+  .panel {
+    padding: var(--stack-md);
+  }
+
+  .stepper-item {
+    min-width: 64px;
+  }
+  .stepper-dot {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 6px;
+
+    .material-symbols-outlined { font-size: 12px; }
+  }
+  .stepper-label {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .panel-title {
+    font-size: 15px;
+  }
+  .item-thumb {
+    width: 44px;
+    height: 44px;
+  }
+  .item-title {
+    font-size: 13px;
+  }
+  .item-qty {
+    font-size: 11px;
+  }
+  .item-total {
+    font-size: 13px;
+  }
+
+  .summary-row {
+    font-size: 12px;
+  }
+  .total-value {
+    font-size: 15px;
+  }
+}
+</style> 

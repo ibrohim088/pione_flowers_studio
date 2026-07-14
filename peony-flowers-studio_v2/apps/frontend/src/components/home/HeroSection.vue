@@ -3,12 +3,27 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <section class="hero container">
-    <div class="hero__grid">
+  <section class="hero">
+    <span class="hero__corner hero__corner--tl" aria-hidden="true"></span>
+    <span class="hero__corner hero__corner--br" aria-hidden="true"></span>
+
+    <div class="hero__grid container">
       <div class="hero__content">
+        <div class="hero__plate">
+          <span class="hero__index">No. 01</span>
+          <span class="hero__hairline" aria-hidden="true"></span>
+          <span class="hero__latin">Paeonia lactiflora</span>
+        </div>
+
         <span class="label-caps eyebrow">{{ $t('hero.eyebrow') }}</span>
-        <h1 class="display-lg title">{{ $t('hero.title') }}</h1>
+
+        <h1 class="display-hero title">
+          {{ $t('hero.title').split(' ').slice(0, -1).join(' ') }}
+          <span class="title__gold">{{ $t('hero.title').split(' ').slice(-1)[0] }}</span>
+        </h1>
+
         <p class="body-lg subtitle">{{ $t('hero.subtitle') }}</p>
+
         <div class="hero__actions">
           <RouterLink to="/catalog" class="cta-btn">{{ $t('hero.cta') }}</RouterLink>
           <RouterLink to="/about" class="secondary-link">
@@ -17,8 +32,9 @@ import { RouterLink } from 'vue-router';
           </RouterLink>
         </div>
       </div>
-      <div class="hero__image">
-        <svg class="hero__decor" viewBox="0 0 500 560" aria-hidden="true">
+
+      <div class="hero__stage" aria-hidden="true">
+        <svg class="hero__decor" viewBox="0 0 500 560" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <path id="petalOuter" d="M0,0 C -28,-22 -24,-78 0,-102 C 24,-78 28,-22 0,0 Z" />
             <path id="petalMid" d="M0,0 C -22,-18 -19,-60 0,-80 C 19,-60 22,-18 0,0 Z" />
@@ -32,37 +48,26 @@ import { RouterLink } from 'vue-router';
             </radialGradient>
           </defs>
 
-          <!-- stem + leaves for main bloom -->
           <path class="stem" d="M300 560 C 296 460, 304 380, 300 312" />
           <use href="#leafShape" class="leaf" transform="translate(298,430) rotate(20) scale(1.1)" />
           <use href="#leafShape" class="leaf" transform="translate(304,470) rotate(-160) scale(1.3)" />
 
-          <!-- main bloom -->
           <g class="bloom" transform="translate(300,210)">
-            <!-- outer ring -->
             <g class="ring ring--outer">
               <use v-for="n in 10" :key="'o' + n" href="#petalOuter" :transform="`rotate(${n * 36})`" />
             </g>
-
-            <!-- middle ring -->
             <g class="ring ring--mid">
               <use v-for="n in 10" :key="'m' + n" href="#petalMid" :transform="`rotate(${n * 36 + 18})`" />
             </g>
-
-            <!-- inner ring -->
             <g class="ring ring--inner">
               <use v-for="n in 8" :key="'i' + n" href="#petalInner" :transform="`rotate(${n * 45})`" />
             </g>
-
-            <!-- core ring -->
             <g class="ring ring--core">
               <use v-for="n in 6" :key="'c' + n" href="#petalCore" :transform="`rotate(${n * 60 + 30})`" />
             </g>
-
             <circle class="center" cx="0" cy="0" r="10" />
           </g>
 
-          <!-- secondary smaller bloom -->
           <g class="stem-group--bud">
             <path class="stem stem--bud" d="M120 470 C 118 420, 124 380, 118 344" />
             <use href="#leafShape" class="leaf leaf--bud" transform="translate(118,410) rotate(200) scale(0.7)" />
@@ -94,42 +99,121 @@ import { RouterLink } from 'vue-router';
 
 <style scoped lang="scss">
 .hero {
+  position: relative;
+  overflow: hidden;
   padding-block: var(--section-padding);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.hero__corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 2;
+  pointer-events: none;
+
+  @media (min-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.hero__corner--tl {
+  top: 20px;
+  left: var(--margin-mobile);
+  border-top: 1px solid var(--color-plate-line);
+  border-left: 1px solid var(--color-plate-line);
+
+  @media (min-width: 768px) {
+    left: var(--margin-desktop);
+  }
+}
+
+.hero__corner--br {
+  bottom: 20px;
+  right: var(--margin-mobile);
+  border-bottom: 1px solid var(--color-plate-line);
+  border-right: 1px solid var(--color-plate-line);
+
+  @media (min-width: 768px) {
+    right: var(--margin-desktop);
+  }
 }
 
 .hero__grid {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--gutter);
   align-items: center;
-  min-height: 320px;
+  gap: 8px;
+  min-height: 420px;
 
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    min-height: 460px;
+    grid-template-columns: 1.05fr 0.95fr;
+    min-height: 560px;
   }
 }
 
 .hero__content {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--stack-lg);
+  gap: var(--stack-md);
+  padding-top: 8px;
+}
+
+.hero__plate {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-on-surface-variant);
+}
+
+.hero__index {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+}
+
+.hero__hairline {
+  width: 32px;
+  height: 1px;
+  background: var(--color-plate-line);
+}
+
+.hero__latin {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--color-on-surface-variant);
 }
 
 .eyebrow {
   color: var(--color-primary);
   letter-spacing: 0.15em;
+  margin-top: 4px;
 }
 
 .title {
   color: var(--color-on-surface);
-  line-height: 1.1;
+  margin: 0;
+}
+
+.title__gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-style: italic;
 }
 
 .subtitle {
   color: var(--color-on-surface-variant);
-  max-width: 420px;
+  max-width: 400px;
+  margin-top: 4px;
 }
 
 .hero__actions {
@@ -137,6 +221,7 @@ import { RouterLink } from 'vue-router';
   flex-wrap: wrap;
   align-items: center;
   gap: var(--stack-md);
+  margin-top: 8px;
 }
 
 .cta-btn {
@@ -145,10 +230,11 @@ import { RouterLink } from 'vue-router';
   padding: 16px 32px;
   border-radius: var(--radius-lg);
   font-weight: 600;
-  transition: opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 
   &:hover {
-    opacity: 0.9;
+    opacity: 0.92;
+    transform: translateY(-1px);
   }
 }
 
@@ -169,16 +255,18 @@ import { RouterLink } from 'vue-router';
   }
 }
 
-.hero__image {
+/* ==== Stage: illustration bleeds past the grid edge instead of floating in its own box ==== */
+.hero__stage {
   position: relative;
-  height: 340px;
-  max-width: 420px;
-  margin-inline: auto;
+  z-index: 1;
+  height: 280px;
+  margin-inline: -8px;
 
   @media (min-width: 768px) {
-    height: 480px;
-    max-width: 100%;
-    margin-inline: 0;
+    height: 100%;
+    position: absolute;
+    inset: -40px -64px 0 auto;
+    width: 62%;
   }
 }
 
@@ -381,28 +469,22 @@ import { RouterLink } from 'vue-router';
             </radialGradient>
           </defs>
 
-
           <path class="stem" d="M300 560 C 296 460, 304 380, 300 312" />
           <use href="#leafShape" class="leaf" transform="translate(298,430) rotate(20) scale(1.1)" />
           <use href="#leafShape" class="leaf" transform="translate(304,470) rotate(-160) scale(1.3)" />
 
-
           <g class="bloom" transform="translate(300,210)">
-
             <g class="ring ring--outer">
               <use v-for="n in 10" :key="'o' + n" href="#petalOuter" :transform="`rotate(${n * 36})`" />
             </g>
-
 
             <g class="ring ring--mid">
               <use v-for="n in 10" :key="'m' + n" href="#petalMid" :transform="`rotate(${n * 36 + 18})`" />
             </g>
 
-
             <g class="ring ring--inner">
               <use v-for="n in 8" :key="'i' + n" href="#petalInner" :transform="`rotate(${n * 45})`" />
             </g>
-
 
             <g class="ring ring--core">
               <use v-for="n in 6" :key="'c' + n" href="#petalCore" :transform="`rotate(${n * 60 + 30})`" />
@@ -410,7 +492,6 @@ import { RouterLink } from 'vue-router';
 
             <circle class="center" cx="0" cy="0" r="10" />
           </g>
-
 
           <g class="stem-group--bud">
             <path class="stem stem--bud" d="M120 470 C 118 420, 124 380, 118 344" />
@@ -489,7 +570,7 @@ import { RouterLink } from 'vue-router';
 }
 
 .cta-btn {
-  background: var(--color-primary-container);
+  background: var(--color-primary);
   color: var(--color-on-primary);
   padding: 16px 32px;
   border-radius: var(--radius-lg);

@@ -29,6 +29,12 @@ export function getApiBase(): Promise<string> {
   if (cachedBase) return Promise.resolve(cachedBase);
   if (pending) return pending;
 
+  const envUrl = import.meta.env.VITE_API_URL as string | undefined;
+  if (envUrl) {
+    cachedBase = envUrl;
+    return Promise.resolve(cachedBase);
+  }
+
   pending = (async () => {
     // Sahifaning o'zi allaqachon tarmoq IP'idan ochilgan bo'lsa,
     // to'g'ridan-to'g'ri o'sha manzildan boshlaymiz (localhost'ni

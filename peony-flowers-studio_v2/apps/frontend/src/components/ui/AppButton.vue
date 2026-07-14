@@ -1,13 +1,15 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    variant?: 'primary' | 'secondary' | 'outline' | 'danger';
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+    size?: 'sm' | 'md' | 'lg' | 'xl';
     loading?: boolean;
     disabled?: boolean;
     type?: 'button' | 'submit';
   }>(),
   {
     variant: 'primary',
+    size: 'md',
     loading: false,
     disabled: false,
     type: 'button',
@@ -19,7 +21,7 @@ withDefaults(
   <button
     :type="type"
     :disabled="disabled || loading"
-    :class="['btn', `btn--${variant}`, { 'btn--loading': loading }]"
+    :class="['btn', `btn--${variant}`, `btn--${size}`, { 'btn--loading': loading }]"
   >
     <span v-if="loading" class="spinner" />
     <slot />
@@ -31,7 +33,6 @@ withDefaults(
 
 .btn {
   @include btn-base;
-  padding: 14px 28px;
 
   &--primary {
     background: var(--color-primary);
@@ -61,9 +62,98 @@ withDefaults(
     }
   }
 
+  &--ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--color-primary);
+    padding-inline: 4px;
+
+    &:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+  }
+
   &--danger {
     background: var(--color-error);
     color: var(--color-on-error);
+  }
+
+  /* ==== Sizes: fixed height + width via min-width/padding, not fluid ==== */
+  &--sm {
+    height: 36px;
+    min-width: 88px;
+    padding-inline: 14px;
+    font-size: 13px;
+
+    .material-symbols-outlined {
+      font-size: 16px;
+    }
+  }
+
+  &--md {
+    height: 44px;
+    min-width: 108px;
+    padding-inline: 20px;
+    font-size: 14px;
+
+    .material-symbols-outlined {
+      font-size: 18px;
+    }
+  }
+
+  &--lg {
+    height: 52px;
+    min-width: 128px;
+    padding-inline: 28px;
+    font-size: 15px;
+
+    .material-symbols-outlined {
+      font-size: 20px;
+    }
+  }
+
+  &--xl {
+    height: 60px;
+    min-width: 148px;
+    padding-inline: 36px;
+    font-size: 16px;
+
+    .material-symbols-outlined {
+      font-size: 22px;
+    }
+  }
+
+  &--ghost.btn--sm,
+  &--ghost.btn--md,
+  &--ghost.btn--lg,
+  &--ghost.btn--xl {
+    height: auto;
+    min-width: 0;
+    padding-inline: 4px;
+  }
+
+  /* ==== Mobile: every size collapses to sm, regardless of prop ==== */
+  @media (max-width: 767px) {
+    &--md,
+    &--lg,
+    &--xl {
+      height: 36px;
+      min-width: 88px;
+      padding-inline: 14px;
+      font-size: 13px;
+
+      .material-symbols-outlined {
+        font-size: 16px;
+      }
+    }
+
+    &--ghost.btn--md,
+    &--ghost.btn--lg,
+    &--ghost.btn--xl {
+      height: auto;
+      min-width: 0;
+      padding-inline: 4px;
+    }
   }
 }
 .spinner {
