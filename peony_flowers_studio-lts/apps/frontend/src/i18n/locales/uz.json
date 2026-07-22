@@ -1,0 +1,334 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "catalog": "Katalog",
+    "about": "Biz haqimizda",
+    "cart": "Savatcha",
+    "account": "Kabinet",
+    "login": "Kirish"
+  },
+  "hero": {
+    "eyebrow": "Yangi to'plam",
+    "title": "Tabiiylik va go'zallik uyg'unligi",
+    "subtitle": "Toshkent bo'ylab premium gullar yetkazib berish xizmati. Biz har bir guldastani nafislik va mehr bilan tayyorlaymiz.",
+    "cta": "Katalogni ko'rish",
+    "aboutLink": "Brend haqida"
+  },
+  "product": {
+    "premiumBadge": "Premium guldastalar",
+    "deliveryPerk": "Toshkent bo'ylab 60 daqiqada yetkazish",
+    "qualityPerk": "Sifat kafolati va yangi gullar",
+    "buyNow": "Hoziroq xarid qilish",
+    "addToCart": "Savatga qo'shish",
+    "outOfStock": "Sotuvda yo'q",
+    "inStock": "dona mavjud",
+    "lowStock": "Oxirgi {count} dona qoldi!",
+    "totalPriceLabel": "Umumiy narx"
+  },
+  "checkout": {
+    "title": "Buyurtmani rasmiylashtirish",
+    "deliveryDate": "Yetkazish sanasi",
+    "deliveryTime": "Yetkazish vaqti",
+    "giftMessage": "Tabrik matni",
+    "paymentMethod": "To'lov usuli",
+    "click": "Onlayn to'lov",
+    "cash": "Naqd pul",
+    "submit": "Buyurtma berish",
+    "delivery": "Yetkazib berish",
+    "address": "Manzil",
+    "date": "Sana",
+    "time": "Vaqt",
+    "giftMessageOptional": "Sovg'a uchun xabar (ixtiyoriy)",
+    "confirmOrder": "Buyurtmani tasdiqlash",
+    "cashDesc": "Kuryerga naqd to'lov",
+    "cashDescPickup": "Do'konda kassaga naqd to'lov",
+    "clickDesc": "Onlayn karta orqali"
+  },
+  "auth": {
+    "welcome": "Xush kelibsiz",
+    "loginTitle": "Kirish",
+    "continue": "Davom etish",
+    "phoneLabel": "Telefon raqami",
+    "waitCode": "Kodni kutish",
+    "resend": "Qayta yuborish",
+    "noAccount": "Hisobingiz yo'qmi?",
+    "registerLink": "Ro'yxatdan o'tish",
+    "haveAccount": "Hisobingiz bormi?",
+    "loginLink": "Kirish",
+    "registerTitle": "Ro'yxatdan o'tish",
+    "fullNameLabel": "Ism va familiya",
+    "namePlaceholder": "Masalan: Anvar Alimov",
+    "agreePrefix": "Men",
+    "terms": "foydalanish shartlari",
+    "agreeSuffix": "va maxfiylik siyosatiga roziman.",
+    "enterCodeText": "raqamiga yuborilgan kodni kiriting",
+    "code": "Tasdiqlash kodi",
+    "confirm": "Tasdiqlash"
+  },
+  "home": {
+    "brandStory": {
+      "title": "Bizning falsafamiz",
+      "text": "Har bir guldasta — bu kichik bir hikoya. Peony Flowers Studio'da biz faqatgina gullar sotmaymiz, biz sizning his-tuyg'ularingizni ifodalashga yordam beramiz. Premium sifat, o'ziga xos dizayn va Toshkentdagi eng tezkor yetkazib berish xizmati — bularning barchasi sizning quvonchingiz uchun.",
+      "quality": "Sifat kafolati",
+      "design": "Eksklyuziv dizayn",
+      "delivery": "Tezkor yetkazib berish"
+    },
+    "featured": {
+      "title": "Eng ko'p sotilganlar",
+      "viewAll": "Barchasi"
+    },
+    "newsletter": {
+      "title": "Yangi to'plamlardan xabardor bo'ling",
+      "text": "Bizning yangiliklarimizga obuna bo'ling va maxsus takliflar hamda yangi gullar haqida birinchilardan bo'lib biling.",
+      "placeholder": "Telefon raqamingiz",
+      "submit": "Yuborish",
+      "sent": "Yuborildi"
+    }
+  },
+  "about": {
+    "title": "Biz haqimizda",
+    "foundedYear": "Tashkil topgan yil",
+    "customersCount": "Mamnun mijozlar",
+    "servicesTitle": "Xizmatlarimiz",
+    "valuesTitle": "Qadriyatlarimiz",
+    "loadError": "Ma'lumotni yuklab bo'lmadi. Birozdan so'ng qayta urinib ko'ring.",
+    "locationTitle": "Bizni qanday topish mumkin",
+    "mapError": "Xaritani yuklab bo'lmadi.",
+    "mapOpenExternal": "Google Maps'da ochish"
+  },
+  "catalog": {
+    "title": "Guldastalar katalogi",
+    "empty": "Hozircha mahsulotlar topilmadi",
+    "filters": {
+      "title": "Filtrlar",
+      "sort": "Saralash",
+      "newest": "Yangi mahsulotlar",
+      "priceLow": "Narxi: Arzonidan qimmatiga",
+      "priceHigh": "Narxi: Qimmatidan arzoniga",
+      "popular": "Mashhurlik",
+      "priceRange": "Narx oralig'i (so'm)",
+      "min": "Min",
+      "max": "Max",
+      "categories": "Kategoriyalar",
+      "all": "Hammasi"
+    }
+  },
+  "cart": {
+    "title": "Savat",
+    "empty": "Savatingiz bo'sh",
+    "goToCatalog": "Katalogga o'tish",
+    "checkout": "Buyurtma berish",
+    "summaryTitle": "Buyurtma xulosasi",
+    "productsPrice": "Mahsulotlar narxi",
+    "delivery": "Yetkazib berish",
+    "free": "Bepul",
+    "discount": "Chegirma",
+    "total": "Jami"
+  },
+  "account": {
+    "greeting": "Salom",
+    "guest": "Mijoz",
+    "overviewText": "Bu yerda buyurtmalaringiz, manzillaringiz va sevimli mahsulotlaringizni boshqarishingiz mumkin.",
+    "sidebar": {
+      "overview": "Umumiy",
+      "personalInfo": "Shaxsiy ma'lumot",
+      "orders": "Buyurtmalar",
+      "addresses": "Manzillar",
+      "wishlist": "Sevimlilar",
+      "notifications": "Xabarlar",
+      "logout": "Chiqish"
+    },
+    "addresses": {
+      "title": "Manzillarim",
+      "addNew": "+ Yangi manzil",
+      "modalTitle": "Manzil",
+      "labelField": "Nomi (Uy, Ish)",
+      "city": "Shahar",
+      "district": "Tuman",
+      "street": "Ko'cha",
+      "house": "Uy raqami",
+      "save": "Saqlash",
+      "default": "Asosiy",
+      "defaultLabel": "Manzil",
+      "edit": "Tahrirlash",
+      "delete": "O'chirish"
+    },
+    "notifications": {
+      "title": "Xabarlar",
+      "markAllRead": "Barchasini o'qilgan deb belgilash",
+      "empty": "Xabarlar yo'q"
+    },
+    "orderDetail": {
+      "title": "Buyurtma",
+      "total": "Jami",
+      "cancel": "Bekor qilish",
+      "selfPickup": "Do'kondan olib ketish",
+      "back": "Buyurtmalarim",
+      "items": "Mahsulotlar",
+      "summary": "Buyurtma xulosasi",
+      "subtotal": "Mahsulotlar summasi",
+      "discount": "Chegirma",
+      "loyaltyDiscount": "Sodiqlik chegirmasi",
+      "deliveryFee": "Yetkazish narxi",
+      "courier": "Kuryer",
+      "orderedOn": "Buyurtma sanasi",
+      "notFound": "Buyurtma topilmadi",
+      "paymentStatusLabel": "Holati",
+      "copyId": "Buyurtma raqamini nusxalash",
+      "copied": "Nusxalandi",
+      "callCourier": "Kuryerga qo'ng'iroq qilish",
+      "cancelConfirmTitle": "Buyurtmani bekor qilasizmi?",
+      "cancelConfirmBody": "Bu amalni ortga qaytarib bo'lmaydi. Buyurtma butunlay bekor qilinadi.",
+      "cancelConfirmYes": "Ha, bekor qilish",
+      "cancelConfirmNo": "Yo'q, qoldirish",
+      "cancelling": "Bekor qilinmoqda…"
+    },
+    "orders": {
+      "title": "Buyurtmalarim",
+      "empty": "Hozircha buyurtmalar yo'q",
+      "emptyFiltered": "Bu statusda buyurtma yo'q",
+      "all": "Barchasi",
+      "itemsCount": "ta mahsulot"
+    },
+    "personalInfo": {
+      "title": "Shaxsiy ma'lumot",
+      "fullName": "To'liq ism",
+      "email": "Email",
+      "save": "Saqlash"
+    },
+    "wishlist": {
+      "title": "Sevimlilar",
+      "empty": "Sevimlilar ro'yxati bo'sh"
+    }
+  },
+  "footer": {
+    "description": "Toshkentdagi zamonaviy floristika studiyasi. Biz faqat gullar emas, balki his-tuyg'ularni ulashamiz.",
+    "shop": "Do'kon",
+    "bouquets": "Guldastalar",
+    "collaborations": "Kollaboratsiyalar",
+    "delivery": "Yetkazib berish",
+    "paymentMethods": "To'lov usullari",
+    "account": "Shaxsiy kabinet",
+    "myProfile": "Profilim",
+    "orderHistory": "Buyurtmalar tarixi",
+    "contact": "Aloqa",
+    "address": "Manzilimiz: Andijon sh., Mashrab ko'chasi, 7-uy",
+    "rights": "Barcha huquqlar himoyalangan."
+  },
+  "review": {
+    "placeholder": "Fikringizni yozing...",
+    "submit": "Sharh qoldirish",
+    "empty": "Hozircha sharhlar yo'q",
+    "anonymous": "Mijoz",
+    "customerReviews": "Mijozlar fikri",
+    "reviewsCountSuffix": "ta sharh"
+  },
+  "paymentStatus": {
+    "pending": "Kutilmoqda",
+    "pending_cash": "Kutilmoqda",
+    "paid": "To'landi",
+    "failed": "Xato",
+    "refunded": "Qaytarildi"
+  },
+  "orderStatus": {
+    "pending": "Kutilmoqda",
+    "confirmed": "Tasdiqlandi",
+    "preparing": "Tayyorlanmoqda",
+    "ready": "Tayyor",
+    "delivering": "Yetkazilmoqda",
+    "delivered": "Yetkazildi",
+    "cancelled": "Bekor qilindi"
+  },
+  "mobileMenu": {
+    "brand": "Brend haqida"
+  },
+  "collaborations": {
+    "eyebrow": "Hamkorlik",
+    "title": "Biz bilan hamkorlik qiling",
+    "intro": "Bloger, brend yoki tadbir tashkilotchisimisiz? Peony Flowers Studio bilan hamkorlikning turli formatlarini taklif etamiz.",
+    "influencer": {
+      "title": "Blogerlar uchun",
+      "text": "Mahsulot almashinuvi, promo-kodlar va hamkorlik kampaniyalari."
+    },
+    "brand": {
+      "title": "Brendlar uchun",
+      "text": "Qadoqlash, sovg'a to'plamlari va birgalikdagi maxsus to'plamlar."
+    },
+    "event": {
+      "title": "Tadbirlar uchun",
+      "text": "To'y, taqdimot va korporativ tadbirlar uchun bezaklar."
+    },
+    "ctaText": "Taklifingizni yozing, jamoamiz tez orada javob beradi.",
+    "ctaButton": "Telegram orqali yozish"
+  },
+  "delivery": {
+    "eyebrow": "Yetkazib berish",
+    "title": "Yetkazib berish shartlari",
+    "intro": "Toshkent bo'ylab tezkor va ehtiyotkorlik bilan yetkazib berish xizmati.",
+    "fast": {
+      "title": "60 daqiqada",
+      "text": "Shahar markazida buyurtmalar o'rtacha 60 daqiqa ichida yetkaziladi."
+    },
+    "cost": {
+      "title": "Narxi",
+      "text": "Yetkazib berish narxi manzilga qarab hisoblanadi, checkout bosqichida ko'rsatiladi."
+    },
+    "hours": {
+      "title": "Ish vaqti",
+      "text": "Har kuni 09:00 dan 21:00 gacha buyurtmalar qabul qilinadi va yetkaziladi."
+    },
+    "note": "Muayyan sana va soatga yetkazib berishni checkout sahifasida belgilashingiz mumkin."
+  },
+  "paymentMethodsPage": {
+    "eyebrow": "To'lov",
+    "title": "To'lov usullari",
+    "intro": "Sizga qulay bo'lgan to'lov usulini tanlang.",
+    "cash": {
+      "title": "Naqd pul",
+      "text": "Buyurtmani qabul qilishda kuryerga naqd to'lov qilishingiz mumkin."
+    },
+    "click": {
+      "title": "Onlayn to'lov",
+      "text": "Bank kartangiz orqali onlayn, xavfsiz va tezkor to'lov qiling."
+    },
+    "note": "Barcha onlayn to'lovlar xavfsiz ulanish orqali amalga oshiriladi. Karta ma'lumotlaringiz saytimizda saqlanmaydi.",
+    "stepsTitle": "Onlayn to'lov qanday amalga oshiriladi?",
+    "steps": {
+      "step1": {
+        "title": "Buyurtmani rasmiylashtiring",
+        "text": "Savatchani to'ldiring va yetkazib berish manzilini kiriting."
+      },
+      "step2": {
+        "title": "To'lov usulini tanlang",
+        "text": "\"Onlayn to'lov\" bandini belgilang va davom eting tugmasini bosing."
+      },
+      "step3": {
+        "title": "Karta ma'lumotlarini kiriting",
+        "text": "Xavfsiz to'lov sahifasida karta raqami va SMS-kodni kiriting."
+      },
+      "step4": {
+        "title": "Tasdiqlash",
+        "text": "To'lov muvaffaqiyatli amalga oshirilgach, buyurtmangiz qabul qilinadi."
+      }
+    },
+    "faqTitle": "Ko'p beriladigan savollar",
+    "faq": {
+      "q1": {
+        "question": "Qaysi kartalar qabul qilinadi?",
+        "answer": "Uzcard va Humo kartalari orqali to'lov qilishingiz mumkin."
+      },
+      "q2": {
+        "question": "To'lov xavfsizmi?",
+        "answer": "Ha, to'lovlar shifrlangan ulanish orqali amalga oshiriladi va karta ma'lumotlari saytimizda saqlanmaydi."
+      },
+      "q3": {
+        "question": "Buyurtmani bekor qilsam, pulim qaytariladimi?",
+        "answer": "Ha, buyurtma bekor qilinganda mablag' 3-7 ish kuni ichida kartangizga qaytariladi."
+      },
+      "q4": {
+        "question": "Yetkazib berishda naqd to'lasam bo'ladimi?",
+        "answer": "Albatta, buyurtma berishda \"Naqd pul\" usulini tanlashingiz kifoya."
+      }
+    }
+  }
+}

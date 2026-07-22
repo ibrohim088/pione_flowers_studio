@@ -1,0 +1,253 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== USER ====================
+
+model User {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  fullName  String?
+  email     String?
+  role      String   @default("customer") // customer|florist|courier|admin
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders        Order[]        @relation("CustomerOrders")
+  preparedOrders Order[]       @relation("FloristOrders")
+  deliveredOrders Order[]      @relation("CourierOrders")
+  addresses     Address[]
+  reviews       Review[]
+  wishlist      WishlistItem[]
+  notifications Notification[]
+
+  @@index([role])
+}
+
+// ==================== CATEGORY / PRODUCT ====================
+
+model Category {
+  id        String    @id @default(cuid())
+  nameUz    String
+  nameRu    String?
+  slug      String    @unique
+  imageUrl  String?
+  order     Int       @default(0)
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  products  Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  titleUz       String
+  titleRu       String?
+  slug          String   @unique
+  descriptionUz String?
+  descriptionRu String?
+  type        String   // Bouquet | Flower | ChocolateBox | Souvenir
+  price       Int      // so'm
+  discountPrice Int?
+  stock       Int      @default(0)
+  isActive    Boolean  @default(true)
+
+  images      ProductImage[]
+  orderItems  OrderItem[]
+  reviews     Review[]
+  wishlist    WishlistItem[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([slug])
+  @@index([isActive])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  order     Int     @default(0)
+
+  @@index([productId])
+}
+
+// ==================== ORDER ====================
+
+model Order {
+  id               String    @id @default(cuid())
+  userId           String
+  user             User      @relation("CustomerOrders", fields: [userId], references: [id])
+
+  addressId        String?
+  address          Address?  @relation(fields: [addressId], references: [id])
+
+  status           String    @default("pending") // pending|confirmed|preparing|ready|delivering|delivered|cancelled
+  paymentMethod    String    // click|cash
+  paymentStatus    String    @default("pending") // pending|pending_cash|paid|failed|refunded
+
+  deliveryDate     DateTime
+  deliveryTime     String
+  giftMessage      String?
+
+  preparedPhotoUrl String?
+  preparedById     String?
+  preparedBy       User?     @relation("FloristOrders", fields: [preparedById], references: [id])
+
+  courierId        String?
+  courier          User?     @relation("CourierOrders", fields: [courierId], references: [id])
+
+  subtotal         Int
+  discount         Int       @default(0)
+  loyaltyDiscount  Int       @default(0)
+  loyaltyTier      String?   // "first" | "second" | "regular"
+  deliveryFee      Int       @default(0)
+  total            Int
+
+  items            OrderItem[]
+  transaction      Transaction?
+
+  createdAt        DateTime  @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([courierId])
+  @@index([preparedById])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Int     // xarid vaqtidagi narx (snapshot)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+// ==================== ADDRESS ====================
+
+model Address {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  label     String?  // "Uy", "Ish" va h.k.
+  city      String
+  district  String?
+  street    String
+  house     String?
+  entrance  String?
+  floor     String?
+  apartment String?
+  landmark  String?
+  latitude  Float?
+  longitude Float?
+  isDefault Boolean  @default(false)
+
+  orders    Order[]
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ==================== REVIEW / WISHLIST ====================
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  rating    Int      // 1-5
+  comment   String?
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+  @@unique([userId, productId])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+  @@index([userId])
+}
+
+// ==================== NOTIFICATION ====================
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ==================== PAYMENT ====================
+
+model Transaction {
+  id           String    @id @default(cuid())
+  orderId      String    @unique
+  order        Order     @relation(fields: [orderId], references: [id])
+
+  provider     String    // "click" | "cash"
+  externalId   String?
+  amount       Int       // tiyin (so'm x 100)
+  currency     String    @default("UZS")
+  status       String    @default("pending") // pending|paid|failed|refunded
+  providerData Json?
+  confirmedBy  String?   // admin ID (naqd tasdiqlash uchun)
+
+  createdAt    DateTime  @default(now())
+  paidAt       DateTime?
+
+  @@index([orderId])
+  @@index([status])
+}
+
+// ==================== NEWSLETTER ====================
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  createdAt DateTime @default(now())
+}
+
+// ==================== SITE CONTENT ====================
+
+model SiteContent {
+  id        String   @id @default(cuid())
+  key       String   @unique // masalan: "about", keyinchalik "delivery" va h.k.
+  data      Json               // { uz: {...}, ru: {...} }
+  updatedBy String?
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
