@@ -59,7 +59,6 @@ onUnmounted(() => clearInterval(timer));
       </RouterLink>
 
       <div class="heading">
-        <p class="label-caps welcome">{{ $t('auth.welcome') }}</p>
         <h1 class="headline-sm">{{ $t('auth.loginTitle') }}</h1>
       </div>
 

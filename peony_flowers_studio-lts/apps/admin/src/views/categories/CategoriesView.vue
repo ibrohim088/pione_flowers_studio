@@ -11,30 +11,34 @@ const { categories, isLoading, fetchAll, createCategory, updateCategory, deleteC
 onMounted(fetchAll);
 
 const columns = [
-  { key: 'nameUz', label: 'Nomi' },
+  { key: 'nameUz', label: 'Nomi (UZ)' },
+  { key: 'nameRu', label: 'Nomi (RU)' },
   { key: 'slug', label: 'Slug' },
   { key: 'actions', label: '' },
 ];
 
 const modalOpen = ref(false);
 const editingId = ref<string | null>(null);
-const form = reactive({ name: '' });
+const form = reactive({ nameUz: '', nameRu: '' });
 
 function openCreate() {
   editingId.value = null;
-  form.name = '';
+  form.nameUz = '';
+  form.nameRu = '';
   modalOpen.value = true;
 }
 
 function openEdit(cat: any) {
   editingId.value = cat.id;
-  form.name = cat.nameUz;
+  form.nameUz = cat.nameUz;
+  form.nameRu = cat.nameRu || '';
   modalOpen.value = true;
 }
 
 async function save() {
-  if (editingId.value) await updateCategory(editingId.value, form);
-  else await createCategory(form);
+  const payload = { nameUz: form.nameUz, nameRu: form.nameRu || undefined };
+  if (editingId.value) await updateCategory(editingId.value, payload);
+  else await createCategory(payload);
   modalOpen.value = false;
 }
 </script>
@@ -56,7 +60,8 @@ async function save() {
 
     <AppModal :open="modalOpen" title="Kategoriya" @close="modalOpen = false">
       <form class="form" @submit.prevent="save">
-        <AppInput v-model="form.name" label="Nomi" />
+        <AppInput v-model="form.nameUz" label="Nomi (UZ)" />
+        <AppInput v-model="form.nameRu" label="Nomi (RU)" />
         <AppButton type="submit">Saqlash</AppButton>
       </form>
     </AppModal>

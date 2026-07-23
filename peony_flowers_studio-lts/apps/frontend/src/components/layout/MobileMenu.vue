@@ -1,20 +1,39 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useAuthStore } from '../../stores/authStore';
 import { useUiStore } from '../../stores/uiStore';
+import { useNotifications } from '../../composables/useNotifications';
 import AppSelect from '../ui/AppSelect.vue';
 
 defineProps<{ open: boolean }>();
-defineEmits<{ close: [] }>();
+const emit = defineEmits<{ close: [] }>();
 
 const authStore = useAuthStore();
 const uiStore = useUiStore();
 const router = useRouter();
+const { notifications, fetchNotifications } = useNotifications();
 
 const localeOptions = [
   { label: 'UZ', value: 'uz' },
   { label: 'RU', value: 'ru' },
 ];
+
+const searchQuery = ref(uiStore.searchQuery);
+
+const unreadCount = () => notifications.value.filter((n) => !n.isRead).length;
+
+if (authStore.isAuthenticated) {
+  fetchNotifications();
+}
+
+function onSearchSubmit() {
+  const trimmed = searchQuery.value.trim();
+  uiStore.setSearchQuery(trimmed);
+  if (!trimmed.length) return;
+  router.push({ path: '/catalog', query: { search: trimmed } });
+  emit('close');
+}
 
 async function onLogout(close: () => void) {
   await authStore.logout();
@@ -41,7 +60,26 @@ async function onLogout(close: () => void) {
         </button>
       </div>
 
+      <form class="mobile-search" @submit.prevent="onSearchSubmit">
+        <span class="material-symbols-outlined">search</span>
+        <input
+          v-model="searchQuery"
+          type="text"
+          class="body-sm"
+          :placeholder="$t('nav.searchPlaceholder')"
+        />
+      </form>
+
       <nav class="links">
+        <RouterLink
+          v-if="authStore.isAuthenticated"
+          to="/account/notifications"
+          class="headline-sm notif-link"
+          @click="$emit('close')"
+        >
+          {{ $t('nav.notifications') }}
+          <span v-if="unreadCount()" class="badge">{{ unreadCount() }}</span>
+        </RouterLink>
         <RouterLink to="/catalog" class="headline-sm" @click="$emit('close')">{{ $t('nav.catalog') }}</RouterLink>
         <RouterLink to="/about" class="headline-sm" @click="$emit('close')">{{ $t('mobileMenu.brand') }}</RouterLink>
         <RouterLink v-if="authStore.isAuthenticated" to="/account" class="headline-sm" @click="$emit('close')">
@@ -102,6 +140,29 @@ async function onLogout(close: () => void) {
   cursor: pointer;
 }
 
+.mobile-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+  padding: 10px 12px;
+
+  .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--color-on-surface-variant);
+  }
+
+  input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    color: var(--color-on-surface);
+  }
+}
+
 .links {
   display: flex;
   flex-direction: column;
@@ -110,6 +171,28 @@ async function onLogout(close: () => void) {
 
 .links a {
   color: var(--color-on-surface);
+}
+
+.notif-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notif-link .badge {
+  background: var(--color-primary);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
 }
 
 .logout-btn {

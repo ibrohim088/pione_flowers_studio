@@ -4,7 +4,8 @@ const filters = defineModel<{
   minPrice: string;
   maxPrice: string;
   sort: string;
-}>({ default: () => ({ categoryId: '', minPrice: '', maxPrice: '', sort: 'newest' }) });
+  search?: string;
+}>({ default: () => ({ categoryId: '', minPrice: '', maxPrice: '', sort: 'newest', search: '' }) });
 
 defineProps<{ categories?: { id: string; name: string }[] }>();
 
@@ -22,6 +23,11 @@ const sortOptions = computed(() => [
 <template>
   <div class="filters">
     <h2 class="label-caps title">{{ $t('catalog.filters.title') }}</h2>
+
+    <div class="group">
+      <label class="label-caps">{{ $t('nav.searchPlaceholder') }}</label>
+      <input v-model="filters.search" type="text" :placeholder="$t('nav.searchPlaceholder')" />
+    </div>
 
     <div class="group">
       <label class="label-caps">{{ $t('catalog.filters.sort') }}</label>

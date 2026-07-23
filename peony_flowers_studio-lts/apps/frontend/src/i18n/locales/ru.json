@@ -5,7 +5,12 @@
     "about": "О нас",
     "cart": "Корзина",
     "account": "Кабинет",
-    "login": "Войти"
+    "login": "Войти",
+    "notifications": "Уведомления",
+    "searchPlaceholder": "Поиск..."
+  },
+  "common": {
+    "loading": "Загрузка..."
   },
   "hero": {
     "eyebrow": "Новая коллекция",
@@ -45,7 +50,6 @@
     "clickDesc": "Оплата картой онлайн"
   },
   "auth": {
-    "welcome": "Добро пожаловать",
     "loginTitle": "Вход",
     "continue": "Продолжить",
     "phoneLabel": "Номер телефона",

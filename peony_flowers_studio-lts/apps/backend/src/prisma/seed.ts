@@ -71,17 +71,17 @@ async function main() {
 
   // ==================== KATEGORIYALAR ====================
   const categoriesData = [
-    { nameUz: 'Guldastalar', slug: 'buketlar', order: 1 },
-    { nameUz: 'Yakka gullar', slug: 'yakka-gullar', order: 2 },
-    { nameUz: "Shokolad to'plamlari", slug: 'shokolad', order: 3 },
-    { nameUz: 'Sovg`a to`plamlari', slug: 'sovgalar', order: 4 },
+    { nameUz: 'Guldastalar', nameRu: 'Букеты', slug: 'buketlar', order: 1 },
+    { nameUz: 'Yakka gullar', nameRu: 'Одиночные цветы', slug: 'yakka-gullar', order: 2 },
+    { nameUz: "Shokolad to'plamlari", nameRu: 'Шоколадные наборы', slug: 'shokolad', order: 3 },
+    { nameUz: 'Sovg`a to`plamlari', nameRu: 'Подарочные наборы', slug: 'sovgalar', order: 4 },
   ];
 
   const categories: Record<string, { id: string }> = {};
   for (const c of categoriesData) {
     categories[c.slug] = await prisma.category.upsert({
       where: { slug: c.slug },
-      update: {},
+      update: { nameUz: c.nameUz, nameRu: c.nameRu, order: c.order },
       create: c,
     });
   }

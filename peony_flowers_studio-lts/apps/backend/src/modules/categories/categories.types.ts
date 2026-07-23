@@ -1,5 +1,6 @@
 export interface CreateCategoryInput {
-  name: string;
+  nameUz: string;
+  nameRu?: string;
   imageUrl?: string;
   order?: number;
 }

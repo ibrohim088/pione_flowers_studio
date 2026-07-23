@@ -90,8 +90,9 @@ function addToCart() {
   background: rgba(255, 255, 255, 0.85);
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,7 +102,9 @@ function addToCart() {
   transition: opacity 0.2s;
 
   .material-symbols-outlined {
-    font-size: 18px;
+    font-size: 20px;
+    line-height: 0;
+    transform: translateY(1px);
   }
 }
 .card__image:hover .wishlist-btn {
@@ -116,6 +119,7 @@ function addToCart() {
   border-radius: 50%;
   width: 36px;
   height: 36px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,6 +127,11 @@ function addToCart() {
   color: var(--color-primary);
   transition: all 0.2s;
   backdrop-filter: blur(4px);
+
+  .material-symbols-outlined {
+    font-size: 20px;
+    line-height: 0;
+  }
 
   &:hover:not(:disabled) {
     background: var(--color-primary);

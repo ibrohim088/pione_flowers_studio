@@ -5,7 +5,12 @@
     "about": "Biz haqimizda",
     "cart": "Savatcha",
     "account": "Kabinet",
-    "login": "Kirish"
+    "login": "Kirish",
+    "notifications": "Bildirishnomalar",
+    "searchPlaceholder": "Qidiruv..."
+  },
+  "common": {
+    "loading": "Yuklanmoqda..."
   },
   "hero": {
     "eyebrow": "Yangi to'plam",
@@ -45,7 +50,6 @@
     "clickDesc": "Onlayn karta orqali"
   },
   "auth": {
-    "welcome": "Xush kelibsiz",
     "loginTitle": "Kirish",
     "continue": "Davom etish",
     "phoneLabel": "Telefon raqami",
